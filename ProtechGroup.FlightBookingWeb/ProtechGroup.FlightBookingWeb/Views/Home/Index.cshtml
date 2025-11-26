@@ -1,0 +1,682 @@
+﻿@using ProtechGroup.FlightBookingWeb.Helpers
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.AntiForgeryToken()
+
+<section class="container mx-auto mt-7.5 relative">
+    @Html.Partial("_FrmSearchAirports")
+</section>
+<section class="container overflow-hidden mx-auto mt-12 h-100">
+    <div class="relative">
+        <div id="slider" class="relative">
+            <div class="slide w-full rounded-[10px] flex justify-center h-full relative" style="display:block;">
+                <img class="object-cover object-center w-full max-h-100 min-h-100 rounded-[10px]" src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&q=80&w=2070" alt="">
+                <div class="absolute top-0 left-0 w-full h-full rounded-[10px] pointer-events-none" style="background: linear-gradient(90deg, rgba(212,245,255,1) 5%, rgba(212,245,255,0) 43%);"></div>
+                <div class="absolute left-11 bottom-14">
+                    <p class=" text-4xl font-bold">Khám phá đảo ngọc</p>
+                    <p class=" font-bold text-[40px]">Phú Quốc</p>
+                    <p class=" text-2xl">Chỉ từ</p>
+                    <p class="text-accent text-[40px] font-bold">1,600k/pax</p>
+                </div>
+            </div>
+            <div class="slide w-full rounded-[10px] flex justify-center h-full relative" style="display:none;">
+                <img class="object-cover object-center w-full max-h-100 min-h-100 rounded-[10px]" src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1470" alt="">
+                <div class="absolute top-0 left-0 w-full h-full rounded-[10px] pointer-events-none" style="background: linear-gradient(90deg, rgba(212,245,255,1) 5%, rgba(212,245,255,0) 43%);"></div>
+                <div class="absolute left-11 bottom-14">
+                    <p class=" text-4xl font-bold">Khám phá Hà Nội</p>
+                    <p class=" font-bold text-[40px]">Phú Quốc</p>
+                    <p class=" text-2xl">Chỉ từ</p>
+                    <p class="text-accent text-[40px] font-bold">1,600k/pax</p>
+                </div>
+            </div>
+            <div class="slide w-full rounded-[10px] flex justify-center h-full relative" style="display:none;">
+                <img class="object-cover object-center w-full max-h-100 min-h-100 rounded-[10px]" src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1470" alt="">
+                <div class="absolute top-0 left-0 w-full h-full rounded-[10px] pointer-events-none" style="background: linear-gradient(90deg, rgba(212,245,255,1) 5%, rgba(212,245,255,0) 43%);"></div>
+                <div class="absolute left-11 bottom-14">
+                    <p class=" text-4xl font-bold ">Khám phá đảo ngọc</p>
+                    <p class=" font-bold text-[40px]">Phú Quốc</p>
+                    <p class=" text-2xl">Chỉ từ</p>
+                    <p class="text-accent text-[40px] font-bold">1,600k/pax</p>
+                </div>
+            </div>
+        </div>
+        <!-- Slide controls -->
+        <div class="absolute right-10 bottom-8 flex gap-2">
+            <button id="prevSlide" class="cursor-pointer bg-[rgb(135,140,147,0.5)] bg-opacity-20 hover:bg-opacity-30 rounded-[10px] size-[50px] flex items-center justify-center z-10">
+                <svg width="24" height="24" fill="none">
+                    <path d="M15.5 19 9.5 12 15.5 5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                </svg>
+            </button>
+            <button id="nextSlide" class=" cursor-pointer bg-[rgb(135,140,147,0.5)] bg-opacity-50 hover:bg-opacity-30 rounded-[10px] size-[50px] flex items-center justify-center z-10">
+                <svg width="24" height="24" fill="none">
+                    <path d="M8.5 5 14.5 12 8.5 19" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                </svg>
+            </button>
+            <div>
+            </div>
+</section>
+<section class="container mx-auto mt-8">
+    <div class="header-section flex justify-between max-lg:flex-wrap gap-4">
+        <div>
+            <p class=" text-2xl font-bold">Chuyến bay có giá tốt</p>
+            <p class=" text-base">Tiết kiệm lên đến 200K cho mỗi chuyến bay</p>
+        </div>
+        <div class="font-bold">
+            <a class="text-accent text-base max-md:text-xs p-3">Phú Quốc</a>
+            <a class="text-base p-3 max-md:text-xs" href="">Đà Nắng</a>
+            <a class="text-base p-3 max-md:text-xs">Quy Nhớn</a>
+            <a class="text-base p-3 max-md:text-xs">...</a>
+        </div>
+    </div>
+    <div class="content mt-10">
+        <div class="flex gap-10 max-lg:flex-wrap">
+            <div class="w-2/5 max-lg:w-full">
+                <ul class="flex flex-col">
+                    <li class="py-3.5 border-b-2 border-b-gray-300 flex justify-between">
+                        <div>
+                            <p class="font-bold text-base">Hà Nội - Hồ Chí Minh</p>
+                            <p class="text-highlight text-sm">Khởi hành ngày 20/11/2025</p>
+                        </div>
+                        <div>
+                            <div class="text-accent font-bold text-base">2,360,000đ > ></div>
+                        </div>
+                    </li>
+                    <li class="py-3.5 border-b-2 border-b-gray-300 flex justify-between">
+                        <div>
+                            <p class="font-bold text-base">Hà Nội - Hồ Chí Minh</p>
+                            <p class="text-highlight text-sm">Khởi hành ngày 20/11/2025</p>
+                        </div>
+                        <div>
+                            <div class="text-accent font-bold text-base">2,360,000đ > ></div>
+                        </div>
+                    </li>
+                    <li class="py-3.5 border-b-2 border-b-gray-300 flex justify-between">
+                        <div>
+                            <p class="font-bold text-base">Hà Nội - Hồ Chí Minh</p>
+                            <p class="text-highlight text-sm">Khởi hành ngày 20/11/2025</p>
+                        </div>
+                        <div>
+                            <div class="text-accent font-bold text-base">2,360,000đ > ></div>
+                        </div>
+                    </li>
+                    <li class="py-3.5 border-b-2 border-b-gray-300 flex justify-between">
+                        <div>
+                            <p class="font-bold text-base">Hà Nội - Hồ Chí Minh</p>
+                            <p class="text-highlight text-sm">Khởi hành ngày 20/11/2025</p>
+                        </div>
+                        <div>
+                            <div class="text-accent font-bold text-base">2,360,000đ > ></div>
+                        </div>
+                    </li>
+                    <li class="py-3.5  flex justify-between">
+                        <div>
+                            <p class="font-bold text-base">Hà Nội - Hồ Chí Minh</p>
+                            <p class="text-highlight text-sm">Khởi hành ngày 20/11/2025</p>
+                        </div>
+                        <div>
+                            <div class="text-accent font-bold text-base">2,360,000đ > ></div>
+                        </div>
+                    </li>
+                </ul>
+                <p class="ml-auto w-fit text-base font-bold"><a href=""> Tìm thêm chuyến bay >></a></p>
+            </div>
+            <div class="w-3/5 flex gap-6 justify-between max-lg:w-full max-sm:flex-wrap">
+
+                <div class="w-full border border-[#D3D9DC] rounded-xl overflow-hidden relative">
+                    <span class="absolute top-4 left-4 tag py-1 text-white font-bold px-3 bg-accent rounded-xl inline-block">Giảm 10%</span>
+                    <div class="h-4/9 w-full">
+                        <img class="size-full object-cover"
+                             src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1470"
+                             alt="" />
+                    </div>
+                    <div class="flex flex-col justify-between px-2.5 py-4 h-5/9">
+                        <div>
+                            <p class="text-base font-bold line-clamp-2">
+                                JW Marriott Phu Quoc Emerald Bay Resort & Spa
+                            </p>
+                            <p class="line-clamp-2">Khem Beach, An Thới, Phú Quốc, Kiên Giang</p>
+                        </div>
+                        <p class="text-accent font-bold text-sm">
+                            <span class="text-2xl">2,800</span>/đêm >><br />,000 VND
+                        </p>
+                    </div>
+                </div>
+
+                <div class="w-full border border-[#D3D9DC] rounded-xl overflow-hidden relative">
+                    <span class="absolute top-4 left-4 tag py-1 text-white font-bold px-3 bg-accent rounded-xl inline-block">Giảm 10%</span>
+                    <div class="h-4/9 w-full">
+                        <img class="size-full object-cover"
+                             src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1470"
+                             alt="" />
+                    </div>
+                    <div class="flex flex-col justify-between px-2.5 py-4 h-5/9">
+                        <div>
+                            <p class="text-base font-bold line-clamp-2">
+                                JW Marriott Phu Quoc Emerald Bay Resort & Spa
+                            </p>
+                            <p class="line-clamp-2">Khem Beach, An Thới, Phú Quốc, Kiên Giang</p>
+                        </div>
+                        <p class="text-accent font-bold text-sm">
+                            <span class="text-2xl">2,800</span>/đêm >><br />,000 VND
+                        </p>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container mx-auto mt-10">
+    <div class="header-section flex justify-between max-lg:flex-wrap gap-4">
+        <div>
+            <p class=" text-2xl font-bold">Điểm đến hấp dẫn</p>
+            <p class=" text-base">Khám phá trọn vẹn một hành trình</p>
+        </div>
+        <div class="font-bold">
+            <a class="text-accent text-base max-md:text-xs p-3">Phú Quốc</a>
+            <a class="text-base p-3 max-md:text-xs" href="">Đà Nắng</a>
+            <a class="text-base p-3 max-md:text-xs">Quy Nhớn</a>
+            <a class="text-base p-3 max-md:text-xs">...</a>
+        </div>
+    </div>
+    <div class="content mt-10">
+        <div class="grid grid-cols-4 gap-6.5 max-sm:grid-cols-1 max-lg:grid-cols-2 ">
+
+            <div class="w-full min-h-[430px] border border-[#D3D9DC] rounded-xl overflow-hidden shadow-2xl">
+                <div class="h-46 w-full relative">
+                    <img class="size-full object-cover"
+                         src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1470"
+                         alt="" />
+                    <div class="absolute bottom-0 right-0 left-0 top-0 p-4 flex flex-col justify-between">
+                        <div class="text-right">
+                            <p class="tag text-white font-bold py-1 px-3 bg-highlight rounded-xl inline-block">
+                                Giảm 10%
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-white font-bold text-base">
+                                Take off to Tokyo sale<br />
+                                Sakura show
+                            </p>
+                            <p class="text-white text-xs">Hết hạn sau: 34 ngày 12:08:17</p>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-5 right-4 w-fit">
+                        <img src="~/Content/img/airline/VN.svg" alt="Logo airline" />
+                    </div>
+                </div>
+                <div class="flex flex-col justify-between p-4 h-61.5">
+                    <div>
+                        <p class="text-sm font-bold">Dubai - Tokyo / Asia</p>
+                    </div>
+                    <div class="flex w-full justify-between">
+                        <div>
+                            <p class="text-xs font-bold max-w-[74px]">
+                                VÉ MÁY BAY QUỐC TẾ
+                                <img src="~/Content/img/search/plane-start.svg"
+                                     alt="icon plane"
+                                     class="w-3.5 inline" />
+                            </p>
+                        </div>
+                        <div class="text-end">
+                            <ul class="flex items-center">
+                                <li><img src="~/Content/img/flight-card/start-none.svg" alt="" /></li>
+                                <li><img src="~/Content/img/flight-card/start-pick.svg" alt="" /></li>
+                                <li><img src="~/Content/img/flight-card/start-pick.svg" alt="" /></li>
+                                <li><img src="~/Content/img/flight-card/start-pick.svg" alt="" /></li>
+                                <li><img src="~/Content/img/flight-card/start-pick.svg" alt="" /></li>
+                            </ul>
+                            <p class="text-[10px] font-bold">25 Người xem</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-xs line-clamp-4">
+                            Lorem ipsum dolor, sit amet consec r, sit amet consectetur adipisic
+                            tetur adipisic r, sit amet consectetur adipisic ing elit. Saepe vero
+                            officia sequi a blanditiis.
+                        </p>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <a href=""
+                               class="text-sm uppercase font-bold bg-primary text-white px-5 py-1.5 max-xl:px-3 max-xl:py-1 max-lg:px-5 max-lg:py-1.5 rounded-br-3xl rounded-tl-3xl">Chi Tiết</a>
+                        </div>
+                        <div>
+                            <p class="price text-accent font-extrabold text-base max-lg:text-base max-xl:text-sm">
+                                2,800,000 đ
+                            </p>
+                            <p class="price-sale font-bold text-xs line-through max-xl:text-xs">
+                                39,680,000 đ
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full min-h-[430px] border border-[#D3D9DC] rounded-xl overflow-hidden shadow-2xl">
+                <div class="h-46 w-full relative">
+                    <img class="size-full object-cover"
+                         src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1470"
+                         alt="" />
+                    <div class="absolute bottom-0 right-0 left-0 top-0 p-4 flex flex-col justify-between">
+                        <div class="text-right">
+                            <p class="tag text-white font-bold py-1 px-3 bg-highlight rounded-xl inline-block">
+                                Giảm 10%
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-white font-bold text-base">
+                                Take off to Tokyo sale<br />
+                                Sakura show
+                            </p>
+                            <p class="text-white text-xs">Hết hạn sau: 34 ngày 12:08:17</p>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-5 right-4 w-fit">
+                        <img src="~/Content/img/airline/VN.svg" alt="Logo airline" />
+                    </div>
+                </div>
+                <div class="flex flex-col justify-between p-4 h-61.5">
+                    <div>
+                        <p class="text-sm font-bold">Dubai - Tokyo / Asia</p>
+                    </div>
+                    <div class="flex w-full justify-between">
+                        <div>
+                            <p class="text-xs font-bold max-w-[74px]">
+                                VÉ MÁY BAY QUỐC TẾ
+                                <img src="~/Content/img/search/plane-start.svg"
+                                     alt="icon plane"
+                                     class="w-3.5 inline" />
+                            </p>
+                        </div>
+                        <div class="text-end">
+                            <ul class="flex items-center">
+                                <li><img src="~/Content/img/flight-card/start-none.svg" alt="" /></li>
+                                <li><img src="~/Content/img/flight-card/start-pick.svg" alt="" /></li>
+                                <li><img src="~/Content/img/flight-card/start-pick.svg" alt="" /></li>
+                                <li><img src="~/Content/img/flight-card/start-pick.svg" alt="" /></li>
+                                <li><img src="~/Content/img/flight-card/start-pick.svg" alt="" /></li>
+                            </ul>
+                            <p class="text-[10px] font-bold">25 Người xem</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-xs line-clamp-4">
+                            Lorem ipsum dolor, sit amet consec r, sit amet consectetur adipisic
+                            tetur adipisic r, sit amet consectetur adipisic ing elit. Saepe vero
+                            officia sequi a blanditiis.
+                        </p>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <a href=""
+                               class="text-sm uppercase font-bold bg-primary text-white px-5 py-1.5 max-xl:px-3 max-xl:py-1 max-lg:px-5 max-lg:py-1.5 rounded-br-3xl rounded-tl-3xl">Chi Tiết</a>
+                        </div>
+                        <div>
+                            <p class="price text-accent font-extrabold text-base max-lg:text-base max-xl:text-sm">
+                                2,800,000 đ
+                            </p>
+                            <p class="price-sale font-bold text-xs line-through max-xl:text-xs">
+                                39,680,000 đ
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full min-h-[430px] border border-[#D3D9DC] rounded-xl overflow-hidden shadow-2xl">
+                <div class="h-46 w-full relative">
+                    <img class="size-full object-cover"
+                         src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1470"
+                         alt="" />
+                    <div class="absolute bottom-0 right-0 left-0 top-0 p-4 flex flex-col justify-between">
+                        <div class="text-right">
+                            <p class="tag text-white font-bold py-1 px-3 bg-highlight rounded-xl inline-block">
+                                Giảm 10%
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-white font-bold text-base">
+                                Take off to Tokyo sale<br />
+                                Sakura show
+                            </p>
+                            <p class="text-white text-xs">Hết hạn sau: 34 ngày 12:08:17</p>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-5 right-4 w-fit">
+                        <img src="~/Content/img/airline/VN.svg" alt="Logo airline" />
+                    </div>
+                </div>
+                <div class="flex flex-col justify-between p-4 h-61.5">
+                    <div>
+                        <p class="text-sm font-bold">Dubai - Tokyo / Asia</p>
+                    </div>
+                    <div class="flex w-full justify-between">
+                        <div>
+                            <p class="text-xs font-bold max-w-[74px]">
+                                VÉ MÁY BAY QUỐC TẾ
+                                <img src="~/Content/img/search/plane-start.svg"
+                                     alt="icon plane"
+                                     class="w-3.5 inline" />
+                            </p>
+                        </div>
+                        <div class="text-end">
+                            <ul class="flex items-center">
+                                <li><img src="~/Content/img/flight-card/start-none.svg" alt="" /></li>
+                                <li><img src="~/Content/img/flight-card/start-pick.svg" alt="" /></li>
+                                <li><img src="~/Content/img/flight-card/start-pick.svg" alt="" /></li>
+                                <li><img src="~/Content/img/flight-card/start-pick.svg" alt="" /></li>
+                                <li><img src="~/Content/img/flight-card/start-pick.svg" alt="" /></li>
+                            </ul>
+                            <p class="text-[10px] font-bold">25 Người xem</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-xs line-clamp-4">
+                            Lorem ipsum dolor, sit amet consec r, sit amet consectetur adipisic
+                            tetur adipisic r, sit amet consectetur adipisic ing elit. Saepe vero
+                            officia sequi a blanditiis.
+                        </p>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <a href=""
+                               class="text-sm uppercase font-bold bg-primary text-white px-5 py-1.5 max-xl:px-3 max-xl:py-1 max-lg:px-5 max-lg:py-1.5 rounded-br-3xl rounded-tl-3xl">Chi Tiết</a>
+                        </div>
+                        <div>
+                            <p class="price text-accent font-extrabold text-base max-lg:text-base max-xl:text-sm">
+                                2,800,000 đ
+                            </p>
+                            <p class="price-sale font-bold text-xs line-through max-xl:text-xs">
+                                39,680,000 đ
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full min-h-[430px] border border-[#D3D9DC] rounded-xl overflow-hidden shadow-2xl">
+                <div class="h-46 w-full relative">
+                    <img class="size-full object-cover"
+                         src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1470"
+                         alt="" />
+                    <div class="absolute bottom-0 right-0 left-0 top-0 p-4 flex flex-col justify-between">
+                        <div class="text-right">
+                            <p class="tag text-white font-bold py-1 px-3 bg-highlight rounded-xl inline-block">
+                                Giảm 10%
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-white font-bold text-base">
+                                Take off to Tokyo sale<br />
+                                Sakura show
+                            </p>
+                            <p class="text-white text-xs">Hết hạn sau: 34 ngày 12:08:17</p>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-5 right-4 w-fit">
+                        <img src="~/Content/img/airline/VN.svg" alt="Logo airline" />
+                    </div>
+                </div>
+                <div class="flex flex-col justify-between p-4 h-61.5">
+                    <div>
+                        <p class="text-sm font-bold">Dubai - Tokyo / Asia</p>
+                    </div>
+                    <div class="flex w-full justify-between">
+                        <div>
+                            <p class="text-xs font-bold max-w-[74px]">
+                                VÉ MÁY BAY QUỐC TẾ
+                                <img src="~/Content/img/search/plane-start.svg"
+                                     alt="icon plane"
+                                     class="w-3.5 inline" />
+                            </p>
+                        </div>
+                        <div class="text-end">
+                            <ul class="flex items-center">
+                                <li><img src="~/Content/img/flight-card/start-none.svg" alt="" /></li>
+                                <li><img src="~/Content/img/flight-card/start-pick.svg" alt="" /></li>
+                                <li><img src="~/Content/img/flight-card/start-pick.svg" alt="" /></li>
+                                <li><img src="~/Content/img/flight-card/start-pick.svg" alt="" /></li>
+                                <li><img src="~/Content/img/flight-card/start-pick.svg" alt="" /></li>
+                            </ul>
+                            <p class="text-[10px] font-bold">25 Người xem</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-xs line-clamp-4">
+                            Lorem ipsum dolor, sit amet consec r, sit amet consectetur adipisic
+                            tetur adipisic r, sit amet consectetur adipisic ing elit. Saepe vero
+                            officia sequi a blanditiis.
+                        </p>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <a href=""
+                               class="text-sm uppercase font-bold bg-primary text-white px-5 py-1.5 max-xl:px-3 max-xl:py-1 max-lg:px-5 max-lg:py-1.5 rounded-br-3xl rounded-tl-3xl">Chi Tiết</a>
+                        </div>
+                        <div>
+                            <p class="price text-accent font-extrabold text-base max-lg:text-base max-xl:text-sm">
+                                2,800,000 đ
+                            </p>
+                            <p class="price-sale font-bold text-xs line-through max-xl:text-xs">
+                                39,680,000 đ
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+<section class="container mx-auto mt-10">
+    <div class="header-section">
+        <p class="text-2xl font-bold">Thông tin hữu ích cho du khách</p>
+        <p class="text-base">Bạn có thể tìm hiểu thủ tục bay, điều kiện vé ở đây</p>
+    </div>
+    <div class="content mt-10">
+        <div class="grid grid-cols-3 max-xl:grid-cols-2 max-sm:grid-cols-1 gap-6">
+            <div class="p-4 border rounded-xl border-[#D3D9DC]">
+                <div class="flex items-center gap-3 border-b border-[#D3D9DC] py-4.5">
+                    <div>
+                        <img src="~/Content/img//question/question1.svg" alt="">
+                    </div>
+                    <div>
+                        <p class="text-base">Mua vé máy bay khuyến mãi có được hoàn và đổi vé không?</p>
+                        <div class="content hidden mt-4">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, reprehenderit alias modi dolores distinctio, adipisci blanditiis nam harum minus pariatur dolorem architecto hic voluptas! Voluptatem fugit mollitia eligendi aliquid laboriosam? it alias modi dolores distinctio, adipisci blanditiis nam harum minus pariatur dolorem architecto hic voluptas! Voluptatem fugit mollitia eligendi aliquid laboriosam?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 border-b border-[#D3D9DC] py-4.5">
+                    <div>
+                        <img src="~/Content/img//question/question1.svg" alt="">
+                    </div>
+                    <div>
+                        <p class="text-base">Mua vé máy bay khuyến mãi có được hoàn và đổi vé không?</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 border-b border-[#D3D9DC] py-4.5">
+                    <div>
+                        <img src="~/Content/img/question/question1.svg" alt="">
+                    </div>
+                    <div>
+                        <p class="text-base">Mua vé máy bay khuyến mãi có được hoàn và đổi vé không?</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 border-b border-[#D3D9DC] py-4.5">
+                    <div>
+                        <img src="~/Content/img/question/question1.svg" alt="">
+                    </div>
+                    <div>
+                        <p class="text-base">Mua vé máy bay khuyến mãi có được hoàn và đổi vé không?</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 py-4.5">
+                    <div>
+                        <img src="~/Content/img/question/question1.svg" alt="">
+                    </div>
+                    <div>
+                        <p class="text-base">Mua vé máy bay khuyến mãi có được hoàn và đổi vé không?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 border rounded-xl border-[#D3D9DC]">
+                <div class="flex items-center gap-3 border-b border-[#D3D9DC] py-4.5">
+                    <div>
+                        <img src="~/Content/img/question/question1.svg" alt="">
+                    </div>
+                    <div>
+                        <p class="text-base">Mua vé máy bay khuyến mãi có được hoàn và đổi vé không?</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 border-b border-[#D3D9DC] py-4.5">
+                    <div>
+                        <img src="~/Content/img/question/question1.svg" alt="">
+                    </div>
+                    <div>
+                        <p class="text-base">Mua vé máy bay khuyến mãi có được hoàn và đổi vé không?</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 border-b border-[#D3D9DC] py-4.5">
+                    <div>
+                        <img src="~/Content/img/question/question1.svg" alt="">
+                    </div>
+                    <div>
+                        <p class="text-base">Mua vé máy bay khuyến mãi có được hoàn và đổi vé không?</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 border-b border-[#D3D9DC] py-4.5">
+                    <div>
+                        <img src="~/Content/img/question/question1.svg" alt="">
+                    </div>
+                    <div>
+                        <p class="text-base">Mua vé máy bay khuyến mãi có được hoàn và đổi vé không?</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 py-4.5">
+                    <div>
+                        <img src="~/Content/img/question/question1.svg" alt="">
+                    </div>
+                    <div>
+                        <p class="text-base">Mua vé máy bay khuyến mãi có được hoàn và đổi vé không?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="py-28 px-14 border rounded-xl border-[#D3D9DC] max-xl:col-span-2 max-sm:col-span-1">
+                <div class="flex flex-col justify-between h-full min-h-40">
+                    <div class="text-center">
+                        <p class="text-2xl font-bold">Câu hỏi chưa phù hợp?</p>
+                    </div>
+                    <div class="text-center">
+                        <a href="" class=" inline-block font-bold text-sm border-2 border-primary p-2.5 rounded-2xl mx-auto w-fit">Tôi cần giải đáp</a>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-sm  mt-5">Chúng tôi sẽ cố gắng phản hồi sớm. Ngoài ra bạn có thể liên hệ tổng đài 09.19005320</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container mx-auto mt-10">
+    <div class="header-section flex justify-between max-lg:flex-wrap gap-4">
+        <div>
+            <p class=" text-2xl font-bold">Tin tức</p>
+            <p class=" text-base">Nắm bắt kịp thời các khám phá mới và thông tin khuyến mại</p>
+        </div>
+        <div class="font-bold">
+            <a class="text-accent text-base max-md:text-xs p-3">Khám phá</a>
+            <a class="text-base p-3 max-md:text-xs" href="">Khuyến mại</a>
+            <a class="text-base p-3 max-md:text-xs">Tin tức</a>
+            <a class="text-base p-3 max-md:text-xs">...</a>
+        </div>
+    </div>
+    <div class="content mt-10">
+        <div class="grid grid-cols-3 max-md:grid-cols-1  gap-5">
+
+            <div class="w-full min-h-50 max-h-50 border border-[#D3D9DC] rounded-xl overflow-hidden">
+                <div class="h-full w-full relative">
+                    <img class="size-full object-cover"
+                         src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1470"
+                         alt="" />
+                    <div class="absolute top-0 left-0 w-full h-full rounded-[10px] pointer-events-none"
+                         style="
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.1) 0%,
+          rgba(255, 255, 255, 0.3) 50%,
+          rgba(255, 255, 255, 1) 100%
+        );
+      "></div>
+                    <div class="absolute bottom-0 right-0 left-0 top-0 p-4 flex items-end">
+                        <div>
+                            <p class="text-xl font-bold">
+                                Khám phá vườn chim độc nhất vô nhị tại Phú Quốc
+                            </p>
+                            <p class="text-sm">Khám phá</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full min-h-50 max-h-50 border border-[#D3D9DC] rounded-xl overflow-hidden">
+                <div class="h-full w-full relative">
+                    <img class="size-full object-cover"
+                         src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1470"
+                         alt="" />
+                    <div class="absolute top-0 left-0 w-full h-full rounded-[10px] pointer-events-none"
+                         style="
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.1) 0%,
+          rgba(255, 255, 255, 0.3) 50%,
+          rgba(255, 255, 255, 1) 100%
+        );
+      "></div>
+                    <div class="absolute bottom-0 right-0 left-0 top-0 p-4 flex items-end">
+                        <div>
+                            <p class="text-xl font-bold">
+                                Khám phá vườn chim độc nhất vô nhị tại Phú Quốc
+                            </p>
+                            <p class="text-sm">Khám phá</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full min-h-50 max-h-50 border border-[#D3D9DC] rounded-xl overflow-hidden">
+                <div class="h-full w-full relative">
+                    <img class="size-full object-cover"
+                         src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1470"
+                         alt="" />
+                    <div class="absolute top-0 left-0 w-full h-full rounded-[10px] pointer-events-none"
+                         style="
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.1) 0%,
+          rgba(255, 255, 255, 0.3) 50%,
+          rgba(255, 255, 255, 1) 100%
+        );
+      "></div>
+                    <div class="absolute bottom-0 right-0 left-0 top-0 p-4 flex items-end">
+                        <div>
+                            <p class="text-xl font-bold">
+                                Khám phá vườn chim độc nhất vô nhị tại Phú Quốc
+                            </p>
+                            <p class="text-sm">Khám phá</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="mt-2">
+            <a href="" class="text-base font-bold ">Xem thêm >></a>
+        </div>
+    </div>
+</section>

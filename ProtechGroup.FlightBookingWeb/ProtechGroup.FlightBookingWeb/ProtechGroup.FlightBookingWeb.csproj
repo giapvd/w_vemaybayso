@@ -1,0 +1,697 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{740C4075-7F59-4BF2-B195-CFEEE56F4C68}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ProtechGroup.FlightBookingWeb</RootNamespace>
+    <AssemblyName>ProtechGroup.FlightBookingWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44371</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.10.1.1\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Abstractions, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Abstractions.5.11.1\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Container.5.11.1\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mvc, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Mvc.5.11.1\lib\net47\Unity.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Controllers\AirportController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderBookingController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\SearchFlightController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\ClientInfoHelper.cs" />
+    <Compile Include="Helpers\HtmlHelperExtensions.cs" />
+    <Compile Include="Helpers\UrlEncryptHelper.cs" />
+    <Compile Include="Models\FlightSearchRequest.cs" />
+    <Compile Include="Models\BookingRequest.cs" />
+    <Compile Include="Models\ValidationResult.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\assets\favicon-icon-DRcyrWuX.ico" />
+    <Content Include="Content\assets\main-C9EblPud.js" />
+    <Content Include="Content\assets\main-CNiOkohg.css" />
+    <Content Include="Content\assets\main-Dsz9U2DG.css" />
+    <Content Include="Content\favicon.ico" />
+    <Content Include="Content\img\airline\sm0D.gif" />
+    <Content Include="Content\img\airline\sm0V.gif" />
+    <Content Include="Content\img\airline\sm2L.gif" />
+    <Content Include="Content\img\airline\sm2W.gif" />
+    <Content Include="Content\img\airline\sm3K.gif" />
+    <Content Include="Content\img\airline\sm3U.gif" />
+    <Content Include="Content\img\airline\sm4U.gif" />
+    <Content Include="Content\img\airline\sm5J.gif" />
+    <Content Include="Content\img\airline\sm6A.gif" />
+    <Content Include="Content\img\airline\sm7F.gif" />
+    <Content Include="Content\img\airline\sm7H.gif" />
+    <Content Include="Content\img\airline\sm8I.gif" />
+    <Content Include="Content\img\airline\sm8P.gif" />
+    <Content Include="Content\img\airline\sm9K.gif" />
+    <Content Include="Content\img\airline\sm9U.gif" />
+    <Content Include="Content\img\airline\sm9W.gif" />
+    <Content Include="Content\img\airline\smA1.gif" />
+    <Content Include="Content\img\airline\smA3.gif" />
+    <Content Include="Content\img\airline\smAA.gif" />
+    <Content Include="Content\img\airline\smAB.gif" />
+    <Content Include="Content\img\airline\smAC.gif" />
+    <Content Include="Content\img\airline\smAE.gif" />
+    <Content Include="Content\img\airline\smAF.gif" />
+    <Content Include="Content\img\airline\smAH.gif" />
+    <Content Include="Content\img\airline\smAI.gif" />
+    <Content Include="Content\img\airline\smAM.gif" />
+    <Content Include="Content\img\airline\smAP.gif" />
+    <Content Include="Content\img\airline\smAQ.gif" />
+    <Content Include="Content\img\airline\smAR.gif" />
+    <Content Include="Content\img\airline\smAS.gif" />
+    <Content Include="Content\img\airline\smAT.gif" />
+    <Content Include="Content\img\airline\smAV.gif" />
+    <Content Include="Content\img\airline\smAY.gif" />
+    <Content Include="Content\img\airline\smAZ.gif" />
+    <Content Include="Content\img\airline\smB6.gif" />
+    <Content Include="Content\img\airline\smBA.gif" />
+    <Content Include="Content\img\airline\smBD.gif" />
+    <Content Include="Content\img\airline\smBE.gif" />
+    <Content Include="Content\img\airline\smBI.gif" />
+    <Content Include="Content\img\airline\smBL.gif" />
+    <Content Include="Content\img\airline\smBR.gif" />
+    <Content Include="Content\img\airline\smBT.gif" />
+    <Content Include="Content\img\airline\smBU.gif" />
+    <Content Include="Content\img\airline\smBW.gif" />
+    <Content Include="Content\img\airline\smC6.gif" />
+    <Content Include="Content\img\airline\smC9.gif" />
+    <Content Include="Content\img\airline\smCA.gif" />
+    <Content Include="Content\img\airline\smCB.gif" />
+    <Content Include="Content\img\airline\smCE.gif" />
+    <Content Include="Content\img\airline\smCG.gif" />
+    <Content Include="Content\img\airline\smCI.gif" />
+    <Content Include="Content\img\airline\smCM.gif" />
+    <Content Include="Content\img\airline\smCO.gif" />
+    <Content Include="Content\img\airline\smCQ.gif" />
+    <Content Include="Content\img\airline\smCX.gif" />
+    <Content Include="Content\img\airline\smCY.gif" />
+    <Content Include="Content\img\airline\smCZ.gif" />
+    <Content Include="Content\img\airline\smDE.gif" />
+    <Content Include="Content\img\airline\smDI.gif" />
+    <Content Include="Content\img\airline\smDJ.gif" />
+    <Content Include="Content\img\airline\smDL.gif" />
+    <Content Include="Content\img\airline\smDO.gif" />
+    <Content Include="Content\img\airline\smDP.gif" />
+    <Content Include="Content\img\airline\smDT.gif" />
+    <Content Include="Content\img\airline\smDU.gif" />
+    <Content Include="Content\img\airline\smE0.gif" />
+    <Content Include="Content\img\airline\smE8.gif" />
+    <Content Include="Content\img\airline\smEA.gif" />
+    <Content Include="Content\img\airline\smEF.gif" />
+    <Content Include="Content\img\airline\smEG.gif" />
+    <Content Include="Content\img\airline\smEI.gif" />
+    <Content Include="Content\img\airline\smEK.gif" />
+    <Content Include="Content\img\airline\smEN.gif" />
+    <Content Include="Content\img\airline\smET.gif" />
+    <Content Include="Content\img\airline\smEW.gif" />
+    <Content Include="Content\img\airline\smEY.gif" />
+    <Content Include="Content\img\airline\smF9.gif" />
+    <Content Include="Content\img\airline\smFB.gif" />
+    <Content Include="Content\img\airline\smFI.gif" />
+    <Content Include="Content\img\airline\smFJ.gif" />
+    <Content Include="Content\img\airline\smFL.gif" />
+    <Content Include="Content\img\airline\smFM.gif" />
+    <Content Include="Content\img\airline\smFR.gif" />
+    <Content Include="Content\img\airline\smFV.gif" />
+    <Content Include="Content\img\airline\smG3.gif" />
+    <Content Include="Content\img\airline\smGA.gif" />
+    <Content Include="Content\img\airline\smGF.gif" />
+    <Content Include="Content\img\airline\smGJ.gif" />
+    <Content Include="Content\img\airline\smGL.gif" />
+    <Content Include="Content\img\airline\smGP.gif" />
+    <Content Include="Content\img\airline\smGQ.gif" />
+    <Content Include="Content\img\airline\smGR.gif" />
+    <Content Include="Content\img\airline\smGU.gif" />
+    <Content Include="Content\img\airline\smGV.gif" />
+    <Content Include="Content\img\airline\smHA.gif" />
+    <Content Include="Content\img\airline\smHF.gif" />
+    <Content Include="Content\img\airline\smHG.gif" />
+    <Content Include="Content\img\airline\smHM.gif" />
+    <Content Include="Content\img\airline\smHP.gif" />
+    <Content Include="Content\img\airline\smHR.gif" />
+    <Content Include="Content\img\airline\smHS.gif" />
+    <Content Include="Content\img\airline\smHU.gif" />
+    <Content Include="Content\img\airline\smHV.gif" />
+    <Content Include="Content\img\airline\smHX.gif" />
+    <Content Include="Content\img\airline\smIB.gif" />
+    <Content Include="Content\img\airline\smIC.gif" />
+    <Content Include="Content\img\airline\smIE.gif" />
+    <Content Include="Content\img\airline\smIG.gif" />
+    <Content Include="Content\img\airline\smIQ.gif" />
+    <Content Include="Content\img\airline\smIR.gif" />
+    <Content Include="Content\img\airline\smIY.gif" />
+    <Content Include="Content\img\airline\smIZ.gif" />
+    <Content Include="Content\img\airline\smJ2.gif" />
+    <Content Include="Content\img\airline\smJB.gif" />
+    <Content Include="Content\img\airline\smJJ.gif" />
+    <Content Include="Content\img\airline\smJK.gif" />
+    <Content Include="Content\img\airline\smJL.gif" />
+    <Content Include="Content\img\airline\smJM.gif" />
+    <Content Include="Content\img\airline\smJO.gif" />
+    <Content Include="Content\img\airline\smJP.gif" />
+    <Content Include="Content\img\airline\smJQ.gif" />
+    <Content Include="Content\img\airline\smJR.gif" />
+    <Content Include="Content\img\airline\smJU.gif" />
+    <Content Include="Content\img\airline\smJV.gif" />
+    <Content Include="Content\img\airline\smJX.gif" />
+    <Content Include="Content\img\airline\smJY.gif" />
+    <Content Include="Content\img\airline\smJZ.gif" />
+    <Content Include="Content\img\airline\smK5.gif" />
+    <Content Include="Content\img\airline\smK6.gif" />
+    <Content Include="Content\img\airline\smKA.gif" />
+    <Content Include="Content\img\airline\smKC.gif" />
+    <Content Include="Content\img\airline\smKE.gif" />
+    <Content Include="Content\img\airline\smKK.gif" />
+    <Content Include="Content\img\airline\smKL.gif" />
+    <Content Include="Content\img\airline\smKM.gif" />
+    <Content Include="Content\img\airline\smKQ.gif" />
+    <Content Include="Content\img\airline\smKR.gif" />
+    <Content Include="Content\img\airline\smKS.gif" />
+    <Content Include="Content\img\airline\smKU.gif" />
+    <Content Include="Content\img\airline\smKX.gif" />
+    <Content Include="Content\img\airline\smLA.gif" />
+    <Content Include="Content\img\airline\smLB.gif" />
+    <Content Include="Content\img\airline\smLC.gif" />
+    <Content Include="Content\img\airline\smLG.gif" />
+    <Content Include="Content\img\airline\smLH.gif" />
+    <Content Include="Content\img\airline\smLI.gif" />
+    <Content Include="Content\img\airline\smLK.gif" />
+    <Content Include="Content\img\airline\smLO.gif" />
+    <Content Include="Content\img\airline\smLP.gif" />
+    <Content Include="Content\img\airline\smLR.gif" />
+    <Content Include="Content\img\airline\smLS.gif" />
+    <Content Include="Content\img\airline\smLT.gif" />
+    <Content Include="Content\img\airline\smLW.gif" />
+    <Content Include="Content\img\airline\smLX.gif" />
+    <Content Include="Content\img\airline\smLY.gif" />
+    <Content Include="Content\img\airline\smM3.gif" />
+    <Content Include="Content\img\airline\smM5.gif" />
+    <Content Include="Content\img\airline\smMA.gif" />
+    <Content Include="Content\img\airline\smMD.gif" />
+    <Content Include="Content\img\airline\smME.gif" />
+    <Content Include="Content\img\airline\smMF.gif" />
+    <Content Include="Content\img\airline\smMH.gif" />
+    <Content Include="Content\img\airline\smMI.gif" />
+    <Content Include="Content\img\airline\smMK.gif" />
+    <Content Include="Content\img\airline\smMP.gif" />
+    <Content Include="Content\img\airline\smMS.gif" />
+    <Content Include="Content\img\airline\smMU.gif" />
+    <Content Include="Content\img\airline\smMX.gif" />
+    <Content Include="Content\img\airline\smMZ.gif" />
+    <Content Include="Content\img\airline\smNB.gif" />
+    <Content Include="Content\img\airline\smNE.gif" />
+    <Content Include="Content\img\airline\smNF.gif" />
+    <Content Include="Content\img\airline\smNG.gif" />
+    <Content Include="Content\img\airline\smNH.gif" />
+    <Content Include="Content\img\airline\smNI.gif" />
+    <Content Include="Content\img\airline\smNK.gif" />
+    <Content Include="Content\img\airline\smNM.gif" />
+    <Content Include="Content\img\airline\smNW.gif" />
+    <Content Include="Content\img\airline\smNX.gif" />
+    <Content Include="Content\img\airline\smNZ.gif" />
+    <Content Include="Content\img\airline\smOA.gif" />
+    <Content Include="Content\img\airline\smOD.gif" />
+    <Content Include="Content\img\airline\smOK.gif" />
+    <Content Include="Content\img\airline\smOL.gif" />
+    <Content Include="Content\img\airline\smOM.gif" />
+    <Content Include="Content\img\airline\smON.gif" />
+    <Content Include="Content\img\airline\smOS.gif" />
+    <Content Include="Content\img\airline\smOU.gif" />
+    <Content Include="Content\img\airline\smOV.gif" />
+    <Content Include="Content\img\airline\smOZ.gif" />
+    <Content Include="Content\img\airline\smP8.gif" />
+    <Content Include="Content\img\airline\smPG.gif" />
+    <Content Include="Content\img\airline\smPH.gif" />
+    <Content Include="Content\img\airline\smPK.gif" />
+    <Content Include="Content\img\airline\smPR.gif" />
+    <Content Include="Content\img\airline\smPS.gif" />
+    <Content Include="Content\img\airline\smPW.gif" />
+    <Content Include="Content\img\airline\smPX.gif" />
+    <Content Include="Content\img\airline\smPZ.gif" />
+    <Content Include="Content\img\airline\smQF.gif" />
+    <Content Include="Content\img\airline\smQH.gif" />
+    <Content Include="Content\img\airline\smQI.gif" />
+    <Content Include="Content\img\airline\smQM.gif" />
+    <Content Include="Content\img\airline\smQQ.gif" />
+    <Content Include="Content\img\airline\smQR.gif" />
+    <Content Include="Content\img\airline\smQS.gif" />
+    <Content Include="Content\img\airline\smQV.gif" />
+    <Content Include="Content\img\airline\smR7.gif" />
+    <Content Include="Content\img\airline\smRB.gif" />
+    <Content Include="Content\img\airline\smRE.gif" />
+    <Content Include="Content\img\airline\smRG.gif" />
+    <Content Include="Content\img\airline\smRJ.gif" />
+    <Content Include="Content\img\airline\smRO.gif" />
+    <Content Include="Content\img\airline\smRQ.gif" />
+    <Content Include="Content\img\airline\smRU.gif" />
+    <Content Include="Content\img\airline\smS2.gif" />
+    <Content Include="Content\img\airline\smS3.gif" />
+    <Content Include="Content\img\airline\smS4.gif" />
+    <Content Include="Content\img\airline\smS7.gif" />
+    <Content Include="Content\img\airline\smSA.gif" />
+    <Content Include="Content\img\airline\smSB.gif" />
+    <Content Include="Content\img\airline\smSK.gif" />
+    <Content Include="Content\img\airline\smSN.gif" />
+    <Content Include="Content\img\airline\smSQ.gif" />
+    <Content Include="Content\img\airline\smSS.gif" />
+    <Content Include="Content\img\airline\smST.gif" />
+    <Content Include="Content\img\airline\smSU.gif" />
+    <Content Include="Content\img\airline\smSV.gif" />
+    <Content Include="Content\img\airline\smSW.gif" />
+    <Content Include="Content\img\airline\smSY.gif" />
+    <Content Include="Content\img\airline\smT3.gif" />
+    <Content Include="Content\img\airline\smTA.gif" />
+    <Content Include="Content\img\airline\smTC.gif" />
+    <Content Include="Content\img\airline\smTE.gif" />
+    <Content Include="Content\img\airline\smTF.gif" />
+    <Content Include="Content\img\airline\smTG.gif" />
+    <Content Include="Content\img\airline\smTK.gif" />
+    <Content Include="Content\img\airline\smTN.gif" />
+    <Content Include="Content\img\airline\smTP.gif" />
+    <Content Include="Content\img\airline\smTR.gif" />
+    <Content Include="Content\img\airline\smTS.gif" />
+    <Content Include="Content\img\airline\smTU.gif" />
+    <Content Include="Content\img\airline\smTV.gif" />
+    <Content Include="Content\img\airline\smTW.gif" />
+    <Content Include="Content\img\airline\smTX.gif" />
+    <Content Include="Content\img\airline\smTZ.gif" />
+    <Content Include="Content\img\airline\smU2.gif" />
+    <Content Include="Content\img\airline\smU5.gif" />
+    <Content Include="Content\img\airline\smU6.gif" />
+    <Content Include="Content\img\airline\smUA.gif" />
+    <Content Include="Content\img\airline\smUI.gif" />
+    <Content Include="Content\img\airline\smUL.gif" />
+    <Content Include="Content\img\airline\smUN.gif" />
+    <Content Include="Content\img\airline\smUO.gif" />
+    <Content Include="Content\img\airline\smUP.gif" />
+    <Content Include="Content\img\airline\smUS.gif" />
+    <Content Include="Content\img\airline\smUU.gif" />
+    <Content Include="Content\img\airline\smUX.gif" />
+    <Content Include="Content\img\airline\smV3.gif" />
+    <Content Include="Content\img\airline\smVA.gif" />
+    <Content Include="Content\img\airline\smVD.gif" />
+    <Content Include="Content\img\airline\smVG.gif" />
+    <Content Include="Content\img\airline\smVJ.gif" />
+    <Content Include="Content\img\airline\smVK.gif" />
+    <Content Include="Content\img\airline\smVN.gif" />
+    <Content Include="Content\img\airline\smVP.gif" />
+    <Content Include="Content\img\airline\smVS.gif" />
+    <Content Include="Content\img\airline\smVT.gif" />
+    <Content Include="Content\img\airline\smVU.gif" />
+    <Content Include="Content\img\airline\smVV.gif" />
+    <Content Include="Content\img\airline\smVX.gif" />
+    <Content Include="Content\img\airline\smW2.gif" />
+    <Content Include="Content\img\airline\smWE.gif" />
+    <Content Include="Content\img\airline\smWF.gif" />
+    <Content Include="Content\img\airline\smWJ.gif" />
+    <Content Include="Content\img\airline\smWM.gif" />
+    <Content Include="Content\img\airline\smWN.gif" />
+    <Content Include="Content\img\airline\smWX.gif" />
+    <Content Include="Content\img\airline\smWY.gif" />
+    <Content Include="Content\img\airline\smXL.gif" />
+    <Content Include="Content\img\airline\smXM.gif" />
+    <Content Include="Content\img\airline\smXQ.gif" />
+    <Content Include="Content\img\airline\smXR.gif" />
+    <Content Include="Content\img\airline\smY2.gif" />
+    <Content Include="Content\img\airline\smYN.gif" />
+    <Content Include="Content\img\airline\smYP.gif" />
+    <Content Include="Content\img\airline\smYV.gif" />
+    <Content Include="Content\img\airline\smZ4.gif" />
+    <Content Include="Content\img\airline\smZB.gif" />
+    <Content Include="Content\img\airline\smZE.gif" />
+    <Content Include="Content\img\airline\smZH.gif" />
+    <Content Include="Content\img\airline\smZI.gif" />
+    <Content Include="Content\img\airline\smZL.gif" />
+    <Content Include="Content\img\favicon-icon.ico" />
+    <Content Include="Content\img\flight-card\start-none.svg" />
+    <Content Include="Content\img\flight-card\start-pick.svg" />
+    <Content Include="Content\img\flight-info\bag.svg" />
+    <Content Include="Content\img\flight-info\drop-dow.svg" />
+    <Content Include="Content\img\flight-info\plane-end.svg" />
+    <Content Include="Content\img\flight-info\plane-start.svg" />
+    <Content Include="Content\img\flight-info\ticket.svg" />
+    <Content Include="Content\img\flight-list\BambooAirways.png" />
+    <Content Include="Content\img\flight-list\filter.svg" />
+    <Content Include="Content\img\flight-list\item-flight-list\bag1.svg" />
+    <Content Include="Content\img\flight-list\item-flight-list\bag2.svg" />
+    <Content Include="Content\img\flight-list\item-flight-list\plane.svg" />
+    <Content Include="Content\img\flight-list\PacificAirlines.png" />
+    <Content Include="Content\img\flight-list\style1.svg" />
+    <Content Include="Content\img\flight-list\style2.svg" />
+    <Content Include="Content\img\flight-list\VietJetAir.png" />
+    <Content Include="Content\img\flight-list\VietnamAirlines.png" />
+    <Content Include="Content\img\flight-list\VietravelAirlines.png" />
+    <Content Include="Content\img\flight-payment\bag.svg" />
+    <Content Include="Content\img\flight-payment\flight-up.svg" />
+    <Content Include="Content\img\flight-payment\QR.png" />
+    <Content Include="Content\img\flight-payment\ticket.svg" />
+    <Content Include="Content\img\footer\bocongthuong.png" />
+    <Content Include="Content\img\footer\face.svg" />
+    <Content Include="Content\img\footer\Mbbank.png" />
+    <Content Include="Content\img\footer\mess.svg" />
+    <Content Include="Content\img\footer\Msbbank.png" />
+    <Content Include="Content\img\footer\SeABank.png" />
+    <Content Include="Content\img\footer\tiktok.svg" />
+    <Content Include="Content\img\footer\whatup.svg" />
+    <Content Include="Content\img\footer\youtube.svg" />
+    <Content Include="Content\img\footer\zalo.svg" />
+    <Content Include="Content\img\header\facebook.svg" />
+    <Content Include="Content\img\header\home.svg" />
+    <Content Include="Content\img\header\phone.svg" />
+    <Content Include="Content\img\header\search.svg" />
+    <Content Include="Content\img\header\tiktok.svg" />
+    <Content Include="Content\img\loading.gif" />
+    <Content Include="Content\img\flight-item\calender.svg" />
+    <Content Include="Content\img\flight-item\drop-dow-gray.svg" />
+    <Content Include="Content\img\flight-item\drop-dow.svg" />
+    <Content Include="Content\img\flight-item\member.svg" />
+    <Content Include="Content\img\flight-item\minus.svg" />
+    <Content Include="Content\img\flight-item\plane-start.svg" />
+    <Content Include="Content\img\flight-item\plus.svg" />
+    <Content Include="Content\img\flight-item\search.svg" />
+    <Content Include="Content\img\flight-item\user-plus.svg" />
+    <Content Include="Content\img\question\question1.svg" />
+    <Content Include="Content\img\search_loading.gif" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-grid.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-grid.min.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-grid.rtl.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-reboot.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-utilities.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-utilities.min.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap.rtl.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap.rtl.min.css" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.bundle.js" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.esm.js" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.esm.min.js" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="Content\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <Content Include="Content\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Content\lib\jquery-validation-unobtrusive\LICENSE.txt" />
+    <Content Include="Content\lib\jquery-validation\dist\additional-methods.js" />
+    <Content Include="Content\lib\jquery-validation\dist\additional-methods.min.js" />
+    <Content Include="Content\lib\jquery-validation\dist\jquery.validate.js" />
+    <Content Include="Content\lib\jquery-validation\dist\jquery.validate.min.js" />
+    <Content Include="Content\lib\jquery\dist\jquery.js" />
+    <Content Include="Content\lib\jquery\dist\jquery.min.js" />
+    <Content Include="Content\lib\jquery\LICENSE.txt" />
+    <Content Include="Content\svg\backToTop.svg" />
+    <Content Include="Content\svg\footer\logoTicket.svg" />
+    <Content Include="Content\svg\header\bell.svg" />
+    <Content Include="Content\svg\header\facebook.svg" />
+    <Content Include="Content\svg\header\mess.svg" />
+    <Content Include="Content\svg\header\phone.svg" />
+    <Content Include="Content\svg\header\search.svg" />
+    <Content Include="Content\svg\header\ticket-header.svg" />
+    <Content Include="Content\svg\header\ticket.svg" />
+    <Content Include="Content\svg\header\user.svg" />
+    <Content Include="Content\svg\home\plane.svg" />
+    <Content Include="Content\svg\home\ticket-sales.svg" />
+    <Content Include="Content\svg\logo.svg" />
+    <Content Include="Content\svg\search\calender.svg" />
+    <Content Include="Content\svg\search\map.svg" />
+    <Content Include="Content\svg\search\oneRound.svg" />
+    <Content Include="Content\svg\search\plane.svg" />
+    <Content Include="Content\svg\search\twoRound.svg" />
+    <Content Include="Content\svg\search\user.svg" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-reboot.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-utilities.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap.min.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap.rtl.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.bundle.js.map" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.esm.js.map" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.esm.min.js.map" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.js.map" />
+    <Content Include="Content\lib\bootstrap\dist\js\bootstrap.min.js.map" />
+    <Content Include="Content\lib\bootstrap\LICENSE" />
+    <Content Include="Content\lib\jquery-validation\LICENSE.md" />
+    <Content Include="Content\lib\jquery\dist\jquery.min.map" />
+    <Content Include="Scripts\common\common.js" />
+    <Content Include="Scripts\common\validation.js" />
+    <Content Include="Scripts\lip\flatpickr.js" />
+    <Content Include="Scripts\lip\jquery-3.7.1.min.js" />
+    <Content Include="Scripts\lip\modernizr-2.8.3.js" />
+    <Content Include="Scripts\modules\confirmCustomer.js" />
+    <Content Include="Scripts\modules\form_search.js" />
+    <Content Include="Scripts\modules\resultFlightDomestic.js" />
+    <Content Include="Scripts\modules\searchflight.js" />
+    <Content Include="Scripts\site.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Airport\Index.cshtml" />
+    <Content Include="Views\Shared\_FrmSearchAirports.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\lip\flatpickr.vn.js" />
+    <Content Include="Views\SearchFlight\ResultsFlightDomestic.cshtml" />
+    <Content Include="Views\OrderBooking\ConfirmCusInformation.cshtml" />
+    <Content Include="Views\Payment\PaymentMethodOrder.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ProtechGroup.Application\ProtechGroup.Application.csproj">
+      <Project>{39e12706-c176-433e-8332-a31cb3373042}</Project>
+      <Name>ProtechGroup.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ProtechGroup.Domain\ProtechGroup.Domain.csproj">
+      <Project>{50f53294-cb4b-4107-b1fe-ca25be32a57f}</Project>
+      <Name>ProtechGroup.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ProtechGroup.Infrastructure\ProtechGroup.Infrastructure.csproj">
+      <Project>{584ac1c8-fa3f-4229-ae08-7385e273745c}</Project>
+      <Name>ProtechGroup.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53709</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44371/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

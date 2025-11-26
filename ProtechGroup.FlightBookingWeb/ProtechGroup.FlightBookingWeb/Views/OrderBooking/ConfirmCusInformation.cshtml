@@ -1,0 +1,839 @@
+﻿@model List<ProtechGroup.Domain.GroupFlight>
+@{
+    var searchInput = (ProtechGroup.Domain.Entities.SearchInputMod)ViewBag.SearchInput;
+    var listBagOut = (List<ProtechGroup.Domain.Entities.PriceBaggageMod>)ViewBag.ListBagOut;
+    var listBagIn = new List<ProtechGroup.Domain.Entities.PriceBaggageMod>();
+    if (searchInput.IsRoundTrip)
+    {
+        listBagIn = (List<ProtechGroup.Domain.Entities.PriceBaggageMod>)ViewBag.ListBagIn;
+    }
+    ViewBag.Title = "Xác nhận thông tin khách hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="flight-info">
+    @Html.AntiForgeryToken()
+    <div class="heading">
+        <div class="container">
+            <h1 class="color-dark">THÔNG TIN CHUYẾN BAY</h1>
+            <p class="color-primary">
+                Khách hàng lưu ý chọn xem điều kiện vé để xem đầy đủ thông tin chuyến bay.
+            </p>
+        </div>
+    </div>
+    <div class="container" id="frmPostOrder" data-session="@searchInput.SessionId">
+        <div class="row box-all">
+            <div class="col-9 col-xxl-12">
+                <section>
+                    <div class="list-ticket-items">
+                        <input type="hidden" value="@searchInput.DepartureDate" id="departure-date" />
+                        <input type="hidden" value="@searchInput.ReturnDate" id="return-date" />
+                        @foreach (var item in Model)
+                        {
+                            <div class="item-ticket" data-booking-code="@item.PriceBreakDowns[0].BookingKey" data-airline="@item.MainAirlineCode" data-waytype="@((int)item.WayType)">
+                                <div class="heading-ticket">
+                                    <div class="row row-cols-md-1">
+                                        <div class="col-6">
+                                            @if (item.WayType == (int)ProtechGroup.Domain.WayType.OutBound)
+                                            {
+                                                <p class="color-dark">Chiều đi: @item.MainDepartureCity - @item.MainArrivalCity</p>
+                                            }
+                                            else
+                                            {
+                                                <p class="color-dark">Chiều về: @item.MainDepartureCity - @item.MainArrivalCity</p>
+                                            }
+                                        </div>
+                                        <div class="col-6">
+                                            <p class="color-dark">Ngày: @item.MainDepartureDate.ToString("dd/MM/yyyy")</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="body-ticket">
+                                    <div class="row g-1">
+                                        <div class="col-3 d-none-md">
+                                            <div class="airline-info">
+                                                <img src="/Content/img/Airline/sm@(item.MainAirlineCode + ".gif")" alt="@item.MainAirlineName" />
+                                                <div class="airline-name">
+                                                    <span class="color-dark name">@item.MainAirlineName</span>
+                                                    <span class="color-info code">@item.MainFlightNumber - @item.Plane</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-lg-7 col-md-12">
+                                            <div class="flight-details">
+                                                <div class="time-info">
+                                                    <div class="row">
+                                                        <div class="col-5">
+                                                            <div class="departure">
+                                                                <div class="row g-1">
+                                                                    <div class="col-7">
+                                                                        <div class="date d-none-lg">
+                                                                            @{
+                                                                                var dateOfWeekDep = item.MainDepartureDate.DayOfWeek;
+                                                                                string strDateOfWeekDep = ProtechGroup.Application.Common.CoreUtils.GetLangDayOfWeek(dateOfWeekDep);
+                                                                                <div>
+                                                                                    @strDateOfWeekDep <br> @item.MainDepartureDate.ToString("dd/MM")
+                                                                                </div>
+                                                                            }
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-5">
+                                                                        <div class="time">@item.MainDepartureTime</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="location">@item.MainDepartureCity (@item.MainDepartureAirportCode)</div>
+                                                                <div class="color-dark">@item.MainDepartureAirportName</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-1">
+                                                            <div class="arrow">✈</div>
+                                                        </div>
+                                                        <div class="col-5">
+                                                            <div class="arrival">
+                                                                <div class="row g-1">
+                                                                    <div class="col-5">
+                                                                        <div class="time">@item.MainArrivalTime</div>
+                                                                    </div>
+                                                                    <div class="col-7">
+                                                                        <div class="date  d-none-lg">
+                                                                            @{
+                                                                                var dateOfWeekArr = item.MainArrivalDate.DayOfWeek;
+                                                                                string strDateOfWeekArr = ProtechGroup.Application.Common.CoreUtils.GetLangDayOfWeek(dateOfWeekArr);
+                                                                                <div>
+                                                                                    @strDateOfWeekArr <br> @item.MainArrivalDate.ToString("dd/MM")
+                                                                                </div>
+                                                                            }
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="location">
+                                                                    @item.MainArrivalCity (@item.MainArrivalAirportCode)
+                                                                </div>
+                                                                <div class="color-dark">@item.MainArrivalAirportName</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-3 d-none d-block-md col-md-6">
+                                            <div class="airline-info">
+                                                <img src="/Content/img/Airline/sm@(item.MainAirlineCode + ".gif")" alt="@item.MainAirlineName">
+                                                <div class="airline-name">
+                                                    <span class="color-dark name">@item.MainAirlineName</span>
+                                                    <span class="color-info code">@item.MainFlightNumber - @item.Plane</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-3 col-lg-2 col-md-6">
+                                            <div class="flight-meta">
+                                                <div class="d-none-lg">
+                                                    @if (item.ListSegment.Count <= 1)
+                                                    {
+                                                        <p class="color-info">Bay thẳng</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        int numstop = item.ListSegment.Count - 1;
+                                                        <p class="color-info">@numstop điểm dừng</p>
+                                                    }
+                                                    <p class="color-dark">@item.Duration</p>
+                                                </div>
+                                                <div class="type-ticket">
+                                                    <p class="color-info d-none-md">Hạng vé</p>
+                                                    <p class="color-dark type">@item.PriceBreakDowns[0].ClassName (@item.PriceBreakDowns[0].FareClass)</p>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="btn-detail" style="margin-top:10px; width:100%">
+                                                <button class="color-dark toggle-info" data-target="#@item.MainFlightNumber">
+                                                    Xem điều kiện vé
+                                                    <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M1.5 1.5L6.5 6.5L1.5 11.5" stroke="#FF3C13" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="info-ticket color-primary" id="@item.MainFlightNumber" style="display:none">
+                                            <div class="ticket-info-type">
+                                                <div class="ticket-section">
+                                                    <h3 class="color-info" style="font-size: 16px;">
+                                                        🔸 ĐIỀU KIỆN VÉ ÁP DỤNG:
+                                                    </h3>
+                                                    @Html.Raw(item.PriceBreakDowns[0].Condition)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </section>
+                <section class="baggage-infor">
+                    <div class="heading">
+                        <div class="container">
+                            <h1 class="color-dark">THÔNG TIN HÀNH LÝ</h1>
+                            @{
+                                var BagOut = Model[0].PriceBreakDowns[0];
+                                string strBagInfo = "Mỗi hành khách được mang (Chiều đi: " + BagOut.RecommendationNumber + " - " + BagOut.AllowanceBaggage;
+                                if (Model.Count > 1)
+                                {
+                                    var BagIn = Model[1].PriceBreakDowns[0];
+                                    strBagInfo += "; Chiều về: " + BagIn.RecommendationNumber + " - " + BagIn.AllowanceBaggage;
+                                }
+                                strBagInfo += ")";
+                                <p class="color-primary">
+                                    @strBagInfo
+                                </p>
+                            }
+                        </div>
+                    </div>
+                    <div class="box-container" id="baggege-info">
+                        <div class="row">
+                            <div class="col-6 col-md-12">
+                                <div class="row g-2">
+                                    <div class="col-12 heading-info-baggage">
+                                        <p class="color-info ">Mua thêm hành lý chiều đi:</p>
+                                    </div>
+                                    @{
+                                        var paxNumBag = searchInput.AdultNumber + searchInput.ChildNumber;
+                                        for (int i = 0; i < paxNumBag; i++)
+                                        {
+                                            int paxIndex = 1;
+                                            <div class="col-12">
+                                                <div class="form-custom">
+                                                    <select class="baggage-out" data-paxindex="@paxIndex">
+                                                        <option value="0" data-price="0" data-kg="0">Không mua thêm hành lý</option>
+                                                        @foreach (var bagOut in listBagOut)
+                                                        {
+                                                            decimal totalPriceBag = bagOut.Price + bagOut.ServiceFee;
+                                                            <option value="@bagOut.Id" data-price="@totalPriceBag" data-kg="@bagOut.TotalKg">Mua thêm @(bagOut.TotalKg + "Kg") hành lý(@ProtechGroup.Application.Common.CoreUtils.FormatPrice(totalPriceBag))</option>
+                                                        }
+
+                                                    </select>
+                                                    <label>
+                                                        <p class="color-primary">
+                                                            Hành khách @paxIndex: <span class="color-info"></span>
+                                                        </p>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            paxIndex++;
+                                        }
+
+
+                                    }
+                                </div>
+                            </div>
+                            @if (searchInput.IsRoundTrip)
+                            {
+                                <div class="col-6 col-md-12">
+                                    <div class="row g-2">
+                                        <div class="col-12 heading-info-baggage">
+                                            <p class="color-info ">Mua thêm hành lý chiều về:</p>
+                                        </div>
+                                        @for (int i = 0; i < paxNumBag; i++)
+                                        {
+                                            int paxIndex = 1;
+                                            <div class="col-12">
+                                                <div class="form-custom">
+                                                    <select class="baggage-in">
+                                                        <option value="0" data-price="0" data-kg="0">Không mua thêm hành lý</option>
+                                                        @foreach (var bagIn in listBagIn)
+                                                        {
+                                                            decimal totalPriceBag = bagIn.Price + bagIn.ServiceFee;
+                                                            <option value="@bagIn.Id" data-price="@totalPriceBag" data-kg="@bagIn.TotalKg">Mua thêm @(bagIn.TotalKg + "Kg") hành lý(@ProtechGroup.Application.Common.CoreUtils.FormatPrice(totalPriceBag))</option>
+                                                        }
+                                                    </select>
+                                                    <label>
+                                                        <p class="color-primary">
+                                                            Hành khách @paxIndex: <span class="color-info"></span>
+                                                        </p>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            paxIndex++;
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </section>
+                <section class="passenger-infor">
+                    <div class="heading">
+                        <div class="container">
+                            <h1 class="color-dark">THÔNG TIN HÀNH KHÁCH</h1>
+                            <p class="color-primary">
+                                Người lớn Từ đủ 12 tuổi trở lên, Trẻ em từ đủ 2 tuổi đến
+                                dưới 12 tuổi, Em bé dưới 02 tuổi.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <h3 class="color-info">
+                            Lưu ý! Kiểm tra thông tin cá nhân của bạn
+                        </h3>
+                        <p class="color-dark">
+                            Do các quy định của hãng hàng không, điều quan trọng là tên
+                            của hành khách đi máy bay được nhập vào ô họ tên và ngày tháng
+                            năm sinh đối với trẻ em, em bé phải trùng với giấy tờ tùy thân
+                            đảm bảo lên máy bay. Hãng có thể từ chối và giá trị của vé bị
+                            mất nếu nhập sai. Rất tiếc, chúng tôi không thể hỗ trợ bạn sửa
+                            tên sau khi đặt vé được xác nhận.
+                        </p>
+                    </div>
+                    <div class="box-container" id="passger-info">
+                        <div class="row g-2">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <div class="d-flex checkbox-custom">
+                                            <label class="color-dark check-box-red-wrapper">
+                                                <input type="checkbox" id="is-chose-info-contactl" checked />
+                                                <div class="check-box-red"></div>
+                                            </label>
+                                            <p class="color-dark">
+                                                Sử dụng thông tin hành khách là thông tin liên hệ
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="color-info">(*) Thông tin bắt buộc</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @for (int i = 0; i < searchInput.AdultNumber; i++)
+                            {
+                                if (i == 0)
+                                {
+                                    <div class="col-2">
+                                        <p class="info-passenger color-dark">NGƯỜI LỚN:</p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-2">
+                                    </div>
+                                }
+                                <div class="col-2">
+                                    <div class="form-custom">
+                                        <select class="passenger-gender-adt">
+                                            <option value="1">Nam</option>
+                                            <option value="0">Nữ</option>
+                                        </select>
+                                        <label>
+                                            <p class="color-primary">
+                                                Giới tính: <span class="color-info">(*)</span>
+                                            </p>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-custom">
+                                        <input type="text" placeholder="Họ tên hành khách người lớn" class="passenger-name-adt required" />
+                                        <label>
+                                            <p class="color-primary">
+                                                Họ và tên: <span class="color-info">(*)</span>
+                                            </p>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-custom">
+                                        <input type="text" placeholder="Số CCCD/Hộ chiếu hành khách người lớn" class="passenger-cardnum-adt required" />
+                                        <label>
+                                            <p class="color-primary">
+                                                Số CCCD/Hộ chiếu: <span class="color-info">(*)</span>
+                                            </p>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-custom">
+                                        <input type="text" placeholder="Ngày sinh hành khách người lớn" class="passenger-birth-adt required" />
+                                        <label>
+                                            <p class="color-primary">Ngày sinh<span class="color-info">(*)</span></p>
+                                        </label>
+                                    </div>
+                                </div>
+                            }
+                            <!-- <+====================WAVEBEAR====================+> -->
+                            @for (int i = 0; i < searchInput.ChildNumber; i++)
+                            {
+                                if (i == 0)
+                                {
+                                    <div class="col-2">
+                                        <p class="info-passenger color-dark">TRẺ EM:</p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-2">
+
+                                    </div>
+                                }
+                                <div class="col-2">
+                                    <div class="form-custom">
+                                        <select class="passenger-gender-chd">
+                                            <option value="1">Nam</option>
+                                            <option value="0">Nữ</option>
+                                        </select>
+                                        <label>
+                                            <p class="color-primary">
+                                                Giới tính: <span class="color-info">(*)</span>
+                                            </p>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-custom">
+                                        <input type="text" placeholder="Họ và tên hành khách trẻ em" class="passenger-name-chd required" />
+                                        <label>
+                                            <p class="color-primary">
+                                                Họ và tên: <span class="color-info">(*)</span>
+                                            </p>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-custom">
+                                        <input type="text" placeholder="Số CCCD/Hộ chiếu hành khách trẻ em" class="passenger-cardnum-chd required" />
+                                        <label>
+                                            <p class="color-primary">
+                                                Số CCCD/Hộ chiếu: <span class="color-info">(*)</span>
+                                            </p>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-custom">
+                                        <input type="text" placeholder="Ngày sinh hành khách trẻ em" class="passenger-birth-chd required" />
+                                        <label>
+                                            <p class="color-primary">Ngày sinh<span class="color-info">(*)</span></p>
+                                        </label>
+                                    </div>
+                                </div>
+                            }
+                            <!-- <+====================WAVEBEAR====================+> -->
+                            @for (int i = 0; i < searchInput.InfantNumber; i++)
+                            {
+                                if (i == 0)
+                                {
+                                    <div class="col-2">
+                                        <p class="info-passenger color-dark">EM BÉ:</p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-2">
+
+                                    </div>
+                                }
+                                <div class="col-2">
+                                    <div class="form-custom">
+                                        <select class="passenger-gender-inf">
+                                            <option value="1">Nam</option>
+                                            <option value="0">Nữ</option>
+                                        </select>
+                                        <label>
+                                            <p class="color-primary">
+                                                Giới tính: <span class="color-info">(*)</span>
+                                            </p>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-custom">
+                                        <input type="text" placeholder="Họ và tên hành khách em bé" class="passenger-name-inf required" />
+                                        <label>
+                                            <p class="color-primary">
+                                                Họ và tên: <span class="color-info">(*)</span>
+                                            </p>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-custom">
+                                        <input type="text" placeholder="Số CCCD/Hộ chiếu hành khách em bé" class="passenger-cardnum-inf required" />
+                                        <label>
+                                            <p class="color-primary">
+                                                Số CCCD/Hộ chiếu: <span class="color-info">(*)</span>
+                                            </p>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-custom">
+                                        <input type="text" placeholder="Ngày sinh hành khách em bé" class="passenger-birth-inf required" />
+                                        <label>
+                                            <p class="color-primary">Ngày sinh<span class="color-info">(*)</span></p>
+                                        </label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </section>
+                <section class="contact-information">
+                    <div class="heading">
+                        <div class="container">
+                            <h1 class="color-dark">THÔNG TIN LIÊN HỆ</h1>
+                            <p class="color-primary">
+                                Xin vui lòng điền vào tất cả các thông tin. Hãng sẽ liên hệ
+                                đến bạn nếu có thay đổi liên quan đến chuyến bay.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="box-container" id="contaclt-info">
+                        <div class="row g-2">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <div class="d-flex checkbox-custom">
+                                            <label class="color-dark check-box-red-wrapper" id="check123" data-id="check123">
+                                                <input type="checkbox" id="is-invoice" />
+                                                <div class="check-box-red"></div>
+                                            </label>
+                                            <p class="color-dark">Có lấy hóa đơn GTGT</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="color-info">(*) Thông tin bắt buộc</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <p class="info-passenger color-dark">THÔNG TIN LIÊN HỆ:</p>
+                            </div>
+                            <div class="col-1">
+                                <div class="form-custom">
+                                    <select class="title-contactl">
+                                        <option value="1">Ông</option>
+                                        <option value="2">Bà</option>
+                                        <option value="3">Anh</option>
+                                        <option value="4">Chị</option>
+                                    </select>
+                                    <label>
+                                        <p class="color-primary">
+                                            Quý danh:
+                                        </p>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-custom">
+                                    <input type="text" placeholder="Ví dụ: Nguyen Van A" class="name-contactl required" />
+                                    <label>
+                                        <p class="color-primary">
+                                            Họ Tên đệm Tên: <span class="color-info">(*)</span>
+                                        </p>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-custom">
+                                    <input type="text" placeholder="Ví dụ: hello@vemaybayso.vn" class="email-contactl required" />
+                                    <label>
+                                        <p class="color-primary">
+                                            Email: <span class="color-info">(*)</span>
+                                        </p>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-custom">
+                                    <input type="text" placeholder="Ví dụ: 0919005320" class="phone-contactl required" />
+                                    <label>
+                                        <p class="color-primary">
+                                            Điện thoại: <span class="color-info">(*)</span>
+                                        </p>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-2"></div>
+                            <div class="col-10">
+                                <div class="form-custom">
+                                    <input type="text" placeholder="Ví dụ: Số 81 Hoàng Cầu, P.Chợ Dừa, Q.Đống Đa, TP.Hà Nội" class="add-contactl" />
+                                    <label>
+                                        <p class="color-primary">Địa chỉ liên hệ:</p>
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- <+====================WAVEBEAR====================+> -->
+                            <div class="col-2">
+                                <p class="info-passenger color-dark">THÔNG TIN HÓA ĐƠN:</p>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-custom">
+                                    <input type="text" placeholder="Đúng theo Đăng ký kinh doanh/Quyết định lập" class="name-invoice" id="name-invoice" />
+                                    <label>
+                                        <p class="color-primary lbl-name-invoice">Tên hóa đơn</p>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-custom">
+                                    <input type="text" placeholder="Ghi đúng mã số thuế đăng ký với cơ quan thuế" class="tax-code-invoice" id="tax-code-invoice" />
+                                    <label>
+                                        <p class="color-primary lbl-taxcode-invoice">Mã số thuế</p>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-custom">
+                                    <input type="text" placeholder="Địa chỉ email để nhận hóa đơn điện tử" class="email-invoice" id="email-invoice" />
+                                    <label>
+                                        <p class="color-primary">Email nhận hóa đơn</p>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                            </div>
+                            <div class="col-10">
+                                <div class="form-custom">
+                                    <input type="text" placeholder="Ghi đúng địa chỉ đăng ký với cơ quan thuế" class="add-invoice" id="add-invoice" />
+                                    <label>
+                                        <p class="color-primary lbl-add-invoice">Địa chỉ hóa đơn</p>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <p class="info-passenger color-dark">YÊU CẦU KHÁC:</p>
+                            </div>
+                            <div class="col-10">
+                                <div class="form-custom">
+                                    <textarea style="min-height: 150px" class="input-multi-line other-requirements"
+                                              placeholder="Nhập nội dung..."></textarea>
+                                    <label>
+                                        <p class="color-primary">
+                                            Bổ sung các thông tin cần hỗ trợ:
+                                        </p>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-3 col-xxl-12">
+                <div class="info-detail">
+                    <div class="box">
+                        <div class="heading">
+                            <p class="color-dark">CHI TIẾT GIÁ</p>
+                            <svg width="16" height="9" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 1L8 8L1 1" stroke="#0A7C79" stroke-width="1.5" stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="price-detail">
+                        @{
+                            var priceOut = Model.FirstOrDefault(p => p.WayType == ProtechGroup.Domain.WayType.OutBound).PriceBreakDowns[0];
+                            decimal totalOrder = 0;
+                            decimal totalAmountOut = 0;
+                            decimal totalAmountFare = 0;
+                            decimal totalTaxFee = 0;
+                            string strFare = string.Empty;
+                            string strTaxFee = string.Empty;
+                            if (searchInput.AdultNumber > 0)
+                            {
+                                if (!string.IsNullOrEmpty(strFare))
+                                {
+                                    strFare += " + ";
+                                }
+                                if (!string.IsNullOrEmpty(strTaxFee))
+                                {
+                                    strTaxFee += " + ";
+                                }
+                                totalAmountFare += priceOut.FareBaseAdt * searchInput.AdultNumber;
+                                decimal taxandfee = priceOut.TaxAdt + priceOut.FeeAdt;
+                                totalTaxFee += taxandfee * searchInput.AdultNumber;
+                                strFare += searchInput.AdultNumber + "(Adt) x " + ProtechGroup.Application.Common.CoreUtils.FormatPrice(priceOut.FareBaseAdt);
+                                strTaxFee += searchInput.AdultNumber + "(Adt) x " + ProtechGroup.Application.Common.CoreUtils.FormatPrice(taxandfee);
+                            }
+                            if (searchInput.ChildNumber > 0)
+                            {
+                                if (!string.IsNullOrEmpty(strFare))
+                                {
+                                    strFare += " + ";
+                                }
+                                if (!string.IsNullOrEmpty(strTaxFee))
+                                {
+                                    strTaxFee += " + ";
+                                }
+                                totalAmountFare += priceOut.FareBaseChd * searchInput.ChildNumber;
+                                decimal taxandfee = priceOut.TaxChd + priceOut.FeeChd;
+                                totalTaxFee += taxandfee * searchInput.ChildNumber;
+                                strFare += searchInput.ChildNumber + "(Chd) x " + ProtechGroup.Application.Common.CoreUtils.FormatPrice(priceOut.FareBaseChd);
+                                strTaxFee += searchInput.ChildNumber + "(Chd) x " + ProtechGroup.Application.Common.CoreUtils.FormatPrice(taxandfee);
+                            }
+                            if (searchInput.InfantNumber > 0)
+                            {
+                                if (!string.IsNullOrEmpty(strFare))
+                                {
+                                    strFare += " + ";
+                                }
+                                if (!string.IsNullOrEmpty(strTaxFee))
+                                {
+                                    strTaxFee += " + ";
+                                }
+                                totalAmountFare += priceOut.FareBaseInf * searchInput.InfantNumber;
+                                decimal taxandfee = priceOut.TaxInf + priceOut.FeeInf;
+                                totalTaxFee += taxandfee * searchInput.InfantNumber;
+                                strFare += searchInput.InfantNumber + "(Inf) x " + ProtechGroup.Application.Common.CoreUtils.FormatPrice(priceOut.FareBaseInf);
+                                strTaxFee += searchInput.InfantNumber + "(Inf) x " + ProtechGroup.Application.Common.CoreUtils.FormatPrice(taxandfee);
+                            }
+                            totalAmountOut = totalAmountFare + totalTaxFee;
+                            totalOrder += totalAmountOut;
+                            <div class="price--detail__heading box">
+                                <p class="color-dark">Tổng tiền chiều đi</p>
+                                <p class="color-info total-price-out" data-price="@totalAmountOut" data-serviceprice="0">@ProtechGroup.Application.Common.CoreUtils.FormatPrice(totalAmountOut) VND</p>
+                            </div>
+                            <div class="price--detail__list box color-dark">
+                                <div class="price-item">
+                                    <p>Giá vé <br /><span style="font-weight:500;">@strFare</span></p>
+                                    <div class="price">
+                                        <p>@ProtechGroup.Application.Common.CoreUtils.FormatPrice(totalAmountFare) VND</p>
+                                    </div>
+                                </div>
+                                <div class="price-item">
+                                    <p>Thuế phí <br /><span style="font-weight:500;">@strTaxFee</span></p>
+                                    <div class="price">
+                                        <p>@ProtechGroup.Application.Common.CoreUtils.FormatPrice(totalTaxFee) VND</p>
+                                    </div>
+                                </div>
+                                <div class="price-item price-service-out">
+                                    <p>Dịch vụ mua thêm</p>
+                                    <div class="price">
+                                        <p>0 VND</p>
+                                    </div>
+                                </div>
+                            </div>
+                            if (searchInput.IsRoundTrip)
+                            {
+                                var priceIn = Model.FirstOrDefault(p => p.WayType == ProtechGroup.Domain.WayType.InBound).PriceBreakDowns[0];
+
+                                decimal totalAmountIn = 0;
+                                decimal totalAmountFareIn = 0;
+                                decimal totalTaxFeeIn = 0;
+                                string strFareIn = string.Empty;
+                                string strTaxFeeIn = string.Empty;
+
+                                if (searchInput.AdultNumber > 0)
+                                {
+                                    if (!string.IsNullOrEmpty(strFareIn))
+                                    {
+                                        strFareIn += " + ";
+                                    }
+                                    if (!string.IsNullOrEmpty(strTaxFeeIn))
+                                    {
+                                        strTaxFeeIn += " + ";
+                                    }
+                                    totalAmountFareIn += priceIn.FareBaseAdt * searchInput.AdultNumber;
+                                    decimal taxandfeeIn = priceIn.TaxAdt + priceIn.FeeAdt;
+                                    totalTaxFeeIn += taxandfeeIn * searchInput.AdultNumber;
+                                    strFareIn += searchInput.AdultNumber + "(Adt) x " + ProtechGroup.Application.Common.CoreUtils.FormatPrice(priceIn.FareBaseAdt);
+                                    strTaxFeeIn += searchInput.AdultNumber + "(Adt) x " + ProtechGroup.Application.Common.CoreUtils.FormatPrice(taxandfeeIn);
+                                }
+                                if (searchInput.ChildNumber > 0)
+                                {
+                                    if (!string.IsNullOrEmpty(strFareIn))
+                                    {
+                                        strFareIn += " + ";
+                                    }
+                                    if (!string.IsNullOrEmpty(strTaxFeeIn))
+                                    {
+                                        strTaxFeeIn += " + ";
+                                    }
+                                    totalAmountFareIn += priceIn.FareBaseChd * searchInput.ChildNumber;
+                                    decimal taxandfeeIn = priceIn.TaxChd + priceIn.FeeChd;
+                                    totalTaxFeeIn += taxandfeeIn * searchInput.ChildNumber;
+                                    strFareIn += searchInput.ChildNumber + "(Chd) x " + ProtechGroup.Application.Common.CoreUtils.FormatPrice(priceIn.FareBaseChd);
+                                    strTaxFeeIn += searchInput.ChildNumber + "(Chd) x " + ProtechGroup.Application.Common.CoreUtils.FormatPrice(taxandfeeIn);
+                                }
+                                if (searchInput.InfantNumber > 0)
+                                {
+                                    if (!string.IsNullOrEmpty(strFareIn))
+                                    {
+                                        strFareIn += " + ";
+                                    }
+                                    if (!string.IsNullOrEmpty(strTaxFeeIn))
+                                    {
+                                        strTaxFeeIn += " + ";
+                                    }
+                                    totalAmountFareIn += priceIn.FareBaseInf * searchInput.InfantNumber;
+                                    decimal taxandfeeIn = priceIn.TaxInf + priceIn.FeeInf;
+                                    totalTaxFeeIn += taxandfeeIn * searchInput.InfantNumber;
+                                    strFareIn += searchInput.InfantNumber + "(Inf) x " + ProtechGroup.Application.Common.CoreUtils.FormatPrice(priceIn.FareBaseInf);
+                                    strTaxFeeIn += searchInput.InfantNumber + "(Inf) x " + ProtechGroup.Application.Common.CoreUtils.FormatPrice(taxandfeeIn);
+                                }
+                                totalAmountIn = totalAmountFareIn + totalTaxFeeIn;
+                                totalOrder += totalAmountIn;
+                                <div class="price--detail__heading box">
+                                    <p class="color-dark">Tổng tiền chiều về</p>
+                                    <p class="color-info total-price-in" data-price="@totalAmountIn" data-serviceprice="0">@ProtechGroup.Application.Common.CoreUtils.FormatPrice(totalAmountIn) VND</p>
+                                </div>
+                                <div class="price--detail__list box color-dark">
+                                    <div class="price-item">
+                                        <p>Giá vé <br /><span style="font-weight:500;">@strFareIn</span></p>
+                                        <div class="price">
+                                            <p>@ProtechGroup.Application.Common.CoreUtils.FormatPrice(totalAmountFareIn) VND</p>
+                                        </div>
+                                    </div>
+                                    <div class="price-item">
+                                        <p>Thuế phí <br /><span style="font-weight:500;">@strTaxFeeIn</span></p>
+                                        <div class="price">
+                                            <p>@ProtechGroup.Application.Common.CoreUtils.FormatPrice(totalTaxFeeIn) VND</p>
+                                        </div>
+                                    </div>
+                                    <div class="price-item price-service-in">
+                                        <p>Dịch vụ mua thêm</p>
+                                        <div class="price">
+                                            <p>0 VND</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            <div class="price-total box">
+                                <p>Tổng tiền:</p>
+                                <p class="price-order">@ProtechGroup.Application.Common.CoreUtils.FormatPrice(totalOrder)VND</p>
+                            </div>
+                        }
+                        <div class="input-discound box">
+                            <div class="form-custom">
+                                <input type="text" placeholder="Ví dụ: VMBS001S6
+" />
+                                <label>
+                                    <p class="color-primary" id="voucher-code">Mã giảm giá</p>
+                                </label>
+                            </div>
+
+                        </div>
+                        <div class="box clause">
+                            <div class="d-flex checkbox-custom">
+                                <label class="color-dark check-box-red-wrapper">
+                                    <input type="checkbox" id="is-agree">
+                                    <div class="check-box-red"></div>
+                                </label>
+                                <span class="color-dark">
+                                    Tôi đã đọc, hiểu và đồng ý với các điều khoản của hãng hàng không, các thông tin
+                                    đặt vé đã chính xác và tôi không có thắc mắc gì.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="box btn-submit">
+                            <button class="btn btn-info" id="payment-order">THANH TOÁN</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="~/Scripts/modules/confirmCustomer.js">
+
+</script>

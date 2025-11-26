@@ -1,0 +1,309 @@
+﻿
+@{
+    ViewBag.Title = "Thanh toán đơn hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles {
+    <link rel="stylesheet" href="/Content/assets/main-CNiOkohg.css">
+}
+
+<main class="flight-payment">
+    <div class="heading">
+        <div class="container">
+            <h1 class="color-dark">THÔNG TIN THANH TOÁN</h1>
+            <p class="color-primary">
+                Quý khách vui lòng kiểm tra lại thông tin đặt vé và thanh toán đầy đủ.
+            </p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row box-all">
+            <div class="col-9 col-xxl-12">
+                <section>
+                    <div class="list-ticket-items">
+                        <div class="item-ticket">
+                            <div class="heading-ticket">
+                                <div class="row row-cols-md-1">
+                                    <div class="col-6">
+                                        <p class="color-dark">Chiều đi: Hà Nội - Hồ Chí Minh</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="color-dark">Ngày: 06/02/2023</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="body-ticket">
+                                <div class="row g-1">
+                                    <div class="col-3 d-none-md">
+                                        <div class="airline-info">
+                                            <img src="./img/home/image-log-bamboo.png" alt="logo" />
+                                            <div class="airline-name">
+                                                <span class="color-dark name">VIETJET AIR</span>
+                                                <span class="color-info code">VJ2051 - A320</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-lg-7 col-md-12">
+                                        <div class="flight-details">
+                                            <div class="time-info">
+                                                <div class="row">
+                                                    <div class="col-5">
+                                                        <div class="departure">
+                                                            <div class="row g-1">
+                                                                <div class="col-7">
+                                                                    <div class="date d-none-lg">
+                                                                        Thứ 5 <br />
+                                                                        05-04/22
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-5">
+                                                                    <div class="time">17:15</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="location">Hà Nội (HAN)</div>
+                                                            <div class="color-dark">Sân bay Nội Bài</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <div class="arrow">✈</div>
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <div class="arrival">
+                                                            <div class="row g-1">
+                                                                <div class="col-5">
+                                                                    <div class="time">17:15</div>
+                                                                </div>
+                                                                <div class="col-7">
+                                                                    <div class="date  d-none-lg">
+                                                                        Thứ 5 <br />
+                                                                        05-04/22
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="location">
+                                                                Tp. Hồ Chí Minh (SGN)
+                                                            </div>
+                                                            <div class="color-dark">Sân bay Nội Bài</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3 d-none d-block-md col-md-6">
+                                        <div class="airline-info">
+                                            <img src="./img/home/image-log-bamboo.png" alt="logo">
+                                            <div class="airline-name">
+                                                <span class="color-dark name">VIETJET AIR</span>
+                                                <span class="color-info code">VJ2051 - A320</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3 col-lg-2 col-md-6">
+                                        <div class="flight-meta">
+                                            <div class="d-none-lg">
+                                                <p class="color-info">Bay thẳng</p>
+                                                <p class="color-dark">02h10m</p>
+                                            </div>
+                                            <div class="type-ticket">
+                                                <p class="color-info d-none-md">Hạng vé</p>
+                                                <p class="color-dark type">Eco1</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-ticket">
+                            <div class="heading-ticket">
+                                <div class="row row-cols-md-1">
+                                    <div class="col-6">
+                                        <p class="color-dark">Chiều đi: Hà Nội - Hồ Chí Minh</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="color-dark">Ngày: 06/02/2023</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="body-ticket">
+                                <div class="row g-1">
+                                    <div class="col-3 d-none-md">
+                                        <div class="airline-info">
+                                            <img src="./img/home/image-log-bamboo.png" alt="logo" />
+                                            <div class="airline-name">
+                                                <span class="color-dark name">VIETJET AIR</span>
+                                                <span class="color-info code">VJ2051 - A320</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-lg-7 col-md-12">
+                                        <div class="flight-details">
+                                            <div class="time-info">
+                                                <div class="row">
+                                                    <div class="col-5">
+                                                        <div class="departure">
+                                                            <div class="row g-1">
+                                                                <div class="col-7">
+                                                                    <div class="date d-none-lg">
+                                                                        Thứ 5 <br />
+                                                                        05-04/22
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-5">
+                                                                    <div class="time">17:15</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="location">Hà Nội (HAN)</div>
+                                                            <div class="color-dark">Sân bay Nội Bài</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <div class="arrow">✈</div>
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <div class="arrival">
+                                                            <div class="row g-1">
+                                                                <div class="col-5">
+                                                                    <div class="time">17:15</div>
+                                                                </div>
+                                                                <div class="col-7">
+                                                                    <div class="date  d-none-lg">
+                                                                        Thứ 5 <br />
+                                                                        05-04/22
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="location">
+                                                                Tp. Hồ Chí Minh (SGN)
+                                                            </div>
+                                                            <div class="color-dark">Sân bay Nội Bài</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3 d-none d-block-md col-md-6">
+                                        <div class="airline-info">
+                                            <img src="./img/home/image-log-bamboo.png" alt="logo">
+                                            <div class="airline-name">
+                                                <span class="color-dark name">VIETJET AIR</span>
+                                                <span class="color-info code">VJ2051 - A320</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3 col-lg-2 col-md-6">
+                                        <div class="flight-meta">
+                                            <div class="d-none-lg">
+                                                <p class="color-info">Bay thẳng</p>
+                                                <p class="color-dark">02h10m</p>
+                                            </div>
+                                            <div class="type-ticket">
+                                                <p class="color-info d-none-md">Hạng vé</p>
+                                                <p class="color-dark type">Eco1</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="baggage-infor">
+                    <div class="heading">
+                        <div class="container">
+                            <h1 class="color-dark">LỰA CHỌN PHƯƠNG THỨC THANH TOÁN</h1>
+                            <p class="color-primary">
+                                Sau khi hoàn tất thanh toán, vé điện tử sẽ được gửi ngay qua SMS và Email của bạn.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="box-container">
+
+                       
+                    </div>
+                </section>
+            </div>
+            <div class="col-3 col-xxl-12">
+                <div class="info-detail">
+                    <div class="box">
+                        <div class="heading-box-info">
+                            <p class="color-dark">THÔNG TIN ĐƠN HÀNG</p>
+                            <svg width="16" height="9" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 1L8 8L1 1" stroke="#0A7C79" stroke-width="1.5" stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="price-detail">
+                        <div class="price-total box">
+                            <p>Tổng tiền:</p>
+                            <p>1,219,820 VND</p>
+                        </div>
+                        <div class="price--detail__list box color-dark">
+                            <div class="price-item">
+                                <p>Mã đơn hàng:</p>
+                                <div class="price">
+                                    <p>251000006</p>
+                                </div>
+                            </div>
+                            <div class="price-item">
+                                <p>Trạng thái thanh toán:</p>
+                                <div>
+                                    <p>Chưa thanh toán </p>
+                                </div>
+                            </div>
+                            <div class="price-item">
+                                <p>Loại vé:</p>
+                                <div>
+                                    <p>Một chiều</p>
+                                </div>
+                            </div>
+                            <div class="price-item">
+                                <p>Hành khách:</p>
+                                <div>
+                                    <p>2 Người lớn, 1 trẻ em, 1 trẻ sơ sinh</p>
+                                </div>
+                            </div>
+                            <div class="price-item" style="background: #f44336cf; padding: 5px; color: #fff; border-radius: 5px;">
+                                <p>Hạn thanh toán:</p>
+                                <div>
+                                    <p>
+                                        Quý khách phải hoàn thành thanh toán trước <br>
+                                        05:35 Thứ 2, 07/08/2023
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="price-total box">
+                            <p>Chọn hình thức thanh toán:</p>
+                        </div>
+                        <div class="price--detail__list box color-dark">
+                            <div class="price-item" style="background: #569ff7; padding: 10px; color: #fff; border-radius: 8px;">
+                                <div>
+                                    <p>
+                                        Thanh toán QR code
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="price-item" style="background: #569ff7; padding: 10px; color: #fff; border-radius: 8px;">
+                                <div>
+                                    <p>
+                                        Chuyển khoản
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="price-item" style="background: #569ff7; padding: 10px; color: #fff; border-radius: 8px;">
+                                <div>
+                                    <p>
+                                        Thanh toán tại văn phòng
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

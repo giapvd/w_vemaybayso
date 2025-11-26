@@ -1,0 +1,321 @@
+﻿
+<div class="bg-primary text-white rounded-2xl p-4 shadow-lg">
+    <form class="w-full" method="post">
+        <input type="text" class="hidden" id="departure-point-value" name="departure_point" value="HAN" />
+        <!-- Điểm đi -->
+        <input type="text" class="hidden" id="arrival-point-value" name="arrival_point" value="SGN" />
+        <!-- Điểm đến -->
+        <input type="text" class="hidden" id="departure-date-value" name="departure_date" />
+        <!-- Ngày đi -->
+        <input type="text" class="hidden" id="return-date-value" name="return_date" />
+        <!-- Ngày về -->
+
+        <div class="flex flex-wrap items-center gap-5 max-xl:justify-between">
+            <div class="flex gap-5">
+                <label class="inline-flex items-center gap-2 cursor-pointer">
+                    <input type="radio" name="trip" value="one_way" id="one_way" class="size-4" checked />
+                    <span class="text-sm">Một chiều</span>
+                </label>
+                <label class="inline-flex items-center gap-2 cursor-pointer">
+                    <input type="radio" name="trip" value="two_way" id="two_way" class="size-4" />
+                    <span class="text-sm">Khứ hồi</span>
+                </label>
+            </div>
+            <div type="button" class="relative cursor-pointer">
+                <div class="flex gap-2" id="person-input">
+                    <img src="~/Content/img/search/member.svg" alt="Icon member" />
+                    <span id="render-person">Số lượng hành khách</span>
+                    <img src="~/Content/img/search/drop-dow.svg" alt="Icon member" />
+                </div>
+                <!-- START QUANTITY -->
+                <div id="quantity-modal"
+                     class="w-90 hidden bg-white flex flex-col gap-8 max-w-[960px]  p-6 shadow-[0px_8px_30px_rgba(0,0,0,0.15)] absolute top-8 max-xl:right-0 max-xl:left-auto max-sm:right-auto max-sm:left-0 max-sm:w-[73vw]   left-0 z-9999 text-text-primary">
+                    <div class="flex gap-2 items-center">
+                        <img src="~/Content/img/search/user-plus.svg" alt="" />
+                        <p class="font-semibold">Số lượng hành khách</p>
+                    </div>
+                    <div>
+                        <div data-type="adult-passenger-value"
+                             class="person-input-change flex justify-between border-b border-[#B3B0D8] py-5">
+                            <p>Người lớn</p>
+                            <div class="flex gap-5">
+                                <div class="minus-button">
+                                    <img src="~/Content/img/search/minus.svg" alt="" />
+                                </div>
+                                <input type="text" class="max-w-3 outline-none" name="adult_passenger" value="1" />
+                                <div class="plus-button">
+                                    <img src="~/Content/img/search/plus.svg" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div data-type="child-passenger-value"
+                             class="person-input-change flex justify-between border-b border-[#B3B0D8] py-5">
+                            <p>Trẻ em <span class="ml-2 text-sm text-[#B3B0D8]">2-11</span></p>
+                            <div class="flex gap-5">
+                                <div class="minus-button">
+                                    <img src="~/Content/img/search/minus.svg" alt="" />
+                                </div>
+                                <input type="text" class="max-w-3 outline-none" name="child_passenger" value="0" />
+                                <div class="plus-button">
+                                    <img src="~/Content/img/search/plus.svg" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div data-type="infant-passenger-value" class="person-input-change flex justify-between py-5">
+                            <p>Em bé<span class="ml-2 text-sm text-[#B3B0D8]">Dưới 2</span></p>
+                            <div class="flex gap-5">
+                                <div class="minus-button">
+                                    <img src="~/Content/img/search/minus.svg" alt="" />
+                                </div>
+                                <input type="text" class="max-w-3 outline-none" name="infant_passenger" value="0" />
+                                <div class="plus-button">
+                                    <img src="~/Content/img/search/plus.svg" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bg-primary text-white font-semibold w-full py-2.5 rounded-xl text-center cursor-pointer" onclick="
+                document.getElementById('quantity-modal').classList.add('hidden');
+              ">Xác nhận</div>
+                    </div>
+                </div>
+                <!--END  QUANTITY -->
+            </div>
+        </div>
+        <div class="justify-between gap-3 my-2 grid grid-cols-4 max-xl:grid-cols-2 max-sm:grid-cols-1"
+             id="form-search-input">
+            <div class="bg-white rounded-md p-3 flex justify-between items-center cursor-pointer"
+                 id="departure-point-input">
+                <div>
+                    <div class="flex gap-2">
+                        <img src="~/Content/img/search/plane-start.svg" alt="icon plane" />
+                        <span class="text-text-primary text-sm">Điểm khởi hành</span>
+                    </div>
+                    <p class="text-text-primary text-lg font-bold line-clamp-1 display">Hà Nội (HAN)</p>
+                </div>
+                <div class="p-4 border-l border-l-[#D3D9DC]">
+                    <img src="~/Content/img/search/drop-dow-gray.svg" alt="icon drop dow" />
+                </div>
+            </div>
+            <div class="bg-white rounded-md p-3 flex justify-between items-center cursor-pointer" id="arrival-point-input">
+                <div>
+                    <div class="flex gap-2">
+                        <img src="~/Content/img/search/plane-start.svg" alt="icon plane" />
+                        <span class="text-text-primary text-sm">Điểm khởi hành</span>
+                    </div>
+                    <p class="text-text-primary text-lg font-bold line-clamp-1 display">Hồ Chí Minh (SGN)</p>
+                </div>
+                <div class="p-4 border-l border-l-[#D3D9DC]">
+                    <img src="~/Content/img/search/drop-dow-gray.svg" alt="icon drop dow" />
+                </div>
+            </div>
+            <div class="bg-white rounded-md p-3 flex justify-between items-center max-xl:col-span-2 max-sm:col-span-1 cursor-pointer"
+                 id="departure-date-input">
+                <div>
+                    <div class="flex gap-2">
+                        <img src="~/Content/img/search/calender.svg" alt="icon plane" />
+                        <span class="text-text-primary text-sm">Ngày đi</span>
+                    </div>
+                    <p class="text-text-primary text-lg font-bold line-clamp-1 display">20/11/2025</p>
+                </div>
+                <div class="p-4 border-l border-l-[#D3D9DC]">
+                    <img src="~/Content/img/search/drop-dow-gray.svg" alt="icon drop dow" />
+                </div>
+            </div>
+            <div class="bg-white rounded-md p-3 flex justify-between items-center hidden cursor-pointer"
+                 id="return-date-input">
+                <div>
+                    <div class="flex gap-2">
+                        <img src="~/Content/img/search/calender.svg" alt="icon plane" />
+                        <span class="text-text-primary text-sm">Ngày về</span>
+                    </div>
+                    <p class="text-text-primary text-lg font-bold line-clamp-1 display">26/11/2025</p>
+                </div>
+                <div class="p-4 border-l border-l-[#D3D9DC]">
+                    <img src="~/Content/img/search/drop-dow-gray.svg" alt="icon drop dow" />
+                </div>
+            </div>
+            <div class="bg-accent rounded-md max-xl:col-span-2 max-sm:col-span-1 max-xl:py-6">
+                <button class="w-full h-full uppercase font-bold text-[22px]">Tìm kiếm</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- LOCATION -->
+    <div id="location-modal"
+         class="hidden bg-white flex flex-col gap-6 max-w-[960px] p-6 shadow-[0px_8px_30px_rgba(0,0,0,0.15)] absolute left-10 z-9999 text-text-primary">
+        <div>
+            <p class="text-2xl font-bold">Nhập Mã Sân bay hoặc Tên Thành phố</p>
+        </div>
+        <div class="flex flex-wrap gap-4 items-center">
+            <label class="flex items-center gap-2 rounded-xl border border-[#CAF0F8] px-4 py-2 max-w-[240px]">
+                <div>
+                    <img src="~/Content/img/search/search.svg" alt="" />
+                </div>
+                <div>
+                    <p class="text-sm">Tìm kiếm Sân Bay:</p>
+                    <input type="text" id="airportInput" class="w-full outline-none" placeholder="Ví dụ: HAN" />
+                </div>
+            </label>
+            <label class="bg-bg-info bg-primary text-white rounded-lg font-bold px-4 py-2 cursor-pointer">
+                <input hidden type="radio" name="typeCity" class="typeCity" value="vietnam" checked /> Việt Nam
+            </label>
+            <label class="bg-bg-info text-text-primary rounded-lg font-bold px-4 py-2 cursor-pointer">
+                <input hidden type="radio" name="typeCity" class="typeCity" value="chaua" /> Châu Á
+            </label>
+            <label class="bg-bg-info text-text-primary rounded-lg font-bold px-4 py-2 cursor-pointer">
+                <input hidden type="radio" name="typeCity" class="typeCity" value="chauau" /> Châu Âu
+            </label>
+            <label class="bg-bg-info text-text-primary rounded-lg font-bold px-4 py-2 cursor-pointer">
+                <input hidden type="radio" name="typeCity" class="typeCity" value="hoaky-canada" /> Hoa Kỳ - Canada
+            </label>
+            <label class="bg-bg-info text-text-primary rounded-lg font-bold px-4 py-2 cursor-pointer">
+                <input hidden type="radio" name="typeCity" class="typeCity" value="chauuc-phi" /> Châu Úc - Phi
+            </label>
+        </div>
+        <div class="shadow-[0px_8px_30px_rgba(0,0,0,0.15)] py-6 px-9 rounded-xl">
+            <p class="text-accent text-2xl mb-7" id="title-airport">Nội địa - Sân bay tại Việt Nam</p>
+            <div class="grid grid-cols-3 gap-8" id="contaner-airport">
+                
+            </div>
+        </div>
+    </div>
+    <!-- END LOCATION -->
+    <!-- DATE -->
+    <div class="hidden calendar-wrapper bg-white text-black flex flex-col gap-6 min-w-[960px] max-w-[960px] p-6 shadow-[0px_8px_30px_rgba(0,0,0,0.15)] absolute left-10 z-9999"
+         id="date-modal">
+        <div class="calendar-header">
+            <div class="mb-4">
+                <p class="text-2xl text-primary">Quý khách vui lòng chọn ngày bay</p>
+                <p class="text-sm text-[#00ABC0]">
+                    Ngày bay chiều đi phải được chọn trước ngày về. Ngày về chỉ được trùng với ngày bay đi và ngày bay sau
+                </p>
+            </div>
+            <div class="flex gap-4 items-center">
+                <!-- <div class="border border-[#CAF0F8] py-2 px-3 flex-1 rounded-xl">
+                  <p class="text-sm">Ngày đi</p>
+                  <p class="text-lg font-bold">20/10/2025</p>
+                </div>
+                <div class="border border-[#CAF0F8] py-2 px-3 flex-1 rounded-xl">
+                  <p class="text-sm">Ngày về</p>
+                  <p class="text-lg font-bold">29/10/2025</p>
+                </div> -->
+                <div class="flex justify-between flex-2 px-5">
+                    <div class="flex gap-2 items-center ml-">
+                        <div class="p-2.5 bg-primary rounded-4xl"></div>
+                        <p>Ngày bay đã chọn</p>
+                    </div>
+                    <div class="flex gap-2 items-center">
+                        <div class="p-2.5 bg-[#00ABC0] rounded-4xl"></div>
+                        <p>Ngày hiện tại</p>
+                    </div>
+                    <div class="flex gap-2 items-center">
+                        <div class="p-2.5 bg-accent rounded-4xl"></div>
+                        <p>Ngày lễ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="relative box-calendar">
+            <div class="absolute top-0 right-0 left-0 flex justify-between items-center">
+                <button id="prev" class="text-3xl cursor-pointer p-6">&lt;</button>
+                <button id="next" class="text-3xl cursor-pointer p-6">&gt;</button>
+            </div>
+            <div id="calendar"></div>
+        </div>
+        <!-- <div id="range-info" class="selected-range"></div> -->
+    </div>
+    <!-- END DATE -->
+</div>
+<!--<div class="modal-overlay" id="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span>HÀNH KHÁCH</span>
+            <span class="close-btn" onclick="modal.style.display ='none'">X</span>
+        </div>
+        <div class="passenger-row">
+            <div>
+                <strong>NGƯỜI LỚN</strong><br />
+                <small>Từ 12 tuổi</small>
+            </div>
+            <div class="counter">
+                <span class="minus minus1">−</span>
+                <span id="memberModal1">1</span>
+                <span class="plus plus1">+</span>
+            </div>
+        </div>
+        <div class="passenger-row">
+            <div>
+                <strong>TRẺ EM</strong><br />
+                <small>Từ 2 đến 11 tuổi</small>
+            </div>
+            <div class="counter">
+                <span class="minus minus2">−</span>
+                <span id="memberModal2">0</span>
+                <span class="plus plus2">+</span>
+            </div>
+        </div>
+        <div class="passenger-row">
+            <div>
+                <strong>EM BÉ</strong><br />
+                <small>Dưới 2 tuổi</small>
+            </div>
+            <div class="counter">
+                <span class="minus minus3">−</span>
+                <span id="memberModal3">0</span>
+                <span class="plus plus3">+</span>
+            </div>
+        </div>
+        <span class="btn-model" onclick="modal.style.display ='none'">Xác nhận</span>
+    </div>
+</div>
+<div class="modal-overlay" id="modal2">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span>Chọn điểm đi</span>
+            <span class="close-btn" onclick="modal2.style.display ='none'">X</span>
+        </div>
+        <div class="passenger-row">
+            <div class="inputSearch">
+                <label>
+                    NHẬP THÀNH PHỐ HOẶC MÃ SÂN BAY
+                    <div class="input">
+                        <input type="text" id="airportInput" />
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                </label>
+            </div>
+        </div>
+        <div class="passenger-row">
+            <div class="list-items">
+                <ul id="airportResults">
+                    <li onclick="checkRoute(this,'HAN')">Hà Nội (HAN)</li>
+                    <li onclick="checkRoute(this,'SGN')">Hồ Chí Minh (SGN)</li>
+                    <li onclick="checkRoute(this,'DAD')">Đà Nẵng (DAD)</li>
+                    <li onclick="checkRoute(this,'DIN')">Điện Biên Phủ (DIN)</li>
+                    <li onclick="checkRoute(this,'HPH')">Hải Phòng (HPH)</li>
+                    <li onclick="checkRoute(this,'THD')">Thanh Hóa (THD)</li>
+                    <li onclick="checkRoute(this,'VII')">Vinh (VII)</li>
+                    <li onclick="checkRoute(this,'VDH')">Quảng Bình (VDH)</li>
+                    <li onclick="checkRoute(this,'VCA')">Cần Thơ (VCA)</li>
+                    <li onclick="checkRoute(this,'VKG')">Kiên Giang (VKG)</li>
+                    <li onclick="checkRoute(this,'VCL')">Quảng Nam (VCL)</li>
+                    <li onclick="checkRoute(this,'HUI')">Huế (HUI)</li>
+                    <li onclick="checkRoute(this,'PXU')">PleiKu (PXU)</li>
+                    <li onclick="checkRoute(this,'TBB')">Phú Yên (TBB)</li>
+                    <li onclick="checkRoute(this,'BMV')">Ban Mê Thuột (BMV)</li>
+                    <li onclick="checkRoute(this,'CXR')">Nha Trang (CXR)</li>
+                    <li onclick="checkRoute(this,'UIH')">Qui Nhơn (UIH)</li>
+                    <li onclick="checkRoute(this,'DLI')">Đà Lạt (DLI)</li>
+                    <li onclick="checkRoute(this,'CAH')">Cà Mau (CAH)</li>
+                    <li onclick="checkRoute(this,'PQC')">Phú Quốc (PQC)</li>
+                    <li onclick="checkRoute(this,'VCS')">Côn Đảo (VCS)</li>
+                    <li onclick="checkRoute(this,'VDO')">Vân Đồn (VDO)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>-->
+<script src="~/Scripts/modules/form_search.js"></script>
+<script src="~/Scripts/modules/searchflight.js"></script>
