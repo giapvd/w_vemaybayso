@@ -1,5 +1,5 @@
 ﻿
-<div class="bg-primary text-white rounded-2xl p-4 shadow-lg">
+<div class="bg-primary text-white p-4 shadow-lg">
     <form class="w-full" method="post">
         <input type="text" class="hidden" id="departure-point-value" name="departure_point" value="HAN" />
         <!-- Điểm đi -->
@@ -176,19 +176,20 @@
         </div>
         <div class="shadow-[0px_8px_30px_rgba(0,0,0,0.15)] py-6 px-9 rounded-xl">
             <p class="text-accent text-2xl mb-7" id="title-airport">Nội địa - Sân bay tại Việt Nam</p>
-            <div class="grid grid-cols-3 gap-8" id="contaner-airport">
-                
+            <div class="grid grid-cols-3 gap-8 max-sm:grid-cols-1 max-lg:grid-cols-2" id="contaner-airport">
+
             </div>
         </div>
     </div>
     <!-- END LOCATION -->
     <!-- DATE -->
-    <div class="hidden calendar-wrapper bg-white text-black flex flex-col gap-6 min-w-[960px] max-w-[960px] p-6 shadow-[0px_8px_30px_rgba(0,0,0,0.15)] absolute left-10 z-9999"
-         id="date-modal">
+  <div
+      class="hidden calendar-wrapper bg-white text-black flex flex-col gap-6 max-w-[960px] max-xl:w-[93%] max-sm:w-[80%] max-lg:w-[90%] w-fit p-5 shadow-[0px_8px_30px_rgba(0,0,0,0.15)] absolute left-10 z-9999 max-sm:p-3"
+      id="date-modal">
         <div class="calendar-header">
             <div class="mb-4">
-                <p class="text-2xl text-primary">Quý khách vui lòng chọn ngày bay</p>
-                <p class="text-sm text-[#00ABC0]">
+              <p class="text-2xl text-primary max-sm:text-base">Quý khách vui lòng chọn ngày bay</p>
+          <p class="text-sm text-[#00ABC0] max-sm:text-xs">
                     Ngày bay chiều đi phải được chọn trước ngày về. Ngày về chỉ được trùng với ngày bay đi và ngày bay sau
                 </p>
             </div>
@@ -201,26 +202,26 @@
                   <p class="text-sm">Ngày về</p>
                   <p class="text-lg font-bold">29/10/2025</p>
                 </div> -->
-                <div class="flex justify-between flex-2 px-5">
-                    <div class="flex gap-2 items-center ml-">
-                        <div class="p-2.5 bg-primary rounded-4xl"></div>
-                        <p>Ngày bay đã chọn</p>
-                    </div>
-                    <div class="flex gap-2 items-center">
-                        <div class="p-2.5 bg-[#00ABC0] rounded-4xl"></div>
-                        <p>Ngày hiện tại</p>
-                    </div>
-                    <div class="flex gap-2 items-center">
-                        <div class="p-2.5 bg-accent rounded-4xl"></div>
-                        <p>Ngày lễ</p>
-                    </div>
-                </div>
+               <div class="flex justify-between flex-2 px-5 max-sm:px-1">
+            <div class="flex gap-2 items-center ml-">
+              <div class="p-2.5 bg-primary rounded-4xl max-sm:p-1"></div>
+              <p class="max-sm:text-xs">Ngày bay đã chọn</p>
             </div>
+            <div class="flex gap-2 items-center">
+              <div class="p-2.5 bg-[#00ABC0] rounded-4xl max-sm:p-1"></div>
+              <p class="max-sm:text-xs">Ngày hiện tại</p>
+            </div>
+            <div class="flex gap-2 items-center">
+              <div class="p-2.5 bg-accent rounded-4xl max-sm:p-1"></div>
+              <p class="max-sm:text-xs">Ngày lễ</p>
+            </div>
+          </div>
         </div>
+      </div>
         <div class="relative box-calendar">
             <div class="absolute top-0 right-0 left-0 flex justify-between items-center">
-                <button id="prev" class="text-3xl cursor-pointer p-6">&lt;</button>
-                <button id="next" class="text-3xl cursor-pointer p-6">&gt;</button>
+                <button id="prev" class="text-3xl cursor-pointer p-6 max-sm:text-xl">&lt;</button>
+                <button id="next" class="text-3xl cursor-pointer p-6 max-sm:text-xl">&gt;</button>
             </div>
             <div id="calendar"></div>
         </div>
