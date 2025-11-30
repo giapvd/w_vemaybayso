@@ -39,8 +39,10 @@
             addAirport("vietnam");
         }
     });
-    $('#btn-search').on('click', function (e) {
-        if (checkValidateInputSearch()) {
+    $('#btn-search').on('click', async function (e) {
+        e.preventDefault();
+        const isValid = await checkValidateInputSearch();
+        if (isValid) {
             var $btn = $(this);
             $btn.prop('disabled', true);
             var originalText = $btn.html();
@@ -52,14 +54,14 @@
             var token = document.querySelector('input[name="__RequestVerificationToken"]').value;
             var data = {
                 __RequestVerificationToken: token,
-                departure: $("#departureAirport").val().trim(),
-                arrival: $("#arrivalAirport").val().trim(),
-                departureDate: $("#departureDate").val().trim(),
-                returnDate: $("#returnDate").val().trim() || null,
-                roundType: parseInt($("#roundType").val().trim()),
-                countAdt: parseInt($("#nguoiLon").val().trim()),
-                countChd: parseInt($("#treEm").val().trim()),
-                countInf: parseInt($("#emBe").val().trim())
+                departure: $("#departure-point-value").val().trim(),
+                arrival: $("#arrival-point-value").val().trim(),
+                departureDate: $("#departure-date-value").val().trim(),
+                returnDate: $("#return-date-value").val().trim() || null,
+                roundType: parseInt($("#round_type-value").val().trim()),
+                countAdt: parseInt($("#adult_passenger").val().trim()),
+                countChd: parseInt($("#child_passenger").val().trim()),
+                countInf: parseInt($("#infant_passenger").val().trim())
             };
 
             var startTime = new Date().getTime();
@@ -108,111 +110,127 @@
         }
     });
 });
-function checkValidateInputSearch() {
-    let departure = $("#departureAirport").val().trim();
-    let arrival = $("#arrivalAirport").val().trim();
-    let departureDate = $("#departureDate").val().trim();
-    let returnDate = $("#returnDate").val().trim();
-    let roundType = parseInt($("#roundType").val().trim());
-    let countAdt = parseInt($("#nguoiLon").val().trim());
-    let countChd = parseInt($("#treEm").val().trim());
-    let countInf = parseInt($("#emBe").val().trim());
+async function checkValidateInputSearch() {
+    let departure = $("#departure-point-value").val().trim();
+    let arrival = $("#arrival-point-value").val().trim();
+    let departureDate = $("#departure-date-value").val().trim();
+    let returnDate = $("#return-date-value").val().trim();
+    let roundType = parseInt($("#round_type-value").val().trim());
+    let countAdt = parseInt($("#adult_passenger").val().trim());
+    let countChd = parseInt($("#child_passenger").val().trim());
+    let countInf = parseInt($("#infant_passenger").val().trim());
     if (departure === "") {
-        $("#isErooDepartureAirport").css("display", "block");
-        $('#isErooDepartureAirport')
-            .text("Bạn chưa chọn điểm đi");
+        await Swal.fire({
+            icon: 'warning',
+            title: 'Cảnh báo',
+            text: "Bạn chưa chọn điểm đi!",
+            confirmButtonText: 'Đã hiểu'
+        });
         return false;
-    }
-    else {
-        $("#isErooDepartureAirport").css("display", "none");
     }
     if (arrival === "") {
-        $("#isErooArrivalAirport").css("display", "block");
-        $('#isErooArrivalAirport')
-            .text("Bạn chưa chọn điểm đến");
+        await Swal.fire({
+            icon: 'warning',
+            title: 'Cảnh báo',
+            text: "Bạn chưa chọn điểm đến!",
+            confirmButtonText: 'Đã hiểu'
+        });
         return false;
     }
-    else {
-        $("#isErooArrivalAirport").css("display", "none");
-    }
+    
     if (departure === arrival) {
-        $("#isErooArrivalAirport").css("display", "block");
-        $('#isErooArrivalAirport')
-            .text("Điểm đến không được trùng điểm đi");
+        await Swal.fire({
+            icon: 'warning',
+            title: 'Cảnh báo',
+            text: "Điểm đến không được trùng điểm đi!",
+            confirmButtonText: 'Đã hiểu'
+        });
         return false;
     }
-    else {
-        $("#isErooArrivalAirport").css("display", "none");
-    }
+
     if (departureDate === "") {
-        $("#isErooDepartureDate").css("display", "block");
-        $('#isErooDepartureDate')
-            .text("Bạn chưa chọn ngày đi");
+        await Swal.fire({
+            icon: 'warning',
+            title: 'Cảnh báo',
+            text: "Bạn chưa chọn ngày đi!",
+            confirmButtonText: 'Đã hiểu'
+        });
         return false;
     }
     else
     {
-        if (isValidDate(departureDate)) {
-            $("#isErooDepartureDate").css("display", "none");
-        }
-        else {
-            $("#isErooDepartureDate").css("display", "block");
-            $('#isErooDepartureDate')
-                .text("Không đúng định dạng dd/mm/yyyy");
+        if (!isValidDate(departureDate)) {
+            await Swal.fire({
+                icon: 'warning',
+                title: 'Cảnh báo',
+                text: "Không đúng định dạng dd/mm/yyyy!",
+                confirmButtonText: 'Đã hiểu'
+            });
             return false;
         }
     }
     if (roundType == 1) {
         if (returnDate === "") {
-            $("#isErooReturnDate").css("display", "block");
-            $('#isErooReturnDate')
-                .text("Bạn chưa chọn ngày về");
+            await Swal.fire({
+                icon: 'warning',
+                title: 'Cảnh báo',
+                text: "Bạn chưa chọn ngày về!",
+                confirmButtonText: 'Đã hiểu'
+            });
             return false;
         }
         else {
             if (isValidDate(returnDate)) {
-                if (isValidDateRange(departureDate, returnDate)) {
-                    $("#isErooReturnDate").css("display", "none");
-                }
-                else {
-                    $("#isErooReturnDate").css("display", "block");
-                    $('#isErooReturnDate')
-                        .text("Ngày về phải lớn hơn ngày đi");
+                if (!isValidDateRange(departureDate, returnDate)) {
+                    await Swal.fire({
+                        icon: 'warning',
+                        title: 'Cảnh báo',
+                        text: "Ngày về phải lớn hơn ngày đi!",
+                        confirmButtonText: 'Đã hiểu'
+                    });
                     return false;
                 }
             }
             else {
-                $("#isErooReturnDate").css("display", "block");
-                $('#isErooReturnDate')
-                    .text("Không đúng định dạng dd/mm/yyyy");
+                await Swal.fire({
+                    icon: 'warning',
+                    title: 'Cảnh báo',
+                    text: "Không đúng định dạng dd/mm/yyyy!",
+                    confirmButtonText: 'Đã hiểu'
+                });
                 return false;
             }
         }
     }
     let totalPax = countAdt + countChd + countInf;
     if (totalPax > 9) {
-        $("#isErooNumPax").css("display", "block");
-        $('#isErooNumPax')
-            .text("Hành khách không quá 9 người");
+        await Swal.fire({
+            icon: 'warning',
+            title: 'Cảnh báo',
+            text: "Hành khách không quá 9 người!",
+            confirmButtonText: 'Đã hiểu'
+        });
         return false;
     }
     else {
         if (totalPax == 0) {
-            $("#isErooNumPax").css("display", "block");
-            $('#isErooNumPax')
-                .text("Số lượng hành khách phải lớn hơn 0");
+            await Swal.fire({
+                icon: 'warning',
+                title: 'Cảnh báo',
+                text: "Số lượng hành khách phải lớn hơn 0!",
+                confirmButtonText: 'Đã hiểu'
+            });
             return false;
         }
         else {
             if (countInf > countAdt) {
-                $("#isErooNumPax").css("display", "block");
-                $('#isErooNumPax')
-                    .text("Số lượng em bé không được lớn hơn người lớn");
+                await Swal.fire({
+                    icon: 'warning',
+                    title: 'Cảnh báo',
+                    text: "Số lượng em bé không được lớn hơn người lớn!",
+                    confirmButtonText: 'Đã hiểu'
+                });
                 return false;
-            }
-            else {
-                
-                $("#isErooNumPax").css("display", "none");
             }
         }
     }

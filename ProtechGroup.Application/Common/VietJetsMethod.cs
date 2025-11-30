@@ -143,7 +143,7 @@ namespace ProtechGroup.Application.Common
                         price.BookingKey = flightKey + "_" + f.bookingKey;
                         price.FareClass = f.fareClass.description;
                         price.FareBasis = f.fareClass.code;
-                        price.ClassName = f.bookingCode.description;
+                        price.ClassName = f.fareClass.description;
                         price.CabinClass = f.cabinClass.description;
                         price.SeatAvailablity = f.availability;
                         price.TotallPriceAdt = 0;
@@ -310,9 +310,7 @@ namespace ProtechGroup.Application.Common
                             case "ECO":
                                 price.RecommendationNumber = "Hành lý xách tay 7kg";
                                 price.AllowanceBaggage = "Hành lý ký gửi 0kg";
-                                price.Condition = "<ul class=\"conditions\">";
-                                price.Condition += "<li>Hành lý xách tay 7kg</li>";
-                                price.Condition += "<li>Không có hành lý ký gửi</li>";
+                                price.Condition = "<ul class=\"border-dotted pb-4 mb-4\">";
                                 price.Condition += "<li>Được phép Thay đổi chuyến bay/ hành trình (Trước giờ khởi hành tối thiểu 03 tiếng) mất phí + chênh lệch giá vé (nếu có)</li>";
                                 price.Condition += "<li>Không được phép Thay đổi chuyến bay/ hành trình (Trong vòng 03 tiếng trước giờ khởi hành và sau giờ khởi hành)</li>";
                                 price.Condition += "<li>Không được phép Đổi tên</li>";
@@ -323,9 +321,7 @@ namespace ProtechGroup.Application.Common
                             case "DLX":
                                 price.RecommendationNumber = "Hành lý xách tay 7kg";
                                 price.AllowanceBaggage = "Hành lý ký gửi 20kg";
-                                price.Condition = "<ul class=\"conditions\">";
-                                price.Condition += "<li>Hành lý xách tay: 07kg</li>";
-                                price.Condition += "<li>Hành lý ký gửi: 20Kg</li>";
+                                price.Condition = "<ul class=\"border-dotted pb-4 mb-4\">";
                                 price.Condition += "<li>Được phép Thay đổi chuyến bay/ hành trình (Trước giờ khởi hành tối thiểu 03 tiếng) miễn phí + chênh lệch giá vé (nếu có)</li>";
                                 price.Condition += "<li>Không được phép Thay đổi chuyến bay/ hành trình (Trong vòng 03 tiếng trước giờ khởi hành và sau giờ khởi hành)</li>";
                                 price.Condition += "<li>Không được phép Đổi tên</li>";
@@ -336,9 +332,7 @@ namespace ProtechGroup.Application.Common
                             case "SBoss":
                                 price.RecommendationNumber = "Hành lý xách tay 10kg";
                                 price.AllowanceBaggage = "Hành lý ký gửi 30kg";
-                                price.Condition = "<ul class=\"conditions\">";
-                                price.Condition += "<li>Hành lý xách tay: 10kg</li>";
-                                price.Condition += "<li>Hành lý ký gửi: 30kg và 01 bộ dụng cụ chơi golf (nếu có)</li>";
+                                price.Condition = "<ul class=\"border-dotted pb-4 mb-4\">";
                                 price.Condition += "<li>Phòng chờ sang trọng</li>";
                                 price.Condition += "<li>Được phép Thay đổi chuyến bay/ hành trình (Trước giờ khởi hành tối thiểu 03 tiếng) miễn phí + chênh lệch giá vé (nếu có)</li>";
                                 price.Condition += "<li>Không được phép Thay đổi chuyến bay/ hành trình (Trong vòng 03 tiếng trước giờ khởi hành và sau giờ khởi hành)</li>";
@@ -350,9 +344,7 @@ namespace ProtechGroup.Application.Common
                             default:
                                 price.RecommendationNumber = "0 Kg hành lý xách tay";
                                 price.AllowanceBaggage = "0 Kg hành lý ký gửi";
-                                price.Condition = "<ul class=\"conditions\">";
-                                price.Condition += "<li>0 Kg hành lý xách tay</li>";
-                                price.Condition += "<li>0 Kg hành lý ký gửi</li>";
+                                price.Condition = "<ul class=\"border-dotted pb-4 mb-4\">";
                                 price.Condition += "<li>Không được thay đổi chuyến bay, chặng bay, ngày bay</li>";
                                 price.Condition += "</ul>";
                                 price.ReturnTicket = "Không hoàn hủy";

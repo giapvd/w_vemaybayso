@@ -484,7 +484,129 @@ namespace ProtechGroup.Application.Common
             if (booAm) str = "Âm " + str;
             return str + "đồng chẵn";
         }
+        //---Chuyển dương lịch sang âm lịch VN
+        public static DateTime ConvertSolarToLunarVN(DateTime solarDate)
+        {
+            int timeZone = 7; // Việt Nam UTC+7
+            int day = solarDate.Day;
+            int month = solarDate.Month;
+            int year = solarDate.Year;
 
+            int jd = ConvertToJulius(solarDate);
+
+            int k = (int)((jd - 2415021.076998695) / 29.530588853);
+            int monthStart = GetNewMoonDay(k + 1, timeZone);
+
+            if (monthStart > jd)
+                monthStart = GetNewMoonDay(k, timeZone);
+
+            int a11 = GetLunarMonth11(year, timeZone);
+            int b11 = GetLunarMonth11(year + 1, timeZone);
+
+            int lunarYear = 0;
+            int lunarMonth = 0;
+
+            if (monthStart < a11)
+            {
+                lunarYear = year;
+                a11 = GetLunarMonth11(year - 1, timeZone);
+            }
+            else
+            {
+                lunarYear = year + 1;
+            }
+
+            int lunarDay = jd - monthStart + 1;
+            int diff = (int)Math.Round((monthStart - a11) / 29.530588853);
+            lunarMonth = diff + 11;
+
+            if (lunarMonth > 12)
+                lunarMonth -= 12;
+
+            return new DateTime(lunarYear, lunarMonth, lunarDay);
+        }
+        private static double NewMoon(int k)
+        {
+            double T = k / 1236.85;
+            double T2 = T * T;
+            double T3 = T2 * T;
+            double dr = Math.PI / 180;
+            double Jd1 = 2415020.75933 + 29.53058868 * k +
+                0.0001178 * T2 - 0.000000155 * T3 +
+                0.00033 * Math.Sin((166.56 + 132.87 * T - 0.009173 * T2) * dr);
+            double M = 359.2242 + 29.10535608 * k - 0.0000333 * T2 - 0.00000347 * T3;
+            double Mpr = 306.0253 + 385.81691806 * k + 0.0107306 * T2 + 0.00001236 * T3;
+            double F = 21.2964 + 390.67050646 * k - 0.0016528 * T2 - 0.00000239 * T3;
+
+            double C1 = (0.1734 - 0.000393 * T) * Math.Sin(M * dr)
+                + 0.0021 * Math.Sin(2 * M * dr)
+                - 0.4068 * Math.Sin(Mpr * dr)
+                + 0.0161 * Math.Sin(2 * Mpr * dr)
+                - 0.0004 * Math.Sin(3 * Mpr * dr)
+                + 0.0104 * Math.Sin(2 * F * dr)
+                - 0.0051 * Math.Sin((M + Mpr) * dr)
+                - 0.0074 * Math.Sin((M - Mpr) * dr)
+                + 0.0004 * Math.Sin((2 * F + M) * dr)
+                - 0.0004 * Math.Sin((2 * F - M) * dr)
+                - 0.0006 * Math.Sin((2 * F + Mpr) * dr)
+                + 0.0010 * Math.Sin((2 * F - Mpr) * dr)
+                + 0.0005 * Math.Sin((2 * Mpr + M) * dr);
+
+            double JdNew = Jd1 + C1;
+            return JdNew;
+        }
+
+        private static double SunLongitude(double jdn)
+        {
+            double T = (jdn - 2451545.0) / 36525;
+            double T2 = T * T;
+            double dr = Math.PI / 180;
+
+            double M = 357.52910 + 35999.05030 * T - 0.0001559 * T2 - 0.00000048 * T * T2;
+            double L0 = 280.46645 + 36000.76983 * T + 0.0003032 * T2;
+
+            double DL = (1.914600 - 0.004817 * T - 0.000014 * T2) * Math.Sin(dr * M)
+                + (0.019993 - 0.000101 * T) * Math.Sin(dr * (2 * M))
+                + 0.000290 * Math.Sin(dr * (3 * M));
+
+            double L = L0 + DL;
+            L = (L + 360) % 360;
+            return L;
+        }
+
+        private static int GetSunLongitudeSector(double jdn)
+        {
+            return (int)(SunLongitude(jdn) / 30);
+        }
+
+        private static int GetNewMoonDay(int k, int timeZone)
+        {
+            return (int)(NewMoon(k) + 0.5 + timeZone / 24.0);
+        }
+
+        private static int GetLunarMonth11(int year, int timeZone)
+        {
+            DateTime off = new DateTime(year, 12, 31);
+            int jd = ConvertToJulius(off);
+            int k = (int)((jd - 2415021.076998695) / 29.530588853);
+            int nm = GetNewMoonDay(k, timeZone);
+            int sun = GetSunLongitudeSector(nm);
+
+            if (sun >= 9)
+                nm = GetNewMoonDay(k - 1, timeZone);
+
+            return nm;
+        }
+
+        private static int ConvertToJulius(DateTime date)
+        {
+            int a = (14 - date.Month) / 12;
+            int y = date.Year + 4800 - a;
+            int m = date.Month + 12 * a - 3;
+
+            return date.Day + (153 * m + 2) / 5 + 365 * y + y / 4 - y / 100 + y / 400 - 32045;
+        }
+        //----End Chuyển dương lịch sang âm lịch VN
         public static bool IsFileEmptyOrDoesntExist(string virtualFilePath)
         {
             return GetFileSize(virtualFilePath) == 0;

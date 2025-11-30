@@ -12,6 +12,7 @@ const departurePointValue = document.getElementById("departure-point-value");
 const arrivalPointValue = document.getElementById("arrival-point-value");
 const departureDateValue = document.getElementById("departure-date-value");
 const returnDateValue = document.getElementById("return-date-value");
+const roundType = document.getElementById("round_type-value");
 
 // Toggle location modal
 const locationModal = document.getElementById("location-modal");
@@ -144,11 +145,13 @@ document.querySelectorAll('input[name="trip"]').forEach((elem) => {
             formSearchInput.classList.add("grid-cols-4");
             departureDateInput.classList.add("max-xl:col-span-2");
             returnDateInput.classList.add("hidden");
+            roundType.value=0;
         } else {
             formSearchInput.classList.add("grid-cols-5");
             formSearchInput.classList.remove("grid-cols-4");
             departureDateInput.classList.remove("max-xl:col-span-2");
             returnDateInput.classList.remove("hidden");
+            roundType.value = 1;
         }
     });
 });
@@ -341,43 +344,100 @@ function renderRangePicker() {
 }
 
 function handleDateClick(el) {
+    // Hàm convert về Date chuẩn
+    function toDate(dateStr) {
+        const d = new Date(dateStr);
+        return isNaN(d) ? null : d;
+    }
+
+    function formatDDMMYYYY(dateObj) {
+        const d = new Date(dateObj);
+        const dd = ("0" + d.getDate()).slice(-2);
+        const mm = ("0" + (d.getMonth() + 1)).slice(-2);
+        const yyyy = d.getFullYear();
+        return `${dd}/${mm}/${yyyy}`;
+    }
+    const selectedDate = toDate(el.dataset.date);
+    if (!selectedDate) return;
     if (typePlane === "one_way") {
-        const date = new Date(el.dataset.date).toLocaleDateString("vi-VN");
-        departureDateInput.querySelector(".display").textContent = date;
-        departureDateValue.value = date;
+        const dateFormatted = formatDDMMYYYY(selectedDate);
+        departureDateInput.querySelector(".display").textContent = dateFormatted;
+        departureDateValue.value = dateFormatted;
         dateModal.classList.add("hidden");
         return;
     }
-    const d = new Date(el.dataset.date);
+
     if (!startDate || (startDate && endDate)) {
-        startDate = d;
+        startDate = selectedDate;
         endDate = null;
-    } else if (d < startDate) {
+    } else if (selectedDate < startDate) {
         endDate = startDate;
-        startDate = d;
-    } else endDate = d;
-    updateRangeHighlight();
+        startDate = selectedDate;
+    } else {
+        endDate = selectedDate;
+    }
+
+    updateRangeHighlight(); // gọi hàm đã fix trước đó
 }
 
 function updateRangeHighlight() {
-    document.querySelectorAll(".days div").forEach((el) => el.classList.remove("start", "end", "range"));
+    // Hàm so sánh ngày an toàn
+    function isSameDay(a, b) {
+        const da = new Date(a);
+        const db = new Date(b);
+        if (isNaN(da) || isNaN(db)) return false;
+        return da.getFullYear() === db.getFullYear() &&
+            da.getMonth() === db.getMonth() &&
+            da.getDate() === db.getDate();
+    }
+
+    // Hàm ép đúng về Date
+    function toDate(dateStr) {
+        const d = new Date(dateStr);
+        return isNaN(d) ? null : d;
+    }
+
+    // Xóa class cũ
+    document.querySelectorAll(".days div").forEach((el) =>
+        el.classList.remove("start", "end", "range")
+    );
+
     if (!startDate) return;
+
+    // Duyệt tất cả ngày
     document.querySelectorAll(".days div[data-date]").forEach((el) => {
-        const d = new Date(el.dataset.date);
-        if (d.toDateString() === startDate.toDateString()) el.classList.add("start");
-        if (endDate && d.toDateString() === endDate.toDateString()) el.classList.add("end");
-        if (endDate && d > startDate && d < endDate) el.classList.add("range");
+        const d = toDate(el.dataset.date);
+        if (!d) return;
+
+        if (isSameDay(d, startDate)) el.classList.add("start");
+        if (endDate && isSameDay(d, endDate)) el.classList.add("end");
+
+        if (endDate && d > startDate && d < endDate) {
+            el.classList.add("range");
+        }
     });
+
+    // Cập nhật text hiển thị ngày
+    function formatDDMMYYYY(dateObj) {
+        const d = new Date(dateObj);
+        const dd = ("0" + d.getDate()).slice(-2);
+        const mm = ("0" + (d.getMonth() + 1)).slice(-2);
+        const yyyy = d.getFullYear();
+        return `${dd}/${mm}/${yyyy}`;
+    }
+
     if (startDate && endDate) {
-        departureDateInput.querySelector(".display").textContent = startDate.toLocaleDateString("vi-VN");
-        departureDateValue.value = startDate.toLocaleDateString("vi-VN");
-        returnDateInput.querySelector(".display").textContent = endDate.toLocaleDateString("vi-VN");
-        returnDateValue.value = endDate.toLocaleDateString("vi-VN");
+        departureDateInput.querySelector(".display").textContent = formatDDMMYYYY(startDate);
+        departureDateValue.value = formatDDMMYYYY(startDate);
+
+        returnDateInput.querySelector(".display").textContent = formatDDMMYYYY(endDate);
+        returnDateValue.value = formatDDMMYYYY(endDate);
+
         dateModal.classList.add("hidden");
     } else if (startDate) {
-        departureDateInput.querySelector(".display").textContent = startDate.toLocaleDateString("vi-VN");
-        departureDateValue.value = startDate.toLocaleDateString("vi-VN");
-    } else console.log("+++++++++++++++++++++");
+        departureDateInput.querySelector(".display").textContent = formatDDMMYYYY(startDate);
+        departureDateValue.value = formatDDMMYYYY(startDate);
+    }
 }
 
 document.getElementById("prev").onclick = () => {

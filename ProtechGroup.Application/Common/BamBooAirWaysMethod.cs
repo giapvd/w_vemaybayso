@@ -190,9 +190,7 @@ namespace ProtechGroup.Application.Common
                         case "O":
                             price.RecommendationNumber = "Hành lý xách tay 7kg";
                             price.AllowanceBaggage = "Hành lý ký gửi 0kg";
-                            price.Condition = "<ul class=\"conditions\">";
-                            price.Condition += "    <li>Hành lý xách tay 7kg</li>";
-                            price.Condition += "    <li>Không có Hành lý ký gửi</li>";
+                            price.Condition = "<ul class=\"border-dotted pb-4 mb-4\">";
                             price.Condition += "    <li>Được phép Thay đổi chuyến bay/ hành trình (Trước giờ khởi hành tối thiểu 03 tiếng) mất phí + chênh lệch giá vé (nếu có)</li>";
                             price.Condition += "    <li>Không được phép Thay đổi chuyến bay/ hành trình (Trong vòng 03 tiếng trước giờ khởi hành và sau giờ khởi hành)</li>";
                             price.Condition += "    <li>Không được phép Đổi tên</li>";
@@ -205,9 +203,7 @@ namespace ProtechGroup.Application.Common
                         case "G":
                             price.RecommendationNumber = "Hành lý xách tay 7kg";
                             price.AllowanceBaggage = "Hành lý ký gửi 20kg";
-                            price.Condition = "<ul class=\"conditions\">";
-                            price.Condition += "    <li>Hành lý xách tay 7 kg</li>";
-                            price.Condition += "    <li>Hành lý ký gửi 20 kg</li>";
+                            price.Condition = "<ul class=\"border-dotted pb-4 mb-4\">";
                             price.Condition += "    <li>Được phép Thay đổi chuyến bay/ hành trình (Trước giờ khởi hành tối thiểu 03 tiếng) mất phí + chênh lệch giá vé (nếu có)</li>";
                             price.Condition += "    <li>Không được phép Thay đổi chuyến bay/ hành trình (Trong vòng 03 tiếng trước giờ khởi hành và sau giờ khởi hành)</li>";
                             price.Condition += "    <li>Không được phép Đổi tên</li>";
@@ -227,9 +223,7 @@ namespace ProtechGroup.Application.Common
                         case "H":
                             price.RecommendationNumber = "Hành lý xách tay 7kg";
                             price.AllowanceBaggage = "Hành lý ký gửi 0kg";
-                            price.Condition = "<ul class=\"conditions\">";
-                            price.Condition += "    <li>Hành lý xách tay 7 kg</li>";
-                            price.Condition += "    <li>Không có Hành lý ký gửi</li>";
+                            price.Condition = "<ul class=\"border-dotted pb-4 mb-4\">";
                             price.Condition += "    <li>Được phép Thay đổi chuyến bay/ hành trình (Trước giờ khởi hành tối thiểu 03 tiếng) mất phí + chênh lệch giá vé (nếu có)</li>";
                             price.Condition += "    <li>Được phép Thay đổi chuyến bay/ hành trình (Trong vòng 03 tiếng trước giờ khởi hành và sau giờ khởi hành) mất phí + chênh lệch giá vé (nếu có)</li>";
                             price.Condition += "    <li>Không được phép Đổi tên</li>";
@@ -244,9 +238,7 @@ namespace ProtechGroup.Application.Common
                         case "Y":
                             price.RecommendationNumber = "Hành lý xách tay 7kg";
                             price.AllowanceBaggage = "Hành lý ký gửi 20kg";
-                            price.Condition = "<ul class=\"conditions\">";
-                            price.Condition += "    <li>Hành lý xách tay 7kg</li>";
-                            price.Condition += "    <li>Hành lý ký gửi	20kg</li>";
+                            price.Condition = "<ul class=\"border-dotted pb-4 mb-4\">";
                             price.Condition += "    <li>Được phép Thay đổi chuyến bay/ hành trình (Trước giờ khởi hành tối thiểu 03 tiếng) miễn phí + chênh lệch giá vé (nếu có)</li>";
                             price.Condition += "    <li>Được phép Thay đổi chuyến bay/ hành trình (Trong vòng 03 tiếng trước giờ khởi hành và sau giờ khởi hành) miễn phí + chênh lệch giá vé (nếu có)</li>";
                             price.Condition += "    <li>Không được phép Đổi tên</li>";
@@ -261,9 +253,7 @@ namespace ProtechGroup.Application.Common
                         case "C":
                             price.RecommendationNumber = "Hành lý xách tay 2 gói 7kg";
                             price.AllowanceBaggage = "Hành lý ký gửi 40kg";
-                            price.Condition = "<ul class=\"conditions\">";
-                            price.Condition = "    <li>Hành lý xách tay được 2 gói 7kg</li>";
-                            price.Condition = "    <li>Hành lý ký gửi 40kg</li>";
+                            price.Condition = "<ul class=\"border-dotted pb-4 mb-4\">";
                             price.Condition = "    <li>Được phép Thay đổi chuyến bay/ hành trình (Trước giờ khởi hành tối thiểu 03 tiếng) mất phí + chênh lệch giá vé (nếu có)</li>";
                             price.Condition = "    <li>Được phép Thay đổi chuyến bay/ hành trình (Trong vòng 03 tiếng trước giờ khởi hành và sau giờ khởi hành) mất phí + chênh lệch giá vé (nếu có)</li>";
                             price.Condition = "    <li>Không được phép Đổi tên</li>";
@@ -277,9 +267,7 @@ namespace ProtechGroup.Application.Common
                         case "F":
                             price.RecommendationNumber = "Hành lý xách tay 2 gói 7kg";
                             price.AllowanceBaggage = "Hành lý ký gửi 40kg";
-                            price.Condition = "<ul class=\"conditions\">";
-                            price.Condition = "     <li>Hành lý xách tay được 2 gói 7kg</li>";
-                            price.Condition = "     <li>Hành lý ký gửi	40kg</li>";
+                            price.Condition = "<ul class=\"border-dotted pb-4 mb-4\">";
                             price.Condition = "     <li>Được phép Thay đổi chuyến bay/ hành trình (Trước giờ khởi hành tối thiểu 03 tiếng) miễn phí + chênh lệch giá vé (nếu có)</li>";
                             price.Condition = "     <li>Được phép Thay đổi chuyến bay/ hành trình (Trong vòng 03 tiếng trước giờ khởi hành và sau giờ khởi hành) miễn phí + chênh lệch giá vé (nếu có)</li>";
                             price.Condition = "     <li>Không được phép Đổi tên</li>";
@@ -292,9 +280,7 @@ namespace ProtechGroup.Application.Common
                         default:
                             price.RecommendationNumber = "0 Kg hành lý xách tay";
                             price.AllowanceBaggage = "0 Kg hành lý ký gửi";
-                            price.Condition = "<ul class=\"conditions\">";
-                            price.Condition += "<li>0 Kg hành lý xách tay</li>";
-                            price.Condition += "<li>0 Kg hành lý ký gửi</li>";
+                            price.Condition = "<ul class=\"border-dotted pb-4 mb-4\">";
                             price.Condition += "<li>Không được thay đổi chuyến bay, chặng bay, ngày bay</li>";
                             price.Condition += "</ul>";
                             price.ReturnTicket = "Không hoàn hủy";

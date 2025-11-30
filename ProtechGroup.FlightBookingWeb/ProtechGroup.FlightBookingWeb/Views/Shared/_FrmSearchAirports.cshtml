@@ -2,13 +2,11 @@
 <div class="bg-primary text-white rounded-2xl p-4 shadow-lg">
     <form class="w-full" method="post">
         <input type="text" class="hidden" id="departure-point-value" name="departure_point" value="HAN" />
-        <!-- Điểm đi -->
         <input type="text" class="hidden" id="arrival-point-value" name="arrival_point" value="SGN" />
-        <!-- Điểm đến -->
         <input type="text" class="hidden" id="departure-date-value" name="departure_date" />
-        <!-- Ngày đi -->
         <input type="text" class="hidden" id="return-date-value" name="return_date" />
-        <!-- Ngày về -->
+        <input type="text" class="hidden" id="round_type-value" name="round_type" value="0"/>
+        
 
         <div class="flex flex-wrap items-center gap-5 max-xl:justify-between">
             <div class="flex gap-5">
@@ -42,7 +40,7 @@
                                 <div class="minus-button">
                                     <img src="~/Content/img/search/minus.svg" alt="" />
                                 </div>
-                                <input type="text" class="max-w-3 outline-none" name="adult_passenger" value="1" />
+                                <input type="text" class="max-w-3 outline-none" id="adult_passenger" name="adult_passenger" value="1" />
                                 <div class="plus-button">
                                     <img src="~/Content/img/search/plus.svg" alt="" />
                                 </div>
@@ -55,7 +53,7 @@
                                 <div class="minus-button">
                                     <img src="~/Content/img/search/minus.svg" alt="" />
                                 </div>
-                                <input type="text" class="max-w-3 outline-none" name="child_passenger" value="0" />
+                                <input type="text" class="max-w-3 outline-none" id="child_passenger" name="child_passenger" value="0" />
                                 <div class="plus-button">
                                     <img src="~/Content/img/search/plus.svg" alt="" />
                                 </div>
@@ -67,7 +65,7 @@
                                 <div class="minus-button">
                                     <img src="~/Content/img/search/minus.svg" alt="" />
                                 </div>
-                                <input type="text" class="max-w-3 outline-none" name="infant_passenger" value="0" />
+                                <input type="text" class="max-w-3 outline-none" id="infant_passenger" name="infant_passenger" value="0" />
                                 <div class="plus-button">
                                     <img src="~/Content/img/search/plus.svg" alt="" />
                                 </div>
@@ -137,7 +135,7 @@
                 </div>
             </div>
             <div class="bg-accent rounded-md max-xl:col-span-2 max-sm:col-span-1 max-xl:py-6">
-                <button class="w-full h-full uppercase font-bold text-[22px]">Tìm kiếm</button>
+                <button class="w-full h-full uppercase font-bold text-[22px]" id="btn-search">Tìm kiếm</button>
             </div>
         </div>
     </form>

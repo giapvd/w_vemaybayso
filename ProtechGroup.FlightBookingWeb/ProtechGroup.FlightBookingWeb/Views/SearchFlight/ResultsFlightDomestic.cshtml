@@ -5,887 +5,667 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-@functions {
-    public static string FormatVietnameseDate(DateTime date)
-    {
-        int dayOfWeek = (int)date.DayOfWeek;
-        string thu;
-
-        switch (dayOfWeek)
-        {
-            case 0: thu = "Chủ nhật"; break;
-            case 1: thu = "Thứ 2"; break;
-            case 2: thu = "Thứ 3"; break;
-            case 3: thu = "Thứ 4"; break;
-            case 4: thu = "Thứ 5"; break;
-            case 5: thu = "Thứ 6"; break;
-            case 6: thu = "Thứ 7"; break;
-            default: thu = ""; break;
-        }
-
-        return $"{thu} - {date:dd/MM}";
-    }
-}
 @Html.AntiForgeryToken()
 <div id="loading" style="display:flex; justify-content:center; align-items:center; height:300px;">
     <img src="~/Content/img/search_loading.gif" alt="Đang tìm chuyến bay..." style="width: 100px; height: 100px;">
 </div>
-
-@Html.Partial("_FrmSearchAirports")
-<main class="flight-list" id="flight-list" style="display:none;">
-    <div class="heading">
-        <div class="container">
-            <div class="row">
-                <div>
-                    <h1 class="color-dark">DANH SÁCH CHUYẾN BAY</h1>
-                    <p class="color-primary">
-                        Giá vé chưa bao gồm thuế và các loại thuế khác, khách hàng lưu ý
-                        chọn chi tiết để xem đầy đủ.
-                    </p>
-                </div>
-            </div>
+<section class="container mx-auto mt-7.5 relative" id="form-search">
+    @Html.Partial("_FrmSearchAirports")
+</section>
+<section class="container mx-auto mt-8" id="flight-list">
+    <div class="header-section flex justify-between max-lg:flex-wrap gap-4">
+        <div>
+            <p class="text-2xl font-bold">Danh sách chuyến bay</p>
+            <p class="text-sm text-[#00ABC0]">
+                Giá vé chưa bao gồm thuế và các loại thuế khác, khách hàng lưu ý chọn giá để xem đầy đủ.
+            </p>
+        </div>
+        <div class="font-bold">
+            <button class="text-base max-md:text-xs p-3 cursor-pointer">
+                <img src="~/Content/img/flight-list/style1.svg" alt="" />
+            </button>
+            <button class="text-base max-md:text-xs p-3 cursor-pointer">
+                <img src="~/Content/img/flight-list/style2.svg" alt="" />
+            </button>
         </div>
     </div>
-    <div class="session">
-        <div class="container">
-            <div class="row">
-                <div class="col-3">
-                    <div id="ModalFilter" class="modal">
-                        <div class="modal-content">
-                            <div class="filter">
-                                <div class="heading">
-                                    <p class="color-dark">Bộ lọc chiều đi</p>
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12 6V4M12 6C10.8954 6 10 6.89543 10 8C10 9.10457 10.8954 10 12 10M12 6C13.1046 6 14 6.89543 14 8C14 9.10457 13.1046 10 12 10M6 18C7.10457 18 8 17.1046 8 16C8 14.8954 7.10457 14 6 14M6 18C4.89543 18 4 17.1046 4 16C4 14.8954 4.89543 14 6 14M6 18V20M6 14V4M12 10V20M18 18C19.1046 18 20 17.1046 20 16C20 14.8954 19.1046 14 18 14M18 18C16.8954 18 16 17.1046 16 16C16 14.8954 16.8954 14 18 14M18 18V20M18 14V4"
-                                              stroke="#0A7C79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                </div>
-                                <div class="box-filter" id="box-filter-sx">
-                                    <div class="heading">
-                                        <p class="color-primary">Sắp xếp</p>
-                                        <svg width="15" height="10" viewBox="0 0 15 10" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M14.1426 1.5L7.64258 8.5L1.14258 1.5" stroke="#0A7C79" stroke-width="1.5"
-                                                  stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </div>
-                                    <div class="filter-content">
-                                        <label class="color-dark">
-                                            <input type="checkbox" value="price" />
-                                            Giá (Từ thấp đến cao)
-                                        </label>
-                                        <label class="color-dark">
-                                            <input type="checkbox" value="time" />
-                                            Giờ cất cánh (Sớm đến muộn)
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="box-filter" id="box-filter-lth">
-                                    <div class="heading">
-                                        <p class="color-primary">Lọc Hãng hàng không</p>
-                                        <svg width="15" height="10" viewBox="0 0 15 10" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M14.1426 1.5L7.64258 8.5L1.14258 1.5" stroke="#0A7C79" stroke-width="1.5"
-                                                  stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </div>
-                                    <div class="filter-content">
-                                        @foreach (var airline in Model.Airlines)
-                                        {
-                                            <label class="color-dark">
-                                                <input type="checkbox" value="@airline.AirlineCode" />
-                                                <div>
-                                                    <span>@airline.AirlineName</span>
-                                                    <img src="/Content/img/Airline/sm@(airline.AirlineCode + ".gif")" alt="logo" />
-                                                </div>
-                                            </label>
-                                        }
-                                    </div>
-                                </div>
-                                <div class="box-filter" id="box-filter-time">
-                                    <div class="heading">
-                                        <p class="color-primary">Giờ cất cánh chiều đi</p>
-                                        <svg width="15" height="10" viewBox="0 0 15 10" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M14.1426 1.5L7.64258 8.5L1.14258 1.5" stroke="#0A7C79" stroke-width="1.5"
-                                                  stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </div>
-                                    <div class="filter-content">
-                                        <label class="color-dark">
-                                            <input type="checkbox" />
-                                            <div>
-                                                <span>Cả ngày</span>
-                                                <span class="time">00:00 - 24:00</span>
-                                            </div>
-                                        </label>
-                                        <label class="color-dark">
-                                            <input type="checkbox" />
-                                            <div>
-                                                <span>Buổi sớm</span>
-                                                <span class="time">00:00 - 06:00</span>
-                                            </div>
-                                        </label>
-                                        <label class="color-dark">
-                                            <input type="checkbox" />
-                                            <div>
-                                                <span>Buổi sáng</span>
-                                                <span class="time">06:00 - 12:00</span>
-                                            </div>
-                                        </label>
-                                        <label class="color-dark">
-                                            <input type="checkbox" />
-                                            <div>
-                                                <span>Buổi chiều</span>
-                                                <span class="time">12:00 - 18:00</span>
-                                            </div>
-                                        </label>
-                                        <label class="color-dark">
-                                            <input type="checkbox" />
-                                            <div>
-                                                <span>Buổi tối</span>
-                                                <span class="time">18:00 - 24:00</span>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <div class="content mt-10">
+        <div class="grid-cols-4 grid gap-5 items-start">
+            <div class="filter box-sha rounded-xl col-span-1 p-5 shadow-[0_0_18px_rgba(0,0,0,0.15)] max-xl:hidden">
+                <div class="head flex justify-between items-center pb-6 border-b border-[#00ABC0]">
+                    <p class="text-base font-bold">Bộ lọc</p>
+                    <div>
+                        <img src="~/Content/img/flight-list/filter.svg" alt="">
                     </div>
                 </div>
-                <div class="col-9 col-xxl-12">
+                <!-- //Box -->
+                <div class="box py-4 border-b border-[#00ABC0]">
+                    <div class="head flex justify-between items-center pb-6">
+                        <p class="text-base font-bold">Sắp xếp</p>
+                        <div>
+                            <svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.75 0.75L7.25 7.75L0.75 0.75" stroke="#0E0F52" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="body flex flex-col gap-3 filter-content">
+                        <label class="flex items-center gap-3 cursor-pointer select-none">
+                            <input type="checkbox" value="price">
+                            <p class="text-sm">Giá (Từ thấp đến cao)</p>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer select-none">
+                            <input type="checkbox" value="time">
+                            <p class="text-sm">Giờ cất cánh (Sớm đến muộn)</p>
+                        </label>
+                    </div>
+                </div>
+                <!-- //Box -->
+                <div class="box py-4 border-b border-[#00ABC0]">
+                    <div class="head flex justify-between items-center pb-6">
+                        <p class="text-base font-bold">Lọc theo Giá vé</p>
+                        <div>
+                            <svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.75 0.75L7.25 7.75L0.75 0.75" stroke="#0E0F52" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="body flex flex-col gap-3">
+                        <label class="flex items-center gap-3 cursor-pointer select-none">
+                            <input type="checkbox">
+                            <p class="text-sm">Giá chưa bao gồm thuế phí</p>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer select-none">
+                            <input type="checkbox">
+                            <p class="text-sm">Giá full thuế phí cho 1 người lớn</p>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer select-none">
+                            <input type="checkbox">
+                            <p class="text-sm">Tổng giá cho tất cả hành khách</p>
+                        </label>
+                    </div>
+                </div>
+                <!-- //Box -->
+                <div class="box py-4 border-b border-[#00ABC0]">
+                    <div class="head flex justify-between items-center pb-6">
+                        <p class="text-base font-bold">Lọc Hãng hàng không</p>
+                        <div>
+                            <svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.75 0.75L7.25 7.75L0.75 0.75" stroke="#0E0F52" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="body flex flex-col gap-3">
+                        @foreach (var airline in Model.Airlines)
+                        {
+                            <label class="flex items-center gap-3 cursor-pointer select-none">
+                                <input type="checkbox" value="@airline.AirlineCode" />
+                                <div class="flex justify-between flex-1 items-center">
+                                    <span class="text-sm font-semibold">@airline.AirlineName</span>
+                                    <img src="~/Content/img/Airline/sm@(airline.AirlineCode + ".gif")" alt="@airline.AirlineName" style="width:32px; height:32px" />
+                                </div>
+                            </label>
+                        }
+                    </div>
+                </div>
+                <div class="box py-4">
+                    <div class="head flex justify-between items-center pb-6">
+                        <p class="text-base font-bold">Giờ cất cánh chiều đi</p>
+                        <div>
+                            <svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.75 0.75L7.25 7.75L0.75 0.75" stroke="#0E0F52" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="body flex flex-col gap-3">
+                        <label class="flex items-center gap-3 cursor-pointer select-none">
+                            <input type="checkbox">
+                            <div class="flex justify-between flex-1 items-center">
+                                <p class="text-sm">Cả ngày</p>
+                                <p class="text-sm font-bold">00:00 - 24:00</p>
+                            </div>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer select-none">
+                            <input type="checkbox">
+                            <div class="flex justify-between flex-1 items-center">
+                                <p class="text-sm">Buổi sớm</p>
+                                <p class="text-sm font-bold">00:00 - 06:00</p>
+                            </div>
+                        </label>
+                        <!-- // -->
+                        <label class="flex items-center gap-3 cursor-pointer select-none">
+                            <input type="checkbox">
+                            <div class="flex justify-between flex-1 items-center">
+                                <p class="text-sm">Buổi sáng</p>
+                                <p class="text-sm font-bold">06:00 - 12:00</p>
+                            </div>
+                        </label>
+                        <!-- // -->
+                        <label class="flex items-center gap-3 cursor-pointer select-none">
+                            <input type="checkbox">
+                            <div class="flex justify-between flex-1 items-center">
+                                <p class="text-sm">Buổi chiều</p>
+                                <p class="text-sm font-bold">12:00 - 18:00</p>
+                            </div>
+                        </label>
+                        <!-- // -->
+                        <label class="flex items-center gap-3 cursor-pointer select-none">
+                            <input type="checkbox">
+                            <div class="flex justify-between flex-1 items-center">
+                                <p class="text-sm">Buổi tối</p>
+                                <p class="text-sm font-bold">18:00 - 24:00</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="flight-list col-span-3  max-xl:col-span-4 ">
+                <div class="flex flex-col gap-4">
                     @if (searchInput.IsRoundTrip)
                     {
-                        <div class="is-deposited" style="display: none;">
-                            <div class="row row-out-bound"></div>
-                            <div class="row row-last-child row-in-bound"></div>
-                        </div>
-                    }
-                    <div class="is-placing item-out-bound">
-                        <div class="row">
-                            <div class="col-3">
-                                <p class="color-info">CHIỀU ĐI </p>
-                                <p class="color-dark">NGÀY @(searchInput.DepartureDate.ToString("dd/MM/yyyy"))</p>
+                        <div class="plane-items-selected shadow-[0_8px_20px_rgba(0,0,0,0.15)] rounded-xl overflow-hidden">
+                            <div class="bg-[#CAF0F8] flex max-lg:flex-wrap items-start justify-between px-4 py-1.5 cursor-pointer select-none clicked">
+                                <div>
+                                    <p class="font-bold text-base">Chuyến bay chiều đi: Hà Nội đến Luân Đôn</p>
+                                    <p class="text-base">
+                                        <span class="max-md:block">Thứ 4, 10 tháng 12</span>
+                                        <span class="ml-3 max-md:ml-0 max-md:block ">18:55 - 12:05 (2h 30 m , Bay thẳng)</span>
+                                    </p>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold max-lg:mt-2">Điều kiện vé &gt;</p>
+                                </div>
                             </div>
-                            <div class="col-7">
-                                <p class="color-info">@searchInput.DepartureCity (@searchInput.DepartureAirport) -> @searchInput.ArrivalCity (@searchInput.ArrivalAirport)</p>
-                                <p class="color-dark">
-                                    @if (searchInput.AdultNumber > 0)
-                                    {
-                                        @(searchInput.AdultNumber + " NGƯỜI LỚN")
-                                    }
-                                    @if (searchInput.ChildNumber > 0)
-                                    {
-                                        @(" | " + searchInput.ChildNumber + " TRẺ EM")
-                                    }
-                                    @if (searchInput.InfantNumber > 0)
-                                    {
-                                        @(" | " + searchInput.ChildNumber + " EM BÉ")
-                                    }
+                            <div class="grid grid-cols-5 max-lg:grid-cols-2 max-md:block p-4">
+                                <div class="flex flex-col max-lg:col-span-2 gap-4  max-lg:mb-5">
+                                    <div class="flex gap-3 items-start">
+                                        <div>
+                                            <img src="~/Content/img/flight-list/VietnamAirlines.png" alt="" class="w-10" />
+                                        </div>
+                                        <div class="text-sm">
+                                            <p class="font-bold">Vietnam Airlines</p>
+                                            <p>VN 617 - A321 Ceo</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex col-span-2 max-lg:col-span-1   gap-2 items-start justify-center max-md:justify-start  max-md:mb-5">
+                                    <div>
+                                        <img src="~/Content/img/flight-info/plane-start.svg" alt="" />
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-2xl">
+                                            <p>HAN - Nội Bài</p>
+                                            <p>Sân bay Quốc tế</p>
+                                        </div>
+                                        <p class="text-base">Thứ 4, 10/12/2025 - 18:55</p>
+                                    </div>
+                                </div>
+                                <div class="flex col-span-2 max-lg:col-span-1   gap-2 items-start justify-center max-md:justify-start">
+                                    <div>
+                                        <img src="~/Content/img/flight-info/plane-start.svg" alt="" />
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-2xl">
+                                            <p>LHR - London Heathrow</p>
+                                            <p>Sân bay Quốc tế</p>
+                                        </div>
+                                        <p class="text-base">Thứ 5, 11/12/2025 - 12:05</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-t border-[#EBA00A] border-dotted py-4 px-10 flex  justify-between gap-10 max-md:flex-col max-md:gap-5 hidden  conditions ">
+                                <div class="flex gap-1.5">
+                                    <div><img src="~/Content/img/flight-info/bag.svg" alt="" /></div>
+                                    <div>
+                                        <p class="text-base">Thông tin hành lý</p>
+                                        <ul class="my-1 text-sm">
+                                            <li>Mỗi hành khách có 07kg hành lý xách tay.</li>
+                                        </ul>
+                                        <p class="text-[#878C93] text-sm">( Tổng hành lý đã bao gồm trong giá )</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-1.5">
+                                    <div><img src="~/Content/img/flight-info/ticket.svg" alt="" /></div>
+                                    <div>
+                                        <p class="text-base">Điều kiện vé</p>
+                                        <ul class="my-1 text-sm">
+                                            <li>Phí đổi: 360.000 VNĐ/1 khách+chênh lệch giá vé (nếu&nbsp; có).</li>
+                                            <li>Quầy ưu tiên: Không; Đổi chuyến tại sân bay: Thu phí;</li>
+                                            <li>Chọn chỗ: Thu phí; Phòng Bông Sen: Không áp dụng.</li>
+                                        </ul>
+                                        <p class="text-[#878C93] text-sm">Vé không hoàn tiền. Hoàn bảo lưu mất phí trước 24h.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--
+            <div class="is-deposited" style="display: none;">
+                <div class="row row-out-bound"></div>
+                <div class="row row-last-child row-in-bound"></div>
+            </div>
+        -->
+                    }
+                    <div class="bg-primary rounded-xl p-4 text-white pr-10 shadow-[0_8px_20px_rgba(0,0,0,0.15)]">
+                        <div class="flex justify-between items-center max-lg:flex-wrap gap-4">
+                            <div>
+                                <p class="mb-1 font-bold text-base">
+                                    <span>@searchInput.DepartureCity (@searchInput.DepartureAirport) - @searchInput.ArrivalCity (@searchInput.ArrivalAirport)</span>
+                                    <span class="mx-4 max-lg:hidden">|</span>
+                                    <span class="max-lg:block">Khởi hành: @ProtechGroup.Application.Common.CoreUtils.GetLangDayOfWeek(searchInput.DepartureDate.DayOfWeek), Ngày @searchInput.DepartureDate.ToString("dd") Tháng @searchInput.DepartureDate.ToString("MM") Năm @searchInput.DepartureDate.ToString("yyyy")</span>
+                                </p>
+                                <p class="text-base">
+                                    @searchInput.AdultNumber Người lớn | @searchInput.ChildNumber  Trẻ em | @searchInput.ChildNumber Em bé
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div class="list-ticket item-out-bound">
-                        <div class="list-action">
-                            @{
-                                DateTime dateOut = searchInput.DepartureDate;
-                                double totalDays = (dateOut - Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy"))).TotalDays;
-                                DateTime staDateShow;
-                                if (totalDays <= 0)
-                                {
-                                    staDateShow = dateOut;
-                                }
-                                else
-                                {
 
-                                    if (totalDays <= 3)
+                    <div class="rounded-xl px-4 py-1 shadow-[0_8px_20px_rgba(0,0,0,0.15)]">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="24" height="24" rx="10" fill="#0E0F52" />
+                                    <path d="M13.5714 17L9 12L13.5714 7L15 8.55208L11.7429 12L15 15.4479L13.5714 17Z" fill="white" />
+                                </svg>
+                            </div>
+                            <div class="flex justify-between items-center w-10/12 overflow-hidden gap-8">
+                                @{
+                                    DateTime dateOut = searchInput.DepartureDate;
+                                    double totalDays = (dateOut - Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy"))).TotalDays;
+                                    DateTime staDateShow;
+                                    if (totalDays <= 0)
                                     {
-                                        staDateShow = dateOut.AddDays(-totalDays);
+                                        staDateShow = dateOut;
                                     }
                                     else
                                     {
-                                        staDateShow = dateOut.AddDays(-3);
-                                    }
 
-                                }
-                                for (int i = 0; i < 7; i++)
-                                {
-                                    DateTime dateShow = staDateShow.AddDays(i);
-                                    double dayscheck = (dateOut - dateShow).TotalDays;
-                                    <div class="action-item" data-session="@searchInput.SessionId" data-strdate="@dateShow.ToString("dd/MM/yyyy")" data-waytype=0>
-                                        <div class="date @(dayscheck == 0? Html.Raw("active") : Html.Raw(string.Empty))">
-                                            <span class="color-primary">@ProtechGroup.Application.Common.CoreUtils.GetLangDayOfWeek(dateShow.DayOfWeek)</span>
-                                            <span class="color-dark">@dateShow.ToString("dd/MM/yyyy")</span>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                        </div>
-                        <div id="openModelFilter" class="d-none d-block-xxl">
-                            <p class="color-dark">Bộ lọc</p>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 6V4M12 6C10.8954 6 10 6.89543 10 8C10 9.10457 10.8954 10 12 10M12 6C13.1046 6 14 6.89543 14 8C14 9.10457 13.1046 10 12 10M6 18C7.10457 18 8 17.1046 8 16C8 14.8954 7.10457 14 6 14M6 18C4.89543 18 4 17.1046 4 16C4 14.8954 4.89543 14 6 14M6 18V20M6 14V4M12 10V20M18 18C19.1046 18 20 17.1046 20 16C20 14.8954 19.1046 14 18 14M18 18C16.8954 18 16 17.1046 16 16C16 14.8954 16.8954 14 18 14M18 18V20M18 14V4"
-                                      stroke="#0A7C79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                        <div class="list-ticket-items list-ticket-items-out">
-                            <div class="cheapest">
-                                @foreach (var flight in Model.BlockItems[0].FlightOutBounds)
-                                {
-                                    if (flight.PriceBreakDowns != null && flight.PriceBreakDowns.Count > 0)
+                                        if (totalDays <= 2)
+                                        {
+                                            staDateShow = dateOut.AddDays(-totalDays);
+                                        }
+                                        else
+                                        {
+                                            staDateShow = dateOut.AddDays(-2);
+                                        }
+
+                                    }
+                                    for (int i = 0; i < 5; i++)
                                     {
-                                        <div class="item-ticket item-ticket-out" data-codeairline="@flight.MainAirlineCode" data-session="@searchInput.SessionId" data-keybooking="@flight.BookingKey" data-way="OutBound" style="display: block;">
-                                            <div class="col-12 d-none d-block-lg">
-                                                <div class="btn-detail mobile">
-                                                    <button class="color-dark toggle-info" data-target="#@flight.MainFlightNumber">
-                                                        Chi tiết hạng vé
-                                                        <svg width="8" height="13" viewBox="0 0 8 13" fill="none"
-                                                             xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M1.5 1.5L6.5 6.5L1.5 11.5" stroke="#FF3C13" stroke-width="1.5"
-                                                                  stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="row g-lg-2">
-                                                <div class="col-3 d-none-lg">
-                                                    <div class="airline-info ">
-                                                        <img class="img-logo-airline" src="/Content/img/Airline/sm@(flight.MainAirlineCode + ".gif")" alt="@flight.MainAirlineName">
-                                                        <div class="airline-name">
-                                                            <span class="color-dark name">@flight.MainAirlineName</span>
-                                                            <span class="color-info code">@flight.MainFlightNumber - @flight.Plane</span>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <div class="col-5 col-lg-7">
-                                                    <div class="flight-details">
-                                                        <div class="time-info">
-                                                            <div class="departure">
-                                                                <div class="time">@flight.MainDepartureTime</div>
-                                                                <div class="location">@flight.MainDepartureAirportCode</div>
-                                                                @{
-                                                                    var dateOfWeekDep = flight.MainDepartureDate.DayOfWeek;
-                                                                    string strDateOfWeekDep = ProtechGroup.Application.Common.CoreUtils.GetLangDayOfWeek(dateOfWeekDep);
-                                                                    <div class="date d-none-lg">@strDateOfWeekDep - @flight.MainDepartureDate.ToString("dd/MM")</div>
-                                                                }
-                                                            </div>
-                                                            <div class="arrow-item">
-                                                                <p class="color-dark duration">@flight.Duration</p>
-                                                                <div class="arrow">
-                                                                    <span class="d-none-lg">---</span> ✈ <span class="d-none-lg">---</span>
-                                                                </div>
-                                                                @if (flight.Stop < 1)
-                                                                {
-                                                                    <p class="color-dark numstop">Bay thẳng</p>
-                                                                }
-                                                                else
-                                                                {
-                                                                    <p class="color-dark numstop">@flight.Stop điểm dừng</p>
-                                                                }
-                                                            </div>
-                                                            <div class="arrival">
-                                                                <div class="time">@flight.MainArrivalTime</div>
-                                                                <div class="location">@flight.MainArrivalAirportCode</div>
-                                                                @{
-                                                                    var dateOfWeekArr = flight.MainArrivalDate.DayOfWeek;
-                                                                    string strDateOfWeekArr = ProtechGroup.Application.Common.CoreUtils.GetLangDayOfWeek(dateOfWeekArr);
-                                                                    <div class="date d-none-lg">@strDateOfWeekArr - @flight.MainArrivalDate.ToString("dd/MM")</div>
-                                                                }
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                @{
-                                                    var clTicketDefault = flight.PriceBreakDowns[0];
-                                                    <div class="col-2 d-none-lg">
-                                                        <div class="flight-meta">
-                                                            <div>
-                                                                <p class="color-info">Hạng vé</p>
-                                                                <p class="color-dark typeRender">@clTicketDefault.ClassName</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-2 col-lg-5">
-                                                        <div class="info-price">
-                                                            <span class="color-info price">@ProtechGroup.Application.Common.CoreUtils.FormatPrice(clTicketDefault.TotallPriceAdt) đ</span>
-                                                            <div class="color-primary info">
-                                                                Giá cho 1 người lớn
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-3  d-none-lg">
-                                                        <div class="btn-detail">
-                                                            <button class="color-dark toggle-info" data-target="#@flight.MainFlightNumber">
-                                                                Chi tiết hạng vé
-                                                                <svg width="8" height="13" viewBox="0 0 8 13" fill="none"
-                                                                     xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M1.5 1.5L6.5 6.5L1.5 11.5" stroke="#FF3C13" stroke-width="1.5"
-                                                                          stroke-linecap="round" stroke-linejoin="round"></path>
-                                                                </svg>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-5  d-none-lg">
-                                                        <div class="extras">
-                                                            <div class="item">
-                                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                                                     xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M17.5 11.046C15.1839 11.9836 12.6523 12.4998 10 12.4998C7.34775 12.4998 4.81608 11.9836 2.5 11.046M13.3333 4.99984V3.33317C13.3333 2.4127 12.5871 1.6665 11.6667 1.6665H8.33333C7.41286 1.6665 6.66667 2.4127 6.66667 3.33317V4.99984M10 9.99984H10.0083M4.16667 16.6665H15.8333C16.7538 16.6665 17.5 15.9203 17.5 14.9998V6.6665C17.5 5.74603 16.7538 4.99984 15.8333 4.99984H4.16667C3.24619 4.99984 2.5 5.74603 2.5 6.6665V14.9998C2.5 15.9203 3.24619 16.6665 4.16667 16.6665Z"
-                                                                          stroke="#FF3C13" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                                                    </path>
-                                                                </svg>
-                                                                <p class="color-info">@clTicketDefault.RecommendationNumber</p>
-                                                            </div>
-                                                            <div class="item">
-                                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                                                     xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M10 6.66667V17.5M10 6.66667C10 6.66667 10 5.42269 10 5C10 4.07953 10.7462 3.33333 11.6667 3.33333C12.5871 3.33333 13.3333 4.07953 13.3333 5C13.3333 5.92047 12.5871 6.66667 11.6667 6.66667C11.1689 6.66667 10 6.66667 10 6.66667ZM10 6.66667C10 6.66667 10 5.05243 10 4.58333C10 3.43274 9.06726 2.5 7.91667 2.5C6.76607 2.5 5.83333 3.43274 5.83333 4.58333C5.83333 5.73393 6.76607 6.66667 7.91667 6.66667C8.59817 6.66667 10 6.66667 10 6.66667ZM4.16667 10H15.8333M4.16667 10C3.24619 10 2.5 9.25381 2.5 8.33333C2.5 7.41286 3.24619 6.66667 4.16667 6.66667H15.8333C16.7538 6.66667 17.5 7.41286 17.5 8.33333C17.5 9.25381 16.7538 10 15.8333 10M4.16667 10L4.16667 15.8333C4.16667 16.7538 4.91286 17.5 5.83333 17.5H14.1667C15.0871 17.5 15.8333 16.7538 15.8333 15.8333V10"
-                                                                          stroke="#FF3C13" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                                                    </path>
-                                                                </svg>
-                                                                <p class="color-info">@clTicketDefault.AllowanceBaggage</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                }
-                                                <div class="col-1 ">
-                                                    <div class="change-seat d-none">
-                                                        <select name="" id="">
-                                                            <option value="">Đổi hạng vé</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="line-decor col-12 d-none  d-block-lg"></div>
-                                                <div class="col-3 col-lg-6 col-md-8  d-none d-block-lg">
-                                                    <div class="airline-info-mobile row-cols-lg-2">
-                                                        <img src="/Content/img/Airline/sm@(flight.MainAirlineCode + ".gif")" alt="@flight.MainAirlineName">
-                                                        <div class="airline-name">
-                                                            <span class="color-dark name">@flight.MainAirlineName</span>
-                                                            <span class="color-info code">@flight.FlightRef</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-3 col-lg-6 col-md-4">
-                                                    @if (!searchInput.IsRoundTrip)
-                                                    {
-                                                        <div class="btn-booking">
-                                                            <a class="btn btn-info btn-order-oneway">ĐẶT VÉ</a>
-                                                        </div>
-                                                    }
-                                                    else
-                                                    {
-                                                        <div class="btn-booking">
-                                                            <a class="btn btn-info btn-select-round-trip">CHỌN</a>
-                                                        </div>
-                                                    }
-                                                </div>
-
-                                                <div class="info-ticket color-primary" id="@flight.MainFlightNumber">
-                                                    <div class="ticket-types">
-                                                        <div class="row row-cols-12 row-cols-md-3  g-md-1">
-                                                            @foreach (var price in flight.PriceBreakDowns)
-                                                            {
-                                                                <div class="col">
-                                                                    <input hidden="" type="radio" class="inputChangeType" id="@(flight.MainAirlineCode + flight.FlightRef + "-" + price.FareClass)" name="type_@(flight.MainAirlineCode + flight.FlightRef)"
-                                                                           value="@price.ClassName" data-keyprice="@price.BookingKey" data-price="@price.TotallPriceAdt">
-                                                                    <label class="type" for="@(flight.MainAirlineCode + flight.FlightRef + "-" + price.FareClass)">Hạng vé: @price.FareClass</label>
-                                                                </div>
-                                                            }
-                                                        </div>
-                                                    </div>
-                                                    @foreach (var price in flight.PriceBreakDowns)
-                                                    {
-                                                        int numAdt = searchInput.AdultNumber;
-                                                        int numChd = searchInput.ChildNumber;
-                                                        int numInf = searchInput.InfantNumber;
-                                                        decimal totalPriceOrder = (price.TotallPriceAdt * numAdt) + (price.TotallPriceChd * numChd) + (price.TotallPriceInf * numInf);
-                                                        <div data-idtype="@(flight.MainAirlineCode + flight.FlightRef + "-" + price.FareClass)" class="type@(flight.MainAirlineCode + flight.FlightRef + "-" + price.FareClass) ticket-info-type">
-                                                            <div class="ticket-section">
-                                                                <div class="row">
-                                                                    <div class="col-6 col-md-12">
-                                                                        <div class="column info">
-                                                                            <h3 class="color-info">
-                                                                                🔸 THÔNG TIN CHUYẾN BAY (HẠNG VÉ  @(price.ClassName != null ? price.ClassName.ToUpper() : price.CabinClass.ToUpper())  - CABIN @price.CabinClass.ToUpper()):
-                                                                            </h3>
-                                                                            @foreach (var segment in flight.ListSegment)
-                                                                            {
-                                                                                <p>
-                                                                                    <strong>Khởi hành:</strong>
-                                                                                    <span class="color-dark">
-                                                                                        @segment.DepartureTime,
-                                                                                        @segment.DepartureDate.ToString("dd/MM/yyyy")
-                                                                                    </span>
-                                                                                    (Giờ @segment.DepartureCountry)
-                                                                                </p>
-                                                                                <ul>
-                                                                                    <li class="color-dark">
-                                                                                        <strong>
-                                                                                            @segment.DepartureCity - @segment.DepartureAirportName
-                                                                                        </strong>
-                                                                                    </li>
-                                                                                </ul>
-                                                                                <p>
-                                                                                    <strong>Đến:</strong>
-                                                                                    <span class="color-dark">
-                                                                                        @segment.ArrivalTime,
-                                                                                        @segment.ArrivalDate.ToString("dd/MM/yyyy")
-                                                                                    </span>(Giờ @segment.ArrivalCountry)
-                                                                                </p>
-                                                                                <ul>
-                                                                                    <li>
-                                                                                        <strong class="color-dark">
-                                                                                            @segment.ArrivalCity - @segment.ArrivalAirportName
-                                                                                        </strong>
-                                                                                    </li>
-                                                                                </ul>
-                                                                                <p>Thời gian: @segment.Duration | @segment.AircraftName</p>
-                                                                            }
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-6 col-md-12 price">
-                                                                        <div class="column price">
-                                                                            <h3 class="color-info">
-                                                                                TỔNG TIỀN VÉ CHIỀU ĐI:
-                                                                                <span class="total-price color-info">@ProtechGroup.Application.Common.CoreUtils.FormatPrice(totalPriceOrder) Đ</span>
-                                                                            </h3>
-                                                                            <table>
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th class="color-info">
-                                                                                            Hành khách x SL x Giá vé
-                                                                                        </th>
-                                                                                        <th class="color-info">
-                                                                                            Thuế và phí x SL
-                                                                                        </th>
-                                                                                        <th class="color-info">
-                                                                                            Tổng tiền
-                                                                                        </th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                    @if (numAdt > 0)
-                                                                                    {
-                                                                                        decimal taxFeeAdt = price.TaxAdt + price.FeeAdt;
-                                                                                        decimal totalPriceAdt = price.TotallPriceAdt * numAdt;
-                                                                                        <tr>
-                                                                                            <td>Người lớn @numAdt x @ProtechGroup.Application.Common.CoreUtils.FormatPrice(price.FareBaseAdt)</td>
-                                                                                            <td>@ProtechGroup.Application.Common.CoreUtils.FormatPrice(taxFeeAdt) x @numAdt  </td>
-                                                                                            <td><strong>@ProtechGroup.Application.Common.CoreUtils.FormatPrice(totalPriceAdt)</strong></td>
-                                                                                        </tr>
-                                                                                    }
-                                                                                    @if (numChd > 0)
-                                                                                    {
-                                                                                        decimal taxFeeChd = price.TaxChd + price.FeeChd;
-                                                                                        decimal totalPriceChd = price.TotallPriceChd * numChd;
-                                                                                        <tr>
-                                                                                            <td>Trẻ em @numChd x @ProtechGroup.Application.Common.CoreUtils.FormatPrice(price.FareBaseChd)</td>
-                                                                                            <td>@ProtechGroup.Application.Common.CoreUtils.FormatPrice(taxFeeChd) x @numChd  </td>
-                                                                                            <td><strong>@ProtechGroup.Application.Common.CoreUtils.FormatPrice(totalPriceChd)</strong></td>
-                                                                                        </tr>
-                                                                                    }
-                                                                                    @if (numInf > 0)
-                                                                                    {
-                                                                                        decimal taxFeeInf = price.TaxInf + price.FeeInf;
-                                                                                        decimal totalPriceInf = price.TotallPriceInf * numInf;
-                                                                                        <tr>
-                                                                                            <td>Em bé @numInf x @ProtechGroup.Application.Common.CoreUtils.FormatPrice(price.FareBaseInf)</td>
-                                                                                            <td>@ProtechGroup.Application.Common.CoreUtils.FormatPrice(taxFeeInf) x @numInf  </td>
-                                                                                            <td><strong>@ProtechGroup.Application.Common.CoreUtils.FormatPrice(totalPriceInf)</strong></td>
-                                                                                        </tr>
-                                                                                    }
-                                                                                </tbody>
-                                                                            </table>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="ticket-section">
-                                                                <h3 class="color-info">🔸 ĐIỀU KIỆN VÉ ÁP DỤNG (@price.ReturnTicket.ToUpper()):</h3>
-                                                                @Html.Raw(price.Condition)
-                                                            </div>
-                                                        </div>
-                                                    }
-                                                </div>
-                                            </div>
-
+                                        DateTime dateShow = staDateShow.AddDays(i);
+                                        double dayscheck = (dateOut - dateShow).TotalDays;
+                                        DateTime lunarDate = ProtechGroup.Application.Common.CoreUtils.ConvertSolarToLunarVN(dateShow);
+                                        <div class="date flex flex-col items-center min-h-15 justify-between p-1 w-1/5 @(dayscheck == 0? Html.Raw("bg-bg-info font-bold") : Html.Raw(string.Empty))" data-session="@searchInput.SessionId" data-strdate="@dateShow.ToString("dd/MM/yyyy")" data-waytype=0>
+                                            <p class="text-xs text-text-primary">@ProtechGroup.Application.Common.CoreUtils.GetLangDayOfWeek(dateShow.DayOfWeek)</p>
+                                            <p class="text-xs text-text-primary">@dateShow.ToString("dd") tháng @dateShow.ToString("MM")</p>
+                                            <p class="text-xs text-accent"><span class="text-sm font-bold">@lunarDate.ToString("dd - MM")</span> âm lịch</p>
                                         </div>
                                     }
-
                                 }
-
-
+                            </div>
+                            <div>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="24" height="24" rx="10" fill="#0E0F52" />
+                                    <path d="M10.4286 7L15 12L10.4286 17L9 15.4479L12.2571 12L9 8.55208L10.4286 7Z" fill="white" />
+                                </svg>
                             </div>
                         </div>
                     </div>
+                    <div class="rounded-xl px-4 py-1 shadow-[0_8px_20px_rgba(0,0,0,0.15)] font-bold flex justify-between items-center">
+                        <p>Chuyến bay đi</p>
+                        <div class="flex">
+                            <p class="px-7 py-2 border-r border-gray-200">Phổ thông</p>
+                            <p class="px-7 py-2 text-highlight">Thương gia</p>
+                        </div>
+                    </div>
+                    @foreach (var flight in Model.BlockItems[0].FlightOutBounds)
+                    {
+                        if (flight.PriceBreakDowns != null && flight.PriceBreakDowns.Count > 0)
+                        {
+                            var clTicketDefault = flight.PriceBreakDowns[0];
+                            var clTicketEnd = flight.PriceBreakDowns[flight.PriceBreakDowns.Count - 1];
+                            string priceFrom = @ProtechGroup.Application.Common.CoreUtils.FormatPrice(clTicketDefault.TotallPriceAdt);
+                            string priceEnd = @ProtechGroup.Application.Common.CoreUtils.FormatPrice(clTicketEnd.TotallPriceAdt);
+                            string firstPart_pf = priceFrom.Length > 3 ? priceFrom.Substring(0, priceFrom.Length - 3) : "";
+                            string last3_pf = priceFrom.Length > 3 ? priceFrom.Substring(priceFrom.Length - 3) : priceFrom;
+                            string firstPart_pe = priceEnd.Length > 3 ? priceEnd.Substring(0, priceEnd.Length - 3) : "";
+                            string last3_pe = priceEnd.Length > 3 ? priceEnd.Substring(priceEnd.Length - 3) : priceEnd;
+
+                            <div class="plane-items rounded-xl px-4 py-4 shadow-[0_8px_20px_rgba(0,0,0,0.15)] flex flex-col gap-4 item-out-bound">
+                                <div class="grid grid-cols-8 items-center gap-4 items-stretch" data-codeairline="@flight.MainAirlineCode" data-session="@searchInput.SessionId" data-keybooking="@flight.BookingKey" data-way="OutBound">
+                                    <div class="col-span-2">
+                                        <div class="flex flex-col gap-4">
+                                            <div class="flex gap-3 items-start">
+                                                <div>
+                                                    <img src="~/Content/img/Airline/sm@(flight.MainAirlineCode + ".gif")" alt="@flight.MainAirlineName" class="w-10" />
+                                                </div>
+                                                <div class="text-sm">
+                                                    <p class="font-bold">@flight.MainAirlineName</p>
+                                                    <p>@flight.MainFlightNumber - @flight.Plane</p>
+                                                </div>
+                                            </div>
+                                            <!-- //// -->
+                                        </div>
+                                    </div>
+                                    <div class="col-span-3 max-lg:col-span-4 py-2">
+                                        <div class="flex flex-col justify-between h-full">
+                                            <div class="flex justify-between items-center">
+                                                <div class="flex gap-1 items-center">
+                                                    <p class="text-2xl font-bold">@flight.MainDepartureTime</p>
+                                                    <p class="text-base">@flight.MainDepartureAirportCode</p>
+                                                </div>
+                                                <div class="flex flex-col items-center">
+                                                    <p class="text-xs text-[#D3D9DC]">@flight.Duration</p>
+                                                    <img src="~/Content/img/flight-list/item-flight-list/plane.svg" alt="" />
+                                                    @if (flight.Stop < 1)
+                                                    {
+                                                        <p class="text-xs text-[#D3D9DC]">Bay thẳng</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="text-xs text-[#D3D9DC]">@flight.Stop điểm dừng</p>
+                                                    }
+                                                </div>
+                                                <div class="flex gap-1 items-center">
+                                                    <p class="text-base">@flight.MainArrivalAirportCode</p>
+                                                    <p class="text-2xl font-bold">@flight.MainArrivalTime</p>
+                                                </div>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <div class="flex items-center">
+                                                    <img src="~/Content/img/flight-list/item-flight-list/bag1.svg" alt="" />
+                                                    <p class="text-xs">@clTicketDefault.RecommendationNumber</p>
+                                                </div>
+                                                <div class="flex items-center">
+                                                    <img src="~/Content/img/flight-list/item-flight-list/bag2.svg" alt="" />
+                                                    <p class="text-xs">@clTicketDefault.AllowanceBaggage</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-span-3 max-lg:col-span-2">
+                                        <div class="flex gap-4 justify-end items-center cursor-pointer select-none detail ">
+                                            <div class="p-2 border border-bg-info rounded-lg">
+                                                <p class="text-xs">Từ</p>
+                                                <p class="min-w-[127px] text-end text-[22px] text-accent leading-5.5">
+                                                    <span class="font-bold">@firstPart_pf</span> <br />@last3_pf VNĐ
+                                                </p>
+                                                <p class="text-end text-sm">Giá 01 người lớn</p>
+                                                <p class="text-end font-bold text-xs">Chọn giá ></p>
+                                            </div>
+                                            <div class="min-w-[127px] p-2 border border-highlight rounded-lg max-lg:hidden">
+                                                <p class="text-xs">Đến</p>
+                                                <p class="text-end text-[22px] text-accent leading-5.5">
+                                                    <span class="font-bold">@firstPart_pe</span> <br />@last3_pe VNĐ
+                                                </p>
+                                                <p class="text-end text-sm">Giá 01 người lớn</p>
+                                                <p class="text-end font-bold text-xs">Chọn giá ></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hidden relative list-card-price bg-bg-info rounded-xl p-5 flex justify-between items-center overflow-hidden">
+                                    <div class="pre absolute left-4 top-1/2 -translate-y-1/2 cursor-pointer z-1">
+                                        <button class="bg-primary text-white rounded-xl p-3 opacity-60 cursor-pointer">&lt;</button>
+                                    </div>
+                                    <div class="next absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer z-1">
+                                        <button class="bg-primary text-white rounded-xl p-3 opacity-60 cursor-pointer">&gt;</button>
+                                    </div>
+                                    @foreach (var price in flight.PriceBreakDowns)
+                                    {
+                                        int numAdt = searchInput.AdultNumber;
+                                        int numChd = searchInput.ChildNumber;
+                                        int numInf = searchInput.InfantNumber;
+                                        int totalPax = numAdt + numChd + numInf;
+                                        decimal totalPriceOrder = (price.TotallPriceAdt * numAdt) + (price.TotallPriceChd * numChd) + (price.TotallPriceInf * numInf);
+                                        <div class="card-price max-w-1/4 min-w-1/4  p-5  rounded-xl  shadow-[0_8px_20px_rgba(0,0,0,0.1)] bg-white max-lg:max-w-1/3 max-lg:min-w-1/3 max-md:max-w-1/2 max-md:min-w-1/2 max-sm:max-w-full max-sm:min-w-full">
+                                            <div class="flex flex-col gap-4 items-center">
+                                                <p class="text-xs font-bold">@price.ClassName</p>
+                                                <div>
+                                                    <p class="text-accent text-base text-center font-bold">@ProtechGroup.Application.Common.CoreUtils.FormatPrice(totalPriceOrder) VND</p>
+                                                    <p class="text-[#B3B0D8] text-xs">Giá vé cho @totalPax hành khách</p>
+                                                </div>
+                                                <div>
+                                                    <button class="bg-accent text-sm py-1 px-5 text-white rounded-2xl">Chọn vé</button>
+                                                </div>
+                                            </div>
+                                            <div class="info mt-5">
+                                                <ul class="border-b border-gray-300 border-dotted pb-4 mb-4">
+                                                    <li class="flex gap-2 items-center">
+                                                        <img src="~/Content/img/flight-list/item-flight-list/bag1.svg" alt="" />
+                                                        <p class="text-xs">@price.RecommendationNumber</p>
+                                                    </li>
+                                                    <li class="flex gap-2 items-center">
+                                                        <img src="~/Content/img/flight-list/item-flight-list/bag2.svg" alt="" />
+                                                        <p class="text-xs">@price.AllowanceBaggage</p>
+                                                    </li>
+                                                </ul>
+                                                <ul class="border-b border-gray-300 border-dotted pb-4 mb-4">
+                                                    <li class="flex gap-2 items-center">
+                                                        <img src="~/Content/img/flight-info/ticket.svg" alt="" style="width:24px; height:24px;" />
+                                                        <p class="text-xs">@price.ReturnTicket</p>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    }
                     @if (searchInput.IsRoundTrip)
                     {
-                        <div class="is-placing item-in-bound" style="margin-top: 40px;">
-                            <div class="row">
-                                <div class="col-3">
-                                    <p class="color-info">CHIỀU VỀ </p>
-                                    <p class="color-dark">NGÀY @(searchInput.ReturnDate?.ToString("dd/MM/yyyy"))</p>
-                                </div>
-                                <div class="col-7">
-                                    <p class="color-info">@searchInput.ArrivalCity (@searchInput.ArrivalAirport) -> @searchInput.DepartureCity (@searchInput.DepartureAirport)</p>
-                                    <p class="color-dark">
-                                        @if (searchInput.AdultNumber > 0)
-                                        {
-                                            @(searchInput.AdultNumber + " NGƯỜI LỚN")
-                                        }
-                                        @if (searchInput.ChildNumber > 0)
-                                        {
-                                            @(" | " + searchInput.ChildNumber + " TRẺ EM")
-                                        }
-                                        @if (searchInput.InfantNumber > 0)
-                                        {
-                                            @(" | " + searchInput.ChildNumber + " EM BÉ")
-                                        }
+                        DateTime returnDate = Convert.ToDateTime(searchInput.ReturnDate?.ToString("dd/MM/yyyy"));
+                        <div class="bg-primary rounded-xl p-4 text-white pr-10 shadow-[0_8px_20px_rgba(0,0,0,0.15)]">
+                            <div class="flex justify-between items-center max-lg:flex-wrap gap-4">
+                                <div>
+                                    <p class="mb-1 font-bold text-base">
+                                        <span> @searchInput.ArrivalCity (@searchInput.ArrivalAirport) - @searchInput.DepartureCity (@searchInput.DepartureAirport)</span>
+                                        <span class="mx-4 max-lg:hidden">|</span>
+                                        <span class="max-lg:block">Khởi hành: @ProtechGroup.Application.Common.CoreUtils.GetLangDayOfWeek(returnDate.DayOfWeek), Ngày @returnDate.ToString("dd") Tháng @returnDate.ToString("MM") Năm @returnDate.ToString("yyyy")</span>
+                                    </p>
+                                    <p class="text-base">
+                                        @searchInput.AdultNumber Người lớn | @searchInput.ChildNumber  Trẻ em | @searchInput.ChildNumber Em bé
                                     </p>
                                 </div>
                             </div>
                         </div>
-                        <div class="list-ticket item-in-bound">
-                            <div class="list-action">
-                                @{
-                                    DateTime dateIn = Convert.ToDateTime(searchInput.ReturnDate?.ToString("dd/MM/yyyy"));
-                                    double totalDaysIn = (dateIn - Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy"))).TotalDays;
-                                    DateTime staDateShowIn;
-                                    if (totalDays <= 0)
-                                    {
-                                        staDateShowIn = dateIn;
-                                    }
-                                    else
-                                    {
-
-                                        if (totalDays <= 3)
+                        <div class="rounded-xl px-4 py-1 shadow-[0_8px_20px_rgba(0,0,0,0.15)]">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="24" height="24" rx="10" fill="#0E0F52" />
+                                        <path d="M13.5714 17L9 12L13.5714 7L15 8.55208L11.7429 12L15 15.4479L13.5714 17Z" fill="white" />
+                                    </svg>
+                                </div>
+                                <div class="flex justify-between items-center w-10/12 overflow-hidden gap-8">
+                                    @{
+                                        double totalDaysIn = (returnDate - Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy"))).TotalDays;
+                                        DateTime staDateShowIn;
+                                        if (totalDays <= 0)
                                         {
-                                            staDateShowIn = dateIn.AddDays(-totalDays);
+                                            staDateShowIn = returnDate;
                                         }
                                         else
                                         {
-                                            staDateShowIn = dateIn.AddDays(-3);
-                                        }
 
-                                    }
-                                    for (int i = 0; i < 7; i++)
-                                    {
-                                        DateTime dateShowIn = staDateShowIn.AddDays(i);
-                                        double dayscheckIn = (dateIn - dateShowIn).TotalDays;
-                                        <div class="action-item" data-session="@searchInput.SessionId" data-strdate="@dateShowIn.ToString("dd/MM/yyyy")" data-waytype=1>
-                                            <div class="date @(dayscheckIn == 0? Html.Raw("active") : Html.Raw(string.Empty))">
-                                                <span class="color-primary">@ProtechGroup.Application.Common.CoreUtils.GetLangDayOfWeek(dateShowIn.DayOfWeek)</span>
-                                                <span class="color-dark">@dateShowIn.ToString("dd/MM/yyyy")</span>
-                                            </div>
-                                        </div>
-                                    }
-                                }
-                            </div>
-                            <div id="openModelFilter" class="d-none d-block-xxl">
-                                <p class="color-dark">Bộ lọc</p>
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 6V4M12 6C10.8954 6 10 6.89543 10 8C10 9.10457 10.8954 10 12 10M12 6C13.1046 6 14 6.89543 14 8C14 9.10457 13.1046 10 12 10M6 18C7.10457 18 8 17.1046 8 16C8 14.8954 7.10457 14 6 14M6 18C4.89543 18 4 17.1046 4 16C4 14.8954 4.89543 14 6 14M6 18V20M6 14V4M12 10V20M18 18C19.1046 18 20 17.1046 20 16C20 14.8954 19.1046 14 18 14M18 18C16.8954 18 16 17.1046 16 16C16 14.8954 16.8954 14 18 14M18 18V20M18 14V4"
-                                          stroke="#0A7C79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </div>
-                            <div class="list-ticket-items list-ticket-items-in">
-                                <div class="cheapest">
-                                    @foreach (var flight in Model.BlockItems[0].FlightInBounds)
-                                    {
-                                        if (flight.PriceBreakDowns != null && flight.PriceBreakDowns.Count > 0)
+                                            if (totalDays <= 2)
+                                            {
+                                                staDateShowIn = returnDate.AddDays(-totalDays);
+                                            }
+                                            else
+                                            {
+                                                staDateShowIn = returnDate.AddDays(-2);
+                                            }
+
+                                        }
+                                        for (int i = 0; i < 5; i++)
                                         {
-                                            <div class="item-ticket item-ticket-in" data-codeairline="@flight.MainAirlineCode" data-session="@searchInput.SessionId" data-keybooking="@flight.BookingKey" data-way="InBound" style="display: block;">
-                                                <div class="col-12 d-none d-block-lg">
-                                                    <div class="btn-detail mobile">
-                                                        <button class="color-dark toggle-info" data-target="#@flight.MainFlightNumber">
-                                                            Chi tiết hạng vé
-                                                            <svg width="8" height="13" viewBox="0 0 8 13" fill="none"
-                                                                 xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M1.5 1.5L6.5 6.5L1.5 11.5" stroke="#FF3C13" stroke-width="1.5"
-                                                                      stroke-linecap="round" stroke-linejoin="round"></path>
-                                                            </svg>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="row g-lg-2">
-                                                    <div class="col-3 d-none-lg">
-                                                        <div class="airline-info ">
-                                                            <img class="img-logo-airline" src="/Content/img/Airline/sm@(flight.MainAirlineCode + ".gif")" alt="@flight.MainAirlineName">
-                                                            <div class="airline-name">
-                                                                <span class="color-dark name">@flight.MainAirlineName</span>
-                                                                <span class="color-info code">@flight.MainFlightNumber</span>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="col-5 col-lg-7">
-                                                        <div class="flight-details">
-                                                            <div class="time-info">
-                                                                <div class="departure">
-                                                                    <div class="time">@flight.MainDepartureTime</div>
-                                                                    <div class="location">@flight.MainDepartureAirportCode</div>
-                                                                    @{
-                                                                        var dateOfWeekDep = flight.MainDepartureDate.DayOfWeek;
-                                                                        string strDateOfWeekDep = ProtechGroup.Application.Common.CoreUtils.GetLangDayOfWeek(dateOfWeekDep);
-                                                                        <div class="date d-none-lg">@strDateOfWeekDep - @flight.MainDepartureDate.ToString("dd/MM")</div>
-                                                                    }
-                                                                </div>
-                                                                <div class="arrow-item">
-                                                                    <p class="color-dark duration">@flight.Duration</p>
-                                                                    <div class="arrow">
-                                                                        <span class="d-none-lg">---</span> ✈ <span class="d-none-lg">---</span>
-                                                                    </div>
-                                                                    @if (flight.Stop < 1)
-                                                                    {
-                                                                        <p class="color-dark numstop">Bay thẳng</p>
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        <p class="color-dark numstop">@flight.Stop điểm dừng</p>
-                                                                    }
-                                                                </div>
-                                                                <div class="arrival">
-                                                                    <div class="time">@flight.MainArrivalTime</div>
-                                                                    <div class="location">@flight.MainArrivalAirportCode</div>
-                                                                    @{
-                                                                        var dateOfWeekArr = flight.MainArrivalDate.DayOfWeek;
-                                                                        string strDateOfWeekArr = ProtechGroup.Application.Common.CoreUtils.GetLangDayOfWeek(dateOfWeekArr);
-                                                                        <div class="date d-none-lg">@strDateOfWeekArr - @flight.MainArrivalDate.ToString("dd/MM")</div>
-                                                                    }
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    @{
-                                                        var clTicketDefault = flight.PriceBreakDowns[0];
-                                                        <div class="col-2 d-none-lg">
-                                                            <div class="flight-meta">
-                                                                <div>
-                                                                    <p class="color-info">Hạng vé</p>
-                                                                    <p class="color-dark typeRender">@clTicketDefault.ClassName</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-2 col-lg-5">
-                                                            <div class="info-price">
-                                                                <span class="color-info price">@ProtechGroup.Application.Common.CoreUtils.FormatPrice(clTicketDefault.TotallPriceAdt) đ</span>
-                                                                <div class="color-primary info">
-                                                                    Giá cho 1 người lớn
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-3  d-none-lg">
-                                                            <div class="btn-detail">
-                                                                <button class="color-dark toggle-info" data-target="#@flight.FlightRef">
-                                                                    Chi tiết hạng vé
-                                                                    <svg width="8" height="13" viewBox="0 0 8 13" fill="none"
-                                                                         xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M1.5 1.5L6.5 6.5L1.5 11.5" stroke="#FF3C13" stroke-width="1.5"
-                                                                              stroke-linecap="round" stroke-linejoin="round"></path>
-                                                                    </svg>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-5  d-none-lg">
-                                                            <div class="extras">
-                                                                <div class="item">
-                                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                                                         xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M17.5 11.046C15.1839 11.9836 12.6523 12.4998 10 12.4998C7.34775 12.4998 4.81608 11.9836 2.5 11.046M13.3333 4.99984V3.33317C13.3333 2.4127 12.5871 1.6665 11.6667 1.6665H8.33333C7.41286 1.6665 6.66667 2.4127 6.66667 3.33317V4.99984M10 9.99984H10.0083M4.16667 16.6665H15.8333C16.7538 16.6665 17.5 15.9203 17.5 14.9998V6.6665C17.5 5.74603 16.7538 4.99984 15.8333 4.99984H4.16667C3.24619 4.99984 2.5 5.74603 2.5 6.6665V14.9998C2.5 15.9203 3.24619 16.6665 4.16667 16.6665Z"
-                                                                              stroke="#FF3C13" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                                                        </path>
-                                                                    </svg>
-                                                                    <p class="color-info">@clTicketDefault.RecommendationNumber</p>
-                                                                </div>
-                                                                <div class="item">
-                                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                                                         xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M10 6.66667V17.5M10 6.66667C10 6.66667 10 5.42269 10 5C10 4.07953 10.7462 3.33333 11.6667 3.33333C12.5871 3.33333 13.3333 4.07953 13.3333 5C13.3333 5.92047 12.5871 6.66667 11.6667 6.66667C11.1689 6.66667 10 6.66667 10 6.66667ZM10 6.66667C10 6.66667 10 5.05243 10 4.58333C10 3.43274 9.06726 2.5 7.91667 2.5C6.76607 2.5 5.83333 3.43274 5.83333 4.58333C5.83333 5.73393 6.76607 6.66667 7.91667 6.66667C8.59817 6.66667 10 6.66667 10 6.66667ZM4.16667 10H15.8333M4.16667 10C3.24619 10 2.5 9.25381 2.5 8.33333C2.5 7.41286 3.24619 6.66667 4.16667 6.66667H15.8333C16.7538 6.66667 17.5 7.41286 17.5 8.33333C17.5 9.25381 16.7538 10 15.8333 10M4.16667 10L4.16667 15.8333C4.16667 16.7538 4.91286 17.5 5.83333 17.5H14.1667C15.0871 17.5 15.8333 16.7538 15.8333 15.8333V10"
-                                                                              stroke="#FF3C13" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                                                        </path>
-                                                                    </svg>
-                                                                    <p class="color-info">@clTicketDefault.AllowanceBaggage</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    }
-                                                    <div class="col-1 ">
-                                                        <div class="change-seat d-none">
-                                                            <select name="" id="">
-                                                                <option value="">Đổi hạng vé</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="line-decor col-12 d-none  d-block-lg"></div>
-                                                    <div class="col-3 col-lg-6 col-md-8  d-none d-block-lg">
-                                                        <div class="airline-info-mobile row-cols-lg-2">
-                                                            <img src="/Content/img/Airline/sm@(flight.MainAirlineCode + ".gif")" alt="@flight.MainAirlineName">
-                                                            <div class="airline-name">
-                                                                <span class="color-dark name">@flight.MainAirlineName</span>
-                                                                <span class="color-info code">@flight.FlightRef</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-3 col-lg-6 col-md-4">
-                                                        @if (!searchInput.IsRoundTrip)
-                                                        {
-                                                            <div class="btn-booking">
-                                                                <a class="btn btn-info btn-order-oneway">ĐẶT VÉ</a>
-                                                            </div>
-                                                        }
-                                                        else
-                                                        {
-                                                            <div class="btn-booking">
-                                                                <a class="btn btn-info btn-select-round-trip">CHỌN</a>
-                                                            </div>
-                                                        }
-                                                    </div>
-
-                                                    <div class="info-ticket color-primary" id="@flight.FlightRef">
-                                                        <div class="ticket-types">
-                                                            <a href="~/Views/OrderBooking/ConfirmCusInformation.cshtml"></a><div class="row row-cols-12 row-cols-md-3  g-md-1">
-                                                                @foreach (var price in flight.PriceBreakDowns)
-                                                                {
-                                                                    <div class="col">
-                                                                        <input hidden="" type="radio" class="inputChangeType" id="@(flight.MainAirlineCode + flight.FlightRef + "-" + price.FareClass)" name="type_@(flight.MainAirlineCode + flight.FlightRef)"
-                                                                               value="@price.ClassName" data-keyprice="@price.BookingKey" data-price="@price.TotallPriceAdt">
-                                                                        <label class="type" for="@(flight.MainAirlineCode + flight.FlightRef + "-" + price.FareClass)">Hạng vé: @price.FareClass</label>
-                                                                    </div>
-                                                                }
-                                                            </div>
-                                                        </div>
-                                                        @foreach (var price in flight.PriceBreakDowns)
-                                                        {
-                                                            int numAdt = searchInput.AdultNumber;
-                                                            int numChd = searchInput.ChildNumber;
-                                                            int numInf = searchInput.InfantNumber;
-                                                            decimal totalPriceOrder = (price.TotallPriceAdt * numAdt) + (price.TotallPriceChd * numChd) + (price.TotallPriceInf * numInf);
-                                                            <div data-idtype="@(flight.MainAirlineCode + flight.FlightRef + "-" + price.FareClass)" class="type@(flight.MainAirlineCode + flight.FlightRef + "-" + price.FareClass) ticket-info-type">
-                                                                <div class="ticket-section">
-                                                                    <div class="row">
-                                                                        <div class="col-6 col-md-12">
-                                                                            <div class="column info">
-                                                                                <h3 class="color-info">
-                                                                                    🔸 THÔNG TIN CHUYẾN BAY (HẠNG VÉ  @(price.ClassName != null ? price.ClassName.ToUpper() : price.CabinClass.ToUpper())  - CABIN @price.CabinClass.ToUpper()):
-                                                                                </h3>
-                                                                                @foreach (var segment in flight.ListSegment)
-                                                                                {
-                                                                                    <p>
-                                                                                        <strong>Khởi hành:</strong>
-                                                                                        <span class="color-dark">
-                                                                                            @segment.DepartureTime,
-                                                                                            @segment.DepartureDate.ToString("dd/MM/yyyy")
-                                                                                        </span>
-                                                                                        (Giờ @segment.DepartureCountry)
-                                                                                    </p>
-                                                                                    <ul>
-                                                                                        <li class="color-dark">
-                                                                                            <strong>
-                                                                                                @segment.DepartureCity - @segment.DepartureAirportName
-                                                                                            </strong>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                    <p>
-                                                                                        <strong>Đến:</strong>
-                                                                                        <span class="color-dark">
-                                                                                            @segment.ArrivalTime,
-                                                                                            @segment.ArrivalDate.ToString("dd/MM/yyyy")
-                                                                                        </span>(Giờ @segment.ArrivalCountry)
-                                                                                    </p>
-                                                                                    <ul>
-                                                                                        <li>
-                                                                                            <strong class="color-dark">
-                                                                                                @segment.ArrivalCity - @segment.ArrivalAirportName
-                                                                                            </strong>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                    <p>Thời gian: @segment.Duration | @segment.AircraftName</p>
-                                                                                }
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-6 col-md-12 price">
-                                                                            <div class="column price">
-                                                                                <h3 class="color-info">
-                                                                                    TỔNG TIỀN VÉ CHIỀU VỀ:
-                                                                                    <span class="total-price color-info">@ProtechGroup.Application.Common.CoreUtils.FormatPrice(totalPriceOrder) Đ</span>
-                                                                                </h3>
-                                                                                <table>
-                                                                                    <thead>
-                                                                                        <tr>
-                                                                                            <th class="color-info">
-                                                                                                Hành khách x SL x Giá vé
-                                                                                            </th>
-                                                                                            <th class="color-info">
-                                                                                                Thuế và phí x SL
-                                                                                            </th>
-                                                                                            <th class="color-info">
-                                                                                                Tổng tiền
-                                                                                            </th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        @if (numAdt > 0)
-                                                                                        {
-                                                                                            decimal taxFeeAdt = price.TaxAdt + price.FeeAdt;
-                                                                                            decimal totalPriceAdt = price.TotallPriceAdt * numAdt;
-                                                                                            <tr>
-                                                                                                <td>Người lớn @numAdt x @ProtechGroup.Application.Common.CoreUtils.FormatPrice(price.FareBaseAdt)</td>
-                                                                                                <td>@ProtechGroup.Application.Common.CoreUtils.FormatPrice(taxFeeAdt) x @numAdt</td>
-                                                                                                <td><strong>@ProtechGroup.Application.Common.CoreUtils.FormatPrice(totalPriceAdt)</strong></td>
-                                                                                            </tr>
-                                                                                        }
-                                                                                        @if (numChd > 0)
-                                                                                        {
-                                                                                            decimal taxFeeChd = price.TaxChd + price.FeeChd;
-                                                                                            decimal totalPriceChd = price.TotallPriceChd * numChd;
-                                                                                            <tr>
-                                                                                                <td>Trẻ em @numChd x @ProtechGroup.Application.Common.CoreUtils.FormatPrice(price.FareBaseChd)</td>
-                                                                                                <td>@ProtechGroup.Application.Common.CoreUtils.FormatPrice(taxFeeChd) x @numChd  </td>
-                                                                                                <td><strong>@ProtechGroup.Application.Common.CoreUtils.FormatPrice(totalPriceChd)</strong></td>
-                                                                                            </tr>
-                                                                                        }
-                                                                                        @if (numInf > 0)
-                                                                                        {
-                                                                                            decimal taxFeeInf = price.TaxInf + price.FeeInf;
-                                                                                            decimal totalPriceInf = price.TotallPriceInf * numInf;
-                                                                                            <tr>
-                                                                                                <td>Em bé @numInf x @ProtechGroup.Application.Common.CoreUtils.FormatPrice(price.FareBaseInf)</td>
-                                                                                                <td>@ProtechGroup.Application.Common.CoreUtils.FormatPrice(taxFeeInf) x @numInf  </td>
-                                                                                                <td><strong>@ProtechGroup.Application.Common.CoreUtils.FormatPrice(totalPriceInf)</strong></td>
-                                                                                            </tr>
-                                                                                        }
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="ticket-section">
-                                                                    <h3 class="color-info">🔸 ĐIỀU KIỆN VÉ ÁP DỤNG (@price.ReturnTicket.ToUpper()):</h3>
-                                                                    @Html.Raw(price.Condition)
-                                                                </div>
-                                                            </div>
-                                                        }
-                                                    </div>
-                                                </div>
-
+                                            DateTime dateShowIn = staDateShowIn.AddDays(i);
+                                            double dayscheckIn = (returnDate - dateShowIn).TotalDays;
+                                            DateTime lunarDateIn = ProtechGroup.Application.Common.CoreUtils.ConvertSolarToLunarVN(dateShowIn);
+                                            <div class="date flex flex-col items-center min-h-15 justify-between p-1 w-1/5 @(dayscheckIn == 0? Html.Raw("bg-bg-info font-bold") : Html.Raw(string.Empty))" data-session="@searchInput.SessionId" data-strdate="@dateShowIn.ToString("dd/MM/yyyy")" data-waytype=0>
+                                                <p class="text-xs text-text-primary">@ProtechGroup.Application.Common.CoreUtils.GetLangDayOfWeek(dateShowIn.DayOfWeek)</p>
+                                                <p class="text-xs text-text-primary">@dateShowIn.ToString("dd") tháng @dateShowIn.ToString("MM")</p>
+                                                <p class="text-xs text-accent"><span class="text-sm font-bold">@lunarDateIn.ToString("dd-MM")</span> âm lịch </p>
                                             </div>
                                         }
-
                                     }
-
-
+                                </div>
+                                <div>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="24" height="24" rx="10" fill="#0E0F52" />
+                                        <path d="M10.4286 7L15 12L10.4286 17L9 15.4479L12.2571 12L9 8.55208L10.4286 7Z" fill="white" />
+                                    </svg>
                                 </div>
                             </div>
                         </div>
+                        <div class="rounded-xl px-4 py-1 shadow-[0_8px_20px_rgba(0,0,0,0.15)] font-bold flex justify-between items-center">
+                            <p>Chuyến bay về</p>
+                            <div class="flex">
+                                <p class="px-7 py-2 border-r border-gray-200">Phổ thông</p>
+                                <p class="px-7 py-2 text-highlight">Thương gia</p>
+                            </div>
+                        </div>
+                        foreach (var flight in Model.BlockItems[0].FlightInBounds)
+                        {
+                            if (flight.PriceBreakDowns != null && flight.PriceBreakDowns.Count > 0)
+                            {
+                                var clTicketDefault = flight.PriceBreakDowns[0];
+                                var clTicketEnd = flight.PriceBreakDowns[flight.PriceBreakDowns.Count - 1];
+                                string priceFrom = @ProtechGroup.Application.Common.CoreUtils.FormatPrice(clTicketDefault.TotallPriceAdt);
+                                string priceEnd = @ProtechGroup.Application.Common.CoreUtils.FormatPrice(clTicketEnd.TotallPriceAdt);
+                                string firstPart_pf = priceFrom.Length > 3 ? priceFrom.Substring(0, priceFrom.Length - 3) : "";
+                                string last3_pf = priceFrom.Length > 3 ? priceFrom.Substring(priceFrom.Length - 3) : priceFrom;
+                                string firstPart_pe = priceEnd.Length > 3 ? priceEnd.Substring(0, priceEnd.Length - 3) : "";
+                                string last3_pe = priceEnd.Length > 3 ? priceEnd.Substring(priceEnd.Length - 3) : priceEnd;
+
+                                <div class="plane-items rounded-xl px-4 py-4 shadow-[0_8px_20px_rgba(0,0,0,0.15)] flex flex-col gap-4 item-out-bound" data-codeairline="@flight.MainAirlineCode" data-session="@searchInput.SessionId" data-keybooking="@flight.BookingKey" data-way="InBound">
+                                    <div class="grid grid-cols-8 items-center gap-4 items-stretch" data-codeairline="@flight.MainAirlineCode" data-session="@searchInput.SessionId" data-keybooking="@flight.BookingKey" data-way="OutBound">
+                                        <div class="col-span-2">
+                                            <div class="flex flex-col gap-4">
+                                                <div class="flex gap-3 items-start">
+                                                    <div>
+                                                        <img src="~/Content/img/Airline/sm@(flight.MainAirlineCode + ".gif")" alt="@flight.MainAirlineName" class="w-10" />
+                                                    </div>
+                                                    <div class="text-sm">
+                                                        <p class="font-bold">@flight.MainAirlineName</p>
+                                                        <p>@flight.MainFlightNumber - @flight.Plane</p>
+                                                    </div>
+                                                </div>
+                                                <!-- //// -->
+                                            </div>
+                                        </div>
+                                        <div class="col-span-3 max-lg:col-span-4 py-2">
+                                            <div class="flex flex-col justify-between h-full">
+                                                <div class="flex justify-between items-center">
+                                                    <div class="flex gap-1 items-center">
+                                                        <p class="text-2xl font-bold">@flight.MainDepartureTime</p>
+                                                        <p class="text-base">@flight.MainDepartureAirportCode</p>
+                                                    </div>
+                                                    <div class="flex flex-col items-center">
+                                                        <p class="text-xs text-[#D3D9DC]">@flight.Duration</p>
+                                                        <img src="~/Content/img/flight-list/item-flight-list/plane.svg" alt="" />
+                                                        @if (flight.Stop < 1)
+                                                        {
+                                                            <p class="text-xs text-[#D3D9DC]">Bay thẳng</p>
+                                                        }
+                                                        else
+                                                        {
+                                                            <p class="text-xs text-[#D3D9DC]">@flight.Stop điểm dừng</p>
+                                                        }
+                                                    </div>
+                                                    <div class="flex gap-1 items-center">
+                                                        <p class="text-base">@flight.MainArrivalAirportCode</p>
+                                                        <p class="text-2xl font-bold">@flight.MainArrivalTime</p>
+                                                    </div>
+                                                </div>
+                                                <div class="flex justify-between">
+                                                    <div class="flex items-center">
+                                                        <img src="~/Content/img/flight-list/item-flight-list/bag1.svg" alt="" />
+                                                        <p class="text-xs">@clTicketDefault.RecommendationNumber</p>
+                                                    </div>
+                                                    <div class="flex items-center">
+                                                        <img src="~/Content/img/flight-list/item-flight-list/bag2.svg" alt="" />
+                                                        <p class="text-xs">@clTicketDefault.AllowanceBaggage</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-span-3 max-lg:col-span-2">
+                                            <div class="flex gap-4 justify-end items-center cursor-pointer select-none detail ">
+                                                <div class="p-2 border border-bg-info rounded-lg">
+                                                    <p class="text-xs">Từ</p>
+                                                    <p class="min-w-[127px] text-end text-[22px] text-accent leading-5.5">
+                                                        <span class="font-bold">@firstPart_pf</span> <br />@last3_pf VNĐ
+                                                    </p>
+                                                    <p class="text-end text-sm">Giá 01 người lớn</p>
+                                                    <p class="text-end font-bold text-xs">Chọn giá ></p>
+                                                </div>
+                                                <div class="min-w-[127px] p-2 border border-highlight rounded-lg max-lg:hidden">
+                                                    <p class="text-xs">Đến</p>
+                                                    <p class="text-end text-[22px] text-accent leading-5.5">
+                                                        <span class="font-bold">@firstPart_pe</span> <br />@last3_pe VNĐ
+                                                    </p>
+                                                    <p class="text-end text-sm">Giá 01 người lớn</p>
+                                                    <p class="text-end font-bold text-xs">Chọn giá ></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hidden relative list-card-price bg-bg-info rounded-xl p-5 flex justify-between items-center overflow-hidden">
+                                        <div class="pre absolute left-4 top-1/2 -translate-y-1/2 cursor-pointer z-1">
+                                            <button class="bg-primary text-white rounded-xl p-3 opacity-60 cursor-pointer">&lt;</button>
+                                        </div>
+                                        <div class="next absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer z-1">
+                                            <button class="bg-primary text-white rounded-xl p-3 opacity-60 cursor-pointer">&gt;</button>
+                                        </div>
+                                        @foreach (var price in flight.PriceBreakDowns)
+                                        {
+                                            int numAdt = searchInput.AdultNumber;
+                                            int numChd = searchInput.ChildNumber;
+                                            int numInf = searchInput.InfantNumber;
+                                            int totalPax = numAdt + numChd + numInf;
+                                            decimal totalPriceOrder = (price.TotallPriceAdt * numAdt) + (price.TotallPriceChd * numChd) + (price.TotallPriceInf * numInf);
+                                            <div class="card-price max-w-1/4 min-w-1/4  p-5  rounded-xl  shadow-[0_8px_20px_rgba(0,0,0,0.1)] bg-white max-lg:max-w-1/3 max-lg:min-w-1/3 max-md:max-w-1/2 max-md:min-w-1/2 max-sm:max-w-full max-sm:min-w-full">
+                                                <div class="flex flex-col gap-4 items-center">
+                                                    <p class="text-xs font-bold">@price.ClassName</p>
+                                                    <div>
+                                                        <p class="text-accent text-base text-center font-bold">@ProtechGroup.Application.Common.CoreUtils.FormatPrice(totalPriceOrder) VND</p>
+                                                        <p class="text-[#B3B0D8] text-xs">Giá vé cho @totalPax hành khách</p>
+                                                    </div>
+                                                    <div>
+                                                        <button class="bg-accent text-sm py-1 px-5 text-white rounded-2xl">Chọn vé</button>
+                                                    </div>
+                                                </div>
+                                                <div class="info mt-5">
+                                                    <ul class="border-b border-gray-300 border-dotted pb-4 mb-4">
+                                                        <li class="flex gap-2 items-center">
+                                                            <img src="~/Content/img/flight-list/item-flight-list/bag1.svg" alt="" />
+                                                            <p class="text-xs">@price.RecommendationNumber</p>
+                                                        </li>
+                                                        <li class="flex gap-2 items-center">
+                                                            <img src="~/Content/img/flight-list/item-flight-list/bag2.svg" alt="" />
+                                                            <p class="text-xs">@price.AllowanceBaggage</p>
+                                                        </li>
+                                                    </ul>
+                                                    <ul class="border-b border-gray-300 border-dotted pb-4 mb-4">
+                                                        <li class="flex gap-2 items-center">
+                                                            <img src="~/Content/img/flight-info/ticket.svg" alt="" style="width:24px; height:24px;" />
+                                                            <p class="text-xs">@price.ReturnTicket</p>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        }
                     }
                 </div>
             </div>
         </div>
-    </div>
-</main>
+</section>
 <script src="~/Scripts/modules/resultFlightDomestic.js"></script>

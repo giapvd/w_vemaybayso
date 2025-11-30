@@ -1,4 +1,32 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
+﻿const planeItemsSelected = document.querySelectorAll(".plane-items-selected");
+planeItemsSelected.forEach((planeItemSelected) => {
+    planeItemSelected.querySelector(".clicked").addEventListener("click", () => {
+        planeItemSelected.querySelector(".conditions").classList.toggle("hidden");
+    });
+});
+const listCardPrices = document.querySelectorAll(".list-card-price");
+const planeItems = document.querySelectorAll(".plane-items");
+planeItems.forEach((planeItem) => {
+    planeItem.querySelector(".detail").addEventListener("click", () => {
+        const listCardPrice = planeItem.querySelector(".list-card-price");
+        listCardPrice.classList.toggle("hidden");
+    });
+});
+listCardPrices.forEach((listCardPrice) => {
+    const nextBtn = listCardPrice.querySelector(".next");
+    const preBtn = listCardPrice.querySelector(".pre");
+    nextBtn.addEventListener("click", () => {
+        const cards = listCardPrice.querySelectorAll(".card-price");
+        listCardPrice.appendChild(cards[0]); // đưa thẻ đầu ra cuối
+    });
+    preBtn.addEventListener("click", () => {
+        const cards = listCardPrice.querySelectorAll(".card-price");
+        const lastCard = cards[cards.length - 1];
+        listCardPrice.insertBefore(lastCard, cards[0]);
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("loading").style.display = "flex";
     document.getElementById("flight-list").style.display = "none";
     document.getElementById("form-search").style.display = "none";
@@ -646,7 +674,7 @@ class FlightFilter {
                       <p>Quý khách vui lòng thử lại với tìm kiếm hành trình khác</p>
                     </div>
                   `;
-                document.querySelector('.list-ticket-items').appendChild(message);
+                document.querySelector('.plane-items').appendChild(message);
             }
         } else {
             if (message) {
