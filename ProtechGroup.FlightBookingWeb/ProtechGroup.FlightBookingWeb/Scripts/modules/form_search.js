@@ -295,9 +295,9 @@ function renderCalendar(year, month) {
         
         <div class="month">
           <div class="month-header">
-            <span>${monthNames[month]}</span><span>${year}</span>
+            <span class="max-sm:text-sm">${monthNames[month]}</span><span class="max-sm:text-sm">${year}</span>
           </div>
-          <div class="weekdays">${weekdays.map((d) => `<div>${d}</div>`).join("")}</div>
+           <div class="weekdays">${weekdays.map((d) => `<div class="max-sm:text-xs">${d}</div>`).join("")}</div>
           <div class="days">`;
     for (let i = 0; i < start; i++) html += `<div class="inactive"></div>`;
 
@@ -333,7 +333,7 @@ function renderRangePicker() {
     const nextMonth = (currentMonth + 1) % 12;
     const nextYear = currentMonth === 11 ? currentYear + 1 : currentYear;
     document.getElementById("calendar").innerHTML = `
-        <div class="calendar">
+         <div class="calendar max-lg:flex-col">
           ${renderCalendar(currentYear, currentMonth)}
           ${renderCalendar(nextYear, nextMonth)}
         </div>`;
