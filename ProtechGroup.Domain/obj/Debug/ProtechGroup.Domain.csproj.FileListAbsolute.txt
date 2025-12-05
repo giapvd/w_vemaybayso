@@ -1,6 +1,0 @@
-E:\ProtechGroupForWeb\ProtechGroup.Domain\bin\Debug\ProtechGroup.Domain.dll
-E:\ProtechGroupForWeb\ProtechGroup.Domain\bin\Debug\ProtechGroup.Domain.pdb
-E:\ProtechGroupForWeb\ProtechGroup.Domain\obj\Debug\ProtechGroup.Domain.csproj.AssemblyReference.cache
-E:\ProtechGroupForWeb\ProtechGroup.Domain\obj\Debug\ProtechGroup.Domain.csproj.CoreCompileInputs.cache
-E:\ProtechGroupForWeb\ProtechGroup.Domain\obj\Debug\ProtechGroup.Domain.dll
-E:\ProtechGroupForWeb\ProtechGroup.Domain\obj\Debug\ProtechGroup.Domain.pdb
