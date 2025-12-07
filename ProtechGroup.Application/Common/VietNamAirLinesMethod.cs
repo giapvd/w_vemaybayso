@@ -55,7 +55,7 @@ namespace ProtechGroup.Application.Common
                 }
 
             }
-            flightResultOutput.BlockItems.Add(blockItem);
+            flightResultOutput.BlockItems.Add(blockItem);   
             return flightResultOutput;
         }
         public string GetBodyPostSearchFlightVietNamAirLine(SearchInputMod searchInput)
@@ -215,7 +215,7 @@ namespace ProtechGroup.Application.Common
                             case "G":
                                 price.RecommendationNumber = "Hành lý xách tay 10kg";
                                 price.AllowanceBaggage = "Hành lý ký gửi 0kg";
-                                price.Condition = "<ul class=\"border-dotted pb-4 mb-4\">";
+                                price.Condition = "<ul class=\"my-1 text-sm\">";
                                 price.Condition += "    <li>Không được phép thay đổi</li>";
                                 price.Condition += "    <li>Không bao gồm quầy thủ tục ưu tiên</li>";
                                 price.Condition += "    <li>Không được phép hoàn/hủy vé</li>";
@@ -230,7 +230,7 @@ namespace ProtechGroup.Application.Common
                             case "E":
                                 price.RecommendationNumber = "Hành lý xách tay 10kg";
                                 price.AllowanceBaggage = "Hành lý ký gửi 23kg";
-                                price.Condition = "<ul class=\"border-dotted pb-4 mb-4\">";
+                                price.Condition = "<ul class=\"my-1 text-sm\">";
                                 price.Condition += "    <li>Được phép Thay đổi mất phí + Chênh lệch giá vé (nếu có)</li>";
                                 price.Condition += "    <li>Không bao gồm quầy thủ tục ưu tiên</li>";
                                 price.Condition += "    <li>Được phép Hoàn/hủy vé mất phí</li>";
@@ -244,7 +244,7 @@ namespace ProtechGroup.Application.Common
                             case "L":
                                 price.RecommendationNumber = "Hành lý xách tay 10kg";
                                 price.AllowanceBaggage = "Hành lý ký gửi 23kg";
-                                price.Condition = "<ul class=\"border-dotted pb-4 mb-4\">";
+                                price.Condition = "<ul class=\"my-1 text-sm\">";
                                 price.Condition += "    <li>Được phép Thay đổi mất phí + Chênh lệch giá vé (nếu có)</li>";
                                 price.Condition += "    <li>Không bao gồm quầy thủ tục ưu tiên</li>";
                                 price.Condition += "    <li>Được phép Hoàn/hủy vé mất phí</li>";
@@ -256,7 +256,7 @@ namespace ProtechGroup.Application.Common
                             case "M":
                                 price.RecommendationNumber = "Hành lý xách tay 10kg";
                                 price.AllowanceBaggage = "Hành lý ký gửi 23kg";
-                                price.Condition = "<ul class=\"border-dotted pb-4 mb-4\">";
+                                price.Condition = "<ul class=\"my-1 text-sm\">";
                                 price.Condition += "    <li>Được phép Thay đổi miễn phí + Chênh lệch giá vé (nếu có)</li>";
                                 price.Condition += "    <li>Được sử dụng quầy thủ tục ưu tiên</li>";
                                 price.Condition += "    <li>Được phép Hoàn/hủy vé mất phí</li>";
@@ -268,7 +268,7 @@ namespace ProtechGroup.Application.Common
                             case "Z":
                                 price.RecommendationNumber = "Hành lý xách tay 10kg";
                                 price.AllowanceBaggage = "Hành lý ký gửi 32kg";
-                                price.Condition += "<ul class=\"border-dotted pb-4 mb-4\">";
+                                price.Condition += "<ul class=\"my-1 text-sm\">";
                                 price.Condition += "    <li>Được phép Thay đổi miễn phí + Chênh lệch giá vé (nếu có)</li>";
                                 price.Condition += "    <li>Được sử dụng quầy thủ tục ưu tiên</li>";
                                 price.Condition += "    <li>Được phép Hoàn/hủy vé mất phí</li>";
@@ -279,7 +279,7 @@ namespace ProtechGroup.Application.Common
                             case "U":
                                 price.RecommendationNumber = "Hành lý xách tay 10kg";
                                 price.AllowanceBaggage = "Hành lý ký gửi 32kg";
-                                price.Condition += "<ul class=\"border-dotted pb-4 mb-4\">";
+                                price.Condition += "<ul class=\"my-1 text-sm\">";
                                 price.Condition += "     <li>Được phép Thay đổi mất phí + Chênh lệch giá vé (nếu có)</li>";
                                 price.Condition += "     <li>Được sử dụng quầy thủ tục ưu tiên</li>";
                                 price.Condition = "      <li>Được phép Hoàn/hủy vé mất phí</li>";
@@ -291,7 +291,7 @@ namespace ProtechGroup.Application.Common
                             case "I":
                                 price.RecommendationNumber = "Hành lý xách tay 18kg";
                                 price.AllowanceBaggage = "Hành lý ký gửi 32kg";
-                                price.Condition += "<ul class=\"border-dotted pb-4 mb-4\">";
+                                price.Condition += "<ul class=\"my-1 text-sm\">";
                                 price.Condition += "     <li>Được phép Thay đổi mất phí + Chênh lệch giá vé (nếu có)</li>";
                                 price.Condition += "     <li>Được phép Đổi chuyến tại sân bay mất phí</li>";
                                 price.Condition += "     <li>Được phép Hoàn/hủy vé mất phí</li>";
@@ -302,7 +302,7 @@ namespace ProtechGroup.Application.Common
                             case "C":
                                 price.RecommendationNumber = "Hành lý xách tay 18kg";
                                 price.AllowanceBaggage = "Hành lý ký gửi 32kg";
-                                price.Condition += "<ul class=\"border-dotted pb-4 mb-4\">";
+                                price.Condition += "<ul class=\"my-1 text-sm\">";
                                 price.Condition += "     <li>Được phép Thay đổi miễn phí + Chênh lệch giá vé (nếu có)</li>";
                                 price.Condition += "     <li>Được phép Đổi chuyến tại sân bay mất phí</li>";
                                 price.Condition += "     <li>Được phép Hoàn/hủy vé mất phí</li>";
@@ -313,7 +313,7 @@ namespace ProtechGroup.Application.Common
                             case "J":
                                 price.RecommendationNumber = "Hành lý xách tay 18kg";
                                 price.AllowanceBaggage = "Hành lý ký gửi 32kg";
-                                price.Condition += "<ul class=\"border-dotted pb-4 mb-4\">";
+                                price.Condition += "<ul class=\"my-1 text-sm\">";
                                 price.Condition += "     <li>Được phép Thay đổi miễn phí</li>";
                                 price.Condition += "     <li>Được phép Đổi chuyến tại sân bay mất phí</li>";
                                 price.Condition += "      <li>Được phép Hoàn/hủy vé mất phí</li>";
@@ -324,15 +324,15 @@ namespace ProtechGroup.Application.Common
                             default:
                                 price.RecommendationNumber = "Hành lý xách tay 0kg";
                                 price.AllowanceBaggage = "Hành lý ký gửi 0kg";
-                                price.Condition = "<ul class=\"border-dotted pb-4 mb-4\">";
+                                price.Condition = "<ul class=\"my-1 text-sm\">";
                                 price.Condition += "<li>Không hoàn hủy</li>";
                                 price.Condition += "<li>Không được thay đổi chuyến bay, chặng bay, ngày bay</li>";
                                 price.Condition += "</ul>";
                                 price.ReturnTicket = "Không hoàn hủy";
                                 break;
                         }
-                        result.Add(price);
                     }
+                    result.Add(price);
                 }
             }
             return result;

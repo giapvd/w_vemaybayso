@@ -27,6 +27,7 @@ namespace ProtechGroup.FlightBookingWeb.Models
         public string namePax { get; set; }
         public string cardNum { get; set; }
         public string birthPax { get; set; }
+        public string memberNum { get; set; }
         public string typePax { get; set; }
         public int bagIdOut { get; set; }
         public string totalKgOut { get; set; }

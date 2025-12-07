@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.Mvc;
 using ProtechGroup.Application.Interfaces;
 using System.Threading.Tasks;
+using ProtechGroup.Domain;
 
 namespace ProtechGroup.FlightBookingWeb.Controllers
 {
@@ -57,6 +58,18 @@ namespace ProtechGroup.FlightBookingWeb.Controllers
                 ViewBag.ErrorMessage = "Truy cập không hợp lệ";
                 return View("Error");
             }
+        }
+        [HttpGet]
+        public JsonResult GetFilghtInfor(string airLineCode, int sessionId, string bookingKey, int WayType)
+        {
+            var groupFlight = new GroupFlight();
+            if(airLineCode.Equals("VN") || airLineCode.Equals("BL"))
+                groupFlight = _methodServie.GetGroupFlightVNARow(sessionId, bookingKey, WayType);
+            if (airLineCode.Equals("VJ"))
+                groupFlight = _methodServie.GetGroupFlightVJRow(sessionId, bookingKey, WayType);
+            if(airLineCode.Equals("QH"))
+                groupFlight = _methodServie.GetGroupFlightQHRow(sessionId, bookingKey, WayType);
+            return Json(groupFlight, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -2863,6 +2863,27 @@ body {
         border: 1px solid #ff3c13;
         font-weight: 700
     }
+.back-to-top {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 999;
+    background-color: var(--color-primary);
+    color: #e5efef;
+    border: none;
+    padding: 12px 16px;
+    border: 1px solid #0EBAB5;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 800;
+    display: none;
+    transition: opacity .3s;
+    border-radius: 10px;
+}
+
+    .back-to-top:hover {
+        background-color: var(--color-accent);
+    }
 
 .selected-range {
     text-align: center;

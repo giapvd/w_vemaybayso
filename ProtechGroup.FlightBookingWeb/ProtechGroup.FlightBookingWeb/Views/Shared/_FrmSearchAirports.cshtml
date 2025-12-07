@@ -78,7 +78,6 @@
               ">Xác nhận</div>
                     </div>
                 </div>
-                <!--END  QUANTITY -->
             </div>
         </div>
         <div class="justify-between gap-3 my-2 grid grid-cols-4 max-xl:grid-cols-2 max-sm:grid-cols-1"
@@ -139,8 +138,6 @@
             </div>
         </div>
     </form>
-
-    <!-- LOCATION -->
     <div id="location-modal"
          class="hidden bg-white flex flex-col gap-6 max-w-[960px] p-6 shadow-[0px_8px_30px_rgba(0,0,0,0.15)] absolute left-10 z-9999 text-text-primary">
         <div>
@@ -179,8 +176,6 @@
             </div>
         </div>
     </div>
-    <!-- END LOCATION -->
-    <!-- DATE -->
   <div
       class="hidden calendar-wrapper bg-white text-black flex flex-col gap-6 max-w-[960px] max-xl:w-[93%] max-sm:w-[80%] max-lg:w-[90%] w-fit p-5 shadow-[0px_8px_30px_rgba(0,0,0,0.15)] absolute left-10 z-9999 max-sm:p-3"
       id="date-modal">
@@ -192,14 +187,6 @@
                 </p>
             </div>
             <div class="flex gap-4 items-center">
-                <!-- <div class="border border-[#CAF0F8] py-2 px-3 flex-1 rounded-xl">
-                  <p class="text-sm">Ngày đi</p>
-                  <p class="text-lg font-bold">20/10/2025</p>
-                </div>
-                <div class="border border-[#CAF0F8] py-2 px-3 flex-1 rounded-xl">
-                  <p class="text-sm">Ngày về</p>
-                  <p class="text-lg font-bold">29/10/2025</p>
-                </div> -->
                <div class="flex justify-between flex-2 px-5 max-sm:px-1">
             <div class="flex gap-2 items-center ml-">
               <div class="p-2.5 bg-primary rounded-4xl max-sm:p-1"></div>
@@ -223,98 +210,7 @@
             </div>
             <div id="calendar"></div>
         </div>
-        <!-- <div id="range-info" class="selected-range"></div> -->
-    </div>
-    <!-- END DATE -->
-</div>
-<!--<div class="modal-overlay" id="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span>HÀNH KHÁCH</span>
-            <span class="close-btn" onclick="modal.style.display ='none'">X</span>
-        </div>
-        <div class="passenger-row">
-            <div>
-                <strong>NGƯỜI LỚN</strong><br />
-                <small>Từ 12 tuổi</small>
-            </div>
-            <div class="counter">
-                <span class="minus minus1">−</span>
-                <span id="memberModal1">1</span>
-                <span class="plus plus1">+</span>
-            </div>
-        </div>
-        <div class="passenger-row">
-            <div>
-                <strong>TRẺ EM</strong><br />
-                <small>Từ 2 đến 11 tuổi</small>
-            </div>
-            <div class="counter">
-                <span class="minus minus2">−</span>
-                <span id="memberModal2">0</span>
-                <span class="plus plus2">+</span>
-            </div>
-        </div>
-        <div class="passenger-row">
-            <div>
-                <strong>EM BÉ</strong><br />
-                <small>Dưới 2 tuổi</small>
-            </div>
-            <div class="counter">
-                <span class="minus minus3">−</span>
-                <span id="memberModal3">0</span>
-                <span class="plus plus3">+</span>
-            </div>
-        </div>
-        <span class="btn-model" onclick="modal.style.display ='none'">Xác nhận</span>
     </div>
 </div>
-<div class="modal-overlay" id="modal2">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span>Chọn điểm đi</span>
-            <span class="close-btn" onclick="modal2.style.display ='none'">X</span>
-        </div>
-        <div class="passenger-row">
-            <div class="inputSearch">
-                <label>
-                    NHẬP THÀNH PHỐ HOẶC MÃ SÂN BAY
-                    <div class="input">
-                        <input type="text" id="airportInput" />
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </div>
-                </label>
-            </div>
-        </div>
-        <div class="passenger-row">
-            <div class="list-items">
-                <ul id="airportResults">
-                    <li onclick="checkRoute(this,'HAN')">Hà Nội (HAN)</li>
-                    <li onclick="checkRoute(this,'SGN')">Hồ Chí Minh (SGN)</li>
-                    <li onclick="checkRoute(this,'DAD')">Đà Nẵng (DAD)</li>
-                    <li onclick="checkRoute(this,'DIN')">Điện Biên Phủ (DIN)</li>
-                    <li onclick="checkRoute(this,'HPH')">Hải Phòng (HPH)</li>
-                    <li onclick="checkRoute(this,'THD')">Thanh Hóa (THD)</li>
-                    <li onclick="checkRoute(this,'VII')">Vinh (VII)</li>
-                    <li onclick="checkRoute(this,'VDH')">Quảng Bình (VDH)</li>
-                    <li onclick="checkRoute(this,'VCA')">Cần Thơ (VCA)</li>
-                    <li onclick="checkRoute(this,'VKG')">Kiên Giang (VKG)</li>
-                    <li onclick="checkRoute(this,'VCL')">Quảng Nam (VCL)</li>
-                    <li onclick="checkRoute(this,'HUI')">Huế (HUI)</li>
-                    <li onclick="checkRoute(this,'PXU')">PleiKu (PXU)</li>
-                    <li onclick="checkRoute(this,'TBB')">Phú Yên (TBB)</li>
-                    <li onclick="checkRoute(this,'BMV')">Ban Mê Thuột (BMV)</li>
-                    <li onclick="checkRoute(this,'CXR')">Nha Trang (CXR)</li>
-                    <li onclick="checkRoute(this,'UIH')">Qui Nhơn (UIH)</li>
-                    <li onclick="checkRoute(this,'DLI')">Đà Lạt (DLI)</li>
-                    <li onclick="checkRoute(this,'CAH')">Cà Mau (CAH)</li>
-                    <li onclick="checkRoute(this,'PQC')">Phú Quốc (PQC)</li>
-                    <li onclick="checkRoute(this,'VCS')">Côn Đảo (VCS)</li>
-                    <li onclick="checkRoute(this,'VDO')">Vân Đồn (VDO)</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>-->
 <script src="~/Scripts/modules/form_search.js"></script>
 <script src="~/Scripts/modules/searchflight.js"></script>

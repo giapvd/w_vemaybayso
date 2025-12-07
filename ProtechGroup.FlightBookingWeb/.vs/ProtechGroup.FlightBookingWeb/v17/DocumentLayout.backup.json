@@ -3,38 +3,32 @@
   "WorkspaceRootPath": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|e:\\protechgroupforweb\\protechgroup.flightbookingweb\\protechgroup.flightbookingweb\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|solutionrelative:protechgroup.flightbookingweb\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|e:\\protechgroupforweb\\protechgroup.flightbookingweb\\protechgroup.flightbookingweb\\controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|solutionrelative:protechgroup.flightbookingweb\\controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\protechgroup.flightbookingweb\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|solutionrelative:protechgroup.flightbookingweb\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|e:\\protechgroupforweb\\protechgroup.flightbookingweb\\protechgroup.flightbookingweb\\views\\payment\\paymentmethodorder.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|solutionrelative:protechgroup.flightbookingweb\\views\\payment\\paymentmethodorder.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|e:\\protechgroupforweb\\protechgroup.flightbookingweb\\protechgroup.flightbookingweb\\views\\searchflight\\resultsflightdomestic.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|solutionrelative:protechgroup.flightbookingweb\\views\\searchflight\\resultsflightdomestic.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|e:\\protechgroupforweb\\protechgroup.flightbookingweb\\protechgroup.flightbookingweb\\views\\orderbooking\\confirmcusinformation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|solutionrelative:protechgroup.flightbookingweb\\views\\orderbooking\\confirmcusinformation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|e:\\protechgroupforweb\\protechgroup.flightbookingweb\\protechgroup.flightbookingweb\\scripts\\modules\\searchflight.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|solutionrelative:protechgroup.flightbookingweb\\scripts\\modules\\searchflight.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|e:\\protechgroupforweb\\protechgroup.flightbookingweb\\protechgroup.flightbookingweb\\app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|solutionrelative:protechgroup.flightbookingweb\\app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{39E12706-C176-433E-8332-A31CB3373042}|..\\ProtechGroup.Application\\ProtechGroup.Application.csproj|e:\\protechgroupforweb\\protechgroup.application\\common\\vietjetsmethod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\protechgroup.flightbookingweb\\scripts\\modules\\confirmcustomer.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|solutionrelative:protechgroup.flightbookingweb\\scripts\\modules\\confirmcustomer.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|e:\\protechgroupforweb\\protechgroup.flightbookingweb\\protechgroup.flightbookingweb\\scripts\\modules\\resultflightdomestic.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "AbsoluteMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\protechgroup.flightbookingweb\\scripts\\modules\\resultflightdomestic.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|solutionrelative:protechgroup.flightbookingweb\\scripts\\modules\\resultflightdomestic.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{39E12706-C176-433E-8332-A31CB3373042}|..\\ProtechGroup.Application\\ProtechGroup.Application.csproj|e:\\protechgroupforweb\\protechgroup.application\\common\\coreutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|e:\\protechgroupforweb\\protechgroup.flightbookingweb\\protechgroup.flightbookingweb\\scripts\\common\\common.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|solutionrelative:protechgroup.flightbookingweb\\scripts\\common\\common.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|e:\\protechgroupforweb\\protechgroup.flightbookingweb\\protechgroup.flightbookingweb\\views\\shared\\_frmsearchairports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|solutionrelative:protechgroup.flightbookingweb\\views\\shared\\_frmsearchairports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\protechgroup.flightbookingweb\\scripts\\modules\\form_search.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{740C4075-7F59-4BF2-B195-CFEEE56F4C68}|ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb.csproj|solutionrelative:protechgroup.flightbookingweb\\scripts\\modules\\form_search.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -43,7 +37,7 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 549,
+          "DockedWidth": 320,
           "SelectedChildIndex": 3,
           "Children": [
             {
@@ -61,40 +55,53 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "ProtechGroup.FlightBookingWeb\\Views\\Home\\Index.cshtml",
-              "ToolTip": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "ProtechGroup.FlightBookingWeb\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAJUCAAAAAAAAAAAAAKoCAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-29T09:31:57.886Z",
+              "Title": "PaymentController.cs",
+              "DocumentMoniker": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\Controllers\\PaymentController.cs",
+              "RelativeDocumentMoniker": "ProtechGroup.FlightBookingWeb\\Controllers\\PaymentController.cs",
+              "ToolTip": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\Controllers\\PaymentController.cs",
+              "RelativeToolTip": "ProtechGroup.FlightBookingWeb\\Controllers\\PaymentController.cs",
+              "ViewState": "AgIAABYCAAAAAAAAAAAmwDYCAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T08:03:47.085Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RouteConfig.cs",
+              "DocumentMoniker": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\App_Start\\RouteConfig.cs",
+              "RelativeDocumentMoniker": "ProtechGroup.FlightBookingWeb\\App_Start\\RouteConfig.cs",
+              "ToolTip": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\App_Start\\RouteConfig.cs",
+              "RelativeToolTip": "ProtechGroup.FlightBookingWeb\\App_Start\\RouteConfig.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAgwEUAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T07:52:32.271Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "VietJetsMethod.cs",
-              "DocumentMoniker": "E:\\ProtechGroupForWeb\\ProtechGroup.Application\\Common\\VietJetsMethod.cs",
-              "RelativeDocumentMoniker": "..\\ProtechGroup.Application\\Common\\VietJetsMethod.cs",
-              "ToolTip": "E:\\ProtechGroupForWeb\\ProtechGroup.Application\\Common\\VietJetsMethod.cs",
-              "RelativeToolTip": "..\\ProtechGroup.Application\\Common\\VietJetsMethod.cs",
-              "ViewState": "AgIAAHIAAAAAAAAAAAAQwJwAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T02:21:35.159Z",
+              "Title": "confirmCustomer.js",
+              "DocumentMoniker": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\Scripts\\modules\\confirmCustomer.js",
+              "RelativeDocumentMoniker": "ProtechGroup.FlightBookingWeb\\Scripts\\modules\\confirmCustomer.js",
+              "ToolTip": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\Scripts\\modules\\confirmCustomer.js",
+              "RelativeToolTip": "ProtechGroup.FlightBookingWeb\\Scripts\\modules\\confirmCustomer.js",
+              "ViewState": "AgIAALIBAAAAAAAAAAAYwMUBAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-12-05T04:12:40.355Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "CoreUtils.cs",
-              "DocumentMoniker": "E:\\ProtechGroupForWeb\\ProtechGroup.Application\\Common\\CoreUtils.cs",
-              "RelativeDocumentMoniker": "..\\ProtechGroup.Application\\Common\\CoreUtils.cs",
-              "ToolTip": "E:\\ProtechGroupForWeb\\ProtechGroup.Application\\Common\\CoreUtils.cs",
-              "RelativeToolTip": "..\\ProtechGroup.Application\\Common\\CoreUtils.cs",
-              "ViewState": "AgIAANYBAAAAAAAAAAAUwOoBAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-28T14:08:14.448Z",
+              "Title": "form_search.js",
+              "DocumentMoniker": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\Scripts\\modules\\form_search.js",
+              "RelativeDocumentMoniker": "ProtechGroup.FlightBookingWeb\\Scripts\\modules\\form_search.js",
+              "ToolTip": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\Scripts\\modules\\form_search.js",
+              "RelativeToolTip": "ProtechGroup.FlightBookingWeb\\Scripts\\modules\\form_search.js",
+              "ViewState": "AgIAAJkCAAAAAAAAAAAAALcCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-12-05T15:22:20.274Z",
               "EditorCaption": ""
             },
             {
@@ -105,80 +112,41 @@
               "RelativeDocumentMoniker": "ProtechGroup.FlightBookingWeb\\Scripts\\modules\\resultFlightDomestic.js",
               "ToolTip": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\Scripts\\modules\\resultFlightDomestic.js",
               "RelativeToolTip": "ProtechGroup.FlightBookingWeb\\Scripts\\modules\\resultFlightDomestic.js",
-              "ViewState": "AgIAAPoBAAAAAAAAAAAuwDUCAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAAM8AAAAAAAAAAAAowLAAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-11-28T09:37:52.084Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "common.js",
-              "DocumentMoniker": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\Scripts\\common\\common.js",
-              "RelativeDocumentMoniker": "ProtechGroup.FlightBookingWeb\\Scripts\\common\\common.js",
-              "ToolTip": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\Scripts\\common\\common.js",
-              "RelativeToolTip": "ProtechGroup.FlightBookingWeb\\Scripts\\common\\common.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-11-28T09:37:37.559Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "searchflight.js",
-              "DocumentMoniker": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\Scripts\\modules\\searchflight.js",
-              "RelativeDocumentMoniker": "ProtechGroup.FlightBookingWeb\\Scripts\\modules\\searchflight.js",
-              "ToolTip": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\Scripts\\modules\\searchflight.js",
-              "RelativeToolTip": "ProtechGroup.FlightBookingWeb\\Scripts\\modules\\searchflight.js",
-              "ViewState": "AgIAAGwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-11-28T09:37:32.279Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ResultsFlightDomestic.cshtml",
-              "DocumentMoniker": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\Views\\SearchFlight\\ResultsFlightDomestic.cshtml",
-              "RelativeDocumentMoniker": "ProtechGroup.FlightBookingWeb\\Views\\SearchFlight\\ResultsFlightDomestic.cshtml",
-              "ToolTip": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\Views\\SearchFlight\\ResultsFlightDomestic.cshtml",
-              "RelativeToolTip": "ProtechGroup.FlightBookingWeb\\Views\\SearchFlight\\ResultsFlightDomestic.cshtml",
-              "ViewState": "AgIAACEAAAAAAAAAAAAAAEYAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-27T15:07:22.96Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "ProtechGroup.FlightBookingWeb\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "ProtechGroup.FlightBookingWeb\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAPYAAAAAAAAAAAAAABEBAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-24T14:07:27.757Z",
               "EditorCaption": ""
             }
           ]
         },
         {
-          "DockedWidth": 145,
+          "DockedWidth": 402,
           "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "_FrmSearchAirports.cshtml",
-              "DocumentMoniker": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\Views\\Shared\\_FrmSearchAirports.cshtml",
-              "RelativeDocumentMoniker": "ProtechGroup.FlightBookingWeb\\Views\\Shared\\_FrmSearchAirports.cshtml",
-              "ToolTip": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\Views\\Shared\\_FrmSearchAirports.cshtml",
-              "RelativeToolTip": "ProtechGroup.FlightBookingWeb\\Views\\Shared\\_FrmSearchAirports.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAABCAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "PaymentMethodOrder.cshtml",
+              "DocumentMoniker": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\Views\\Payment\\PaymentMethodOrder.cshtml",
+              "RelativeDocumentMoniker": "ProtechGroup.FlightBookingWeb\\Views\\Payment\\PaymentMethodOrder.cshtml",
+              "ToolTip": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\Views\\Payment\\PaymentMethodOrder.cshtml",
+              "RelativeToolTip": "ProtechGroup.FlightBookingWeb\\Views\\Payment\\PaymentMethodOrder.cshtml",
+              "ViewState": "AgIAANcAAAAAAAAAAAAswPgAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-24T15:56:10.099Z",
+              "WhenOpened": "2025-12-07T07:54:40.436Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ConfirmCusInformation.cshtml",
+              "DocumentMoniker": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\Views\\OrderBooking\\ConfirmCusInformation.cshtml",
+              "RelativeDocumentMoniker": "ProtechGroup.FlightBookingWeb\\Views\\OrderBooking\\ConfirmCusInformation.cshtml",
+              "ToolTip": "E:\\ProtechGroupForWeb\\ProtechGroup.FlightBookingWeb\\ProtechGroup.FlightBookingWeb\\Views\\OrderBooking\\ConfirmCusInformation.cshtml",
+              "RelativeToolTip": "ProtechGroup.FlightBookingWeb\\Views\\OrderBooking\\ConfirmCusInformation.cshtml",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAADYAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-05T02:18:25.252Z",
               "EditorCaption": ""
             }
           ]

@@ -86,9 +86,6 @@ namespace ProtechGroup.FlightBookingWeb.Controllers
                     if (modelView != null && modelView.Count > 0)
                     {
                         ViewBag.SearchInput = searchInput;
-                        ViewBag.ListBagOut = _priceBaggageService.GetPriceBaggageByAirlineCode(airCodeOut.ToUpper());
-                        if (searchInput.IsRoundTrip)
-                            ViewBag.ListBagIn = _priceBaggageService.GetPriceBaggageByAirlineCode(airCodeIn.ToUpper());
                         return View(modelView);
                     }
                     else

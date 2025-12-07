@@ -133,33 +133,77 @@ namespace ProtechGroup.Application.Services
             var searchInput = _searchInputService.GetByKeySessionId(sessionId);
             if (CoreUtils.IsFileEmptyOrDoesntExist(CoreUtils.GetBamBooResponseFilePath(sessionId)))
             {
-                string bodypost = _bamBooAirWaysMethod.GetBodyAirAvailability(searchInput);
-                alinesBB = await _bamBooAirWaysService.GetAlinesBamBoo(bodypost);
-                CoreUtils.WriteToFile(CoreUtils.GetBamBooResponseFilePath(sessionId), JsonConvert.SerializeObject(alinesBB));
+                try
+                {
+                    string bodypost = _bamBooAirWaysMethod.GetBodyAirAvailability(searchInput);
+                    alinesBB = await _bamBooAirWaysService.GetAlinesBamBoo(bodypost);
+                    CoreUtils.WriteToFile(CoreUtils.GetBamBooResponseFilePath(sessionId), JsonConvert.SerializeObject(alinesBB));
+                }
+                catch(Exception ex)
+                {
+                    alinesBB = new RootBamBoo();
+                    CoreUtils.WriteToFile(CoreUtils.GetBamBooResponseFilePath(sessionId), ex.Message);
+                }
             }
             else
             {
-                alinesBB = JsonConvert.DeserializeObject<RootBamBoo>(CoreUtils.GetContentFromFile(CoreUtils.GetBamBooResponseFilePath(sessionId)));
+                try
+                {
+                    alinesBB = JsonConvert.DeserializeObject<RootBamBoo>(CoreUtils.GetContentFromFile(CoreUtils.GetBamBooResponseFilePath(sessionId)));
+                }
+                catch
+                {
+                    alinesBB = new RootBamBoo();
+                }
             }
             if (CoreUtils.IsFileEmptyOrDoesntExist(CoreUtils.GetVietJetResponseFilePath(sessionId)))
             {
-                string strRequest =_vietJetsMethod.GetStringRequestAlinesVietJet(searchInput);
-                alineVJ = await _vietJetsService.GetAlinesVietJets(strRequest);
-                CoreUtils.WriteToFile(CoreUtils.GetVietJetResponseFilePath(sessionId), JsonConvert.SerializeObject(alineVJ));
+                try
+                {
+                    string strRequest = _vietJetsMethod.GetStringRequestAlinesVietJet(searchInput);
+                    alineVJ = await _vietJetsService.GetAlinesVietJets(strRequest);
+                    CoreUtils.WriteToFile(CoreUtils.GetVietJetResponseFilePath(sessionId), JsonConvert.SerializeObject(alineVJ));
+                }
+                catch (Exception ex)
+                {
+                    alineVJ = new RootVietJets[100];
+                    CoreUtils.WriteToFile(CoreUtils.GetVietJetResponseFilePath(sessionId), ex.Message);
+                }
             }
             else
             {
-                alineVJ = JsonConvert.DeserializeObject<RootVietJets[]>(CoreUtils.GetContentFromFile(CoreUtils.GetVietJetResponseFilePath(sessionId)));
+                try
+                {
+                    alineVJ = JsonConvert.DeserializeObject<RootVietJets[]>(CoreUtils.GetContentFromFile(CoreUtils.GetVietJetResponseFilePath(sessionId)));
+                }
+                catch {
+                    alineVJ = new RootVietJets[100];
+                }
             }
             if (CoreUtils.IsFileEmptyOrDoesntExist(CoreUtils.GetVietNamAirLinesResponseFilePath(sessionId)))
             {
-                string bodyPost = _vietNamAirLinesMethod.GetBodyPostSearchFlightVietNamAirLine(searchInput);
-                alinesVN = await _vietNamAirLinesService.SearchFlightVietNamAirLines(bodyPost);
-                CoreUtils.WriteToFile(CoreUtils.GetVietNamAirLinesResponseFilePath(sessionId), JsonConvert.SerializeObject(alinesVN));  
+                try
+                {
+                    string bodyPost = _vietNamAirLinesMethod.GetBodyPostSearchFlightVietNamAirLine(searchInput);
+                    alinesVN = await _vietNamAirLinesService.SearchFlightVietNamAirLines(bodyPost);
+                    CoreUtils.WriteToFile(CoreUtils.GetVietNamAirLinesResponseFilePath(sessionId), JsonConvert.SerializeObject(alinesVN));
+                }
+                catch (Exception ex)
+                {
+                    alinesVN = new RootVNA();
+                    CoreUtils.WriteToFile(CoreUtils.GetVietNamAirLinesResponseFilePath(sessionId), ex.Message);
+                }
             }
             else
             {
-                alinesVN = JsonConvert.DeserializeObject<RootVNA>(CoreUtils.GetContentFromFile(CoreUtils.GetVietNamAirLinesResponseFilePath(sessionId)));
+                try
+                {
+                    alinesVN = JsonConvert.DeserializeObject<RootVNA>(CoreUtils.GetContentFromFile(CoreUtils.GetVietNamAirLinesResponseFilePath(sessionId)));
+                }
+                catch
+                {
+                    alinesVN = new RootVNA();
+                }
             }
             var flightResultBB = _bamBooAirWaysMethod.BuildFlightResultBamBoo(alinesBB, searchInput.TotalPax, searchInput.IsSearchDomestic);
             var flightResultVJ = _vietJetsMethod.BuildFlightResultVietJets(alineVJ, searchInput.TotalPax, searchInput.IsSearchDomestic);

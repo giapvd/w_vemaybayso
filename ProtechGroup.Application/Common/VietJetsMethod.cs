@@ -100,17 +100,17 @@ namespace ProtechGroup.Application.Common
                 result.MainFlightNumber = "VJ" + root.flights[0].flightNumber;
                 result.MainAirlineCode = "VJ";
                 result.MainAirlineName = "VietJet Air";
-                result.MainDepartureAirportCode = root.flights[0].departure.airport.code;
-                result.MainDepartureAirportName = root.flights[0].departure.airport.name;
                 var departureAirportRow = _iairportService.GetAirportByCode(root.flights[0].departure.airport.code);
+                result.MainDepartureAirportCode = root.flights[0].departure.airport.code;
+                result.MainDepartureAirportName = departureAirportRow.AirportNameVN;
                 result.MainDepartureCity = departureAirportRow.CityName;
                 result.MainDepartureCountry = departureAirportRow.CountryName;
                 result.MainDepartureTime = Convert.ToDateTime(root.flights[0].departure.scheduledTime).ToString("HH:mm");
                 result.Plane = root.flights[0].aircraftModel.name;
                 result.MainDepartureDate = Convert.ToDateTime(root.flights[0].departure.scheduledTime);
-                result.MainArrivalAirportCode = root.flights[root.flights.Count - 1].arrival.airport.code;
-                result.MainArrivalAirportName = root.flights[root.flights.Count - 1].arrival.airport.name;
                 var arrivalAirportRow = _iairportService.GetAirportByCode(root.flights[root.flights.Count - 1].arrival.airport.code);
+                result.MainArrivalAirportCode = root.flights[root.flights.Count - 1].arrival.airport.code;
+                result.MainArrivalAirportName = arrivalAirportRow.AirportNameVN;
                 result.MainArrivalCity = arrivalAirportRow.CityName;
                 result.MainArrivalCountry = arrivalAirportRow.CountryName;
                 result.MainArrivalTime = Convert.ToDateTime(root.flights[root.flights.Count - 1].arrival.scheduledTime).ToString("HH:mm");
@@ -310,7 +310,7 @@ namespace ProtechGroup.Application.Common
                             case "ECO":
                                 price.RecommendationNumber = "Hành lý xách tay 7kg";
                                 price.AllowanceBaggage = "Hành lý ký gửi 0kg";
-                                price.Condition = "<ul class=\"border-dotted pb-4 mb-4\">";
+                                price.Condition = "<ul class=\"my-1 text-sm\">";
                                 price.Condition += "<li>Được phép Thay đổi chuyến bay/ hành trình (Trước giờ khởi hành tối thiểu 03 tiếng) mất phí + chênh lệch giá vé (nếu có)</li>";
                                 price.Condition += "<li>Không được phép Thay đổi chuyến bay/ hành trình (Trong vòng 03 tiếng trước giờ khởi hành và sau giờ khởi hành)</li>";
                                 price.Condition += "<li>Không được phép Đổi tên</li>";
@@ -321,7 +321,7 @@ namespace ProtechGroup.Application.Common
                             case "DLX":
                                 price.RecommendationNumber = "Hành lý xách tay 7kg";
                                 price.AllowanceBaggage = "Hành lý ký gửi 20kg";
-                                price.Condition = "<ul class=\"border-dotted pb-4 mb-4\">";
+                                price.Condition = "<ul class=\"my-1 text-sm\">";
                                 price.Condition += "<li>Được phép Thay đổi chuyến bay/ hành trình (Trước giờ khởi hành tối thiểu 03 tiếng) miễn phí + chênh lệch giá vé (nếu có)</li>";
                                 price.Condition += "<li>Không được phép Thay đổi chuyến bay/ hành trình (Trong vòng 03 tiếng trước giờ khởi hành và sau giờ khởi hành)</li>";
                                 price.Condition += "<li>Không được phép Đổi tên</li>";
@@ -332,7 +332,7 @@ namespace ProtechGroup.Application.Common
                             case "SBoss":
                                 price.RecommendationNumber = "Hành lý xách tay 10kg";
                                 price.AllowanceBaggage = "Hành lý ký gửi 30kg";
-                                price.Condition = "<ul class=\"border-dotted pb-4 mb-4\">";
+                                price.Condition = "<ul class=\"my-1 text-sm\">";
                                 price.Condition += "<li>Phòng chờ sang trọng</li>";
                                 price.Condition += "<li>Được phép Thay đổi chuyến bay/ hành trình (Trước giờ khởi hành tối thiểu 03 tiếng) miễn phí + chênh lệch giá vé (nếu có)</li>";
                                 price.Condition += "<li>Không được phép Thay đổi chuyến bay/ hành trình (Trong vòng 03 tiếng trước giờ khởi hành và sau giờ khởi hành)</li>";
@@ -344,7 +344,7 @@ namespace ProtechGroup.Application.Common
                             default:
                                 price.RecommendationNumber = "0 Kg hành lý xách tay";
                                 price.AllowanceBaggage = "0 Kg hành lý ký gửi";
-                                price.Condition = "<ul class=\"border-dotted pb-4 mb-4\">";
+                                price.Condition = "<ul class=\"my-1 text-sm\">";
                                 price.Condition += "<li>Không được thay đổi chuyến bay, chặng bay, ngày bay</li>";
                                 price.Condition += "</ul>";
                                 price.ReturnTicket = "Không hoàn hủy";

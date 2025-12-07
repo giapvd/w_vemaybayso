@@ -1,21 +1,56 @@
 ﻿
 $(document).ready(function () {
+    document.querySelectorAll(".select-customer-wrapper").forEach((elem) => {
+        elem.addEventListener("click", () => {
+            elem.querySelector(".select-customer-dropdown").classList.toggle("hidden");
+        });
+        elem.querySelectorAll(".option").forEach((option) => {
+            option.addEventListener("click", (e) => {
+                const selectedText = e.target.closest(".option").textContent.trim();
+                elem.querySelector(".text-render").textContent = selectedText;
+                elem.querySelector('input[type="hidden"]').value = e.target.closest(".option").dataset.value;
+            });
+        });
+    });
     var $checkBoxContactl = $("#is-chose-info-contactl");
     var $firstInput = $("input.passenger-name-adt").first();
     var $checkboxInvoice = $('#is-invoice');
     var $emailContactl = $(".email-contactl");
     if ($firstInput.length === 0) return;
+
+    $checkBoxContactl.on("mousedown", function (e) {
+        if (this.checked) {
+            this.isAlreadyChecked = true;
+        } else {
+            this.isAlreadyChecked = false;
+        }
+    });
+
+    $checkBoxContactl.on("click", function (e) {
+        if (this.isAlreadyChecked) {
+            this.checked = false;
+        }
+
+    });
+    $checkboxInvoice.on("mousedown", function (e) {
+        if (this.checked) {
+            this.isAlreadyChecked = true;
+        } else {
+            this.isAlreadyChecked = false;
+        }
+    });
+
+    $checkboxInvoice.on("click", function (e) {
+        if (this.isAlreadyChecked) {
+            this.checked = false;
+        }
+        changeSelectInvoice();
+    });
     $firstInput.on("input", function (e) {
         if ($checkBoxContactl.is(":checked")) {
              var nameConcactl = $('.name-contactl');
              nameConcactl.val($(this).val());
          }
-    });
-    $emailContactl.on("input", function (e) {
-        if ($checkboxInvoice.is(":checked")) {
-            var emailvoice = $("#email-invoice");
-            emailvoice.val($(this).val());
-        }
     });
     $checkBoxContactl.change(function () {
         var nameConcactl = $('.name-contactl');
@@ -26,198 +61,45 @@ $(document).ready(function () {
             nameConcactl.val('');
         }
     });
-
-    function removeVietnameseTones(str) {
-        str = str.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // Bỏ dấu tổ hợp
-        str = str.replace(/đ/g, "d").replace(/Đ/g, "D");
-        return str;
-    }
-
+    const planeItemsSelected = document.querySelectorAll(".plane-items-selected");
+    planeItemsSelected.forEach((planeItemSelected) => {
+        planeItemSelected.querySelector(".clicked").addEventListener("click", () => {
+            planeItemSelected.querySelector(".conditions").classList.toggle("hidden");
+        });
+    });
+    
     $(".passenger-name-adt, .passenger-name-chd, .passenger-name-inf").on("blur", function () {
         let value = $(this).val().trim();
-
         if (value !== "") {
             value = removeVietnameseTones(value).toUpperCase();
             $(this).val(value);
         }
     });
-
-    $checkboxInvoice.change(function () {
-        if ($(this).is(":checked")) {
-            $(".lbl-name-invoice").html('Tên hóa đơn: <span class="color-info">(*)</span>');
-            $(".lbl-taxcode-invoice").html('Mã số thuế: <span class="color-info">(*)</span>');
-            $(".lbl-add-invoice").html('Địa chỉ hóa đơn: <span class="color-info">(*)</span>');
-            $("#name-invoice").addClass('required');
-            $("#tax-code-invoice").addClass('required');
-            $("#add-invoice").addClass('required');
-            if ($("email-invoice").val() === "")
-                $("email-invoice").val($('.email-contactl').val());
+    function changeSelectInvoice() {
+        if ($checkboxInvoice.is(":checked")) {
+            $(".lbl-name-invoice").html('Tên hóa đơn: <span class="text-red-500">*</span><input type="text" placeholder="Ví dụ: Vé máy bay số" class="outline-none w-full name-invoice required" id="name-invoice"/>');
+            $(".lbl-taxcode-invoice").html('Mã số thuế: <span class="text-red-500">*</span><input type="text" placeholder="Ví dụ: 0123456789" class="tax-code-invoice outline-none w-full required" id="tax-code-invoice"/>');
+            $(".lbl-add-invoice").html('Địa chỉ hóa đơn: <span class="text-red-500">*</span><input type="text" placeholder="Số 7 Ngõ 4 P. Đào Hinh, Việt Hưng, Long Biên, Hà Nội." class="add-invoice outline-none w-full required" id="add-invoice"/>');
         }
         else {
-            $(".lbl-name-invoice").html('Tên hóa đơn');
-            $(".lbl-taxcode-invoice").html('Mã số thuế');
-            $(".lbl-add-invoice").html('Địa chỉ hóa đơn');
-            $("#name-invoice").removeClass('required');
-            $("#tax-code-invoice").removeClass('required');
-            $("#add-invoice").removeClass('required');
+            $(".lbl-name-invoice").html('Tên hóa đơn: <input type="text" placeholder="Ví dụ: Vé máy bay số" class="outline-none w-full name-invoice" id="name-invoice"/>');
+            $(".lbl-taxcode-invoice").html('Mã số thuế: <input type="text" placeholder="Ví dụ: 0123456789" class="tax-code-invoice outline-none w-full" id="tax-code-invoice"/>');
+            $(".lbl-add-invoice").html('Địa chỉ hóa đơn: <span class="text-red-500">*</span><input type="text" placeholder="Số 7 Ngõ 4 P. Đào Hinh, Việt Hưng, Long Biên, Hà Nội." class="add-invoice outline-none w-full" id="add-invoice"/>');
         }
-    });
-    $(".toggle-info").click(function () {
-        const $btn = $(this);
-        const target = $btn.data("target");
-        const $info = $(target);
-        $info.slideToggle(300, function () {
-            $btn.html(
-                $info.is(":visible") ?
-                    'Rút gọn <svg style="transform: rotate(90deg);" width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M1.5 1.5L6.5 6.5L1.5 11.5" stroke="#FF3C13" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>' :
-                    'Xem điều kiện vé  <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M1.5 1.5L6.5 6.5L1.5 11.5" stroke="#FF3C13" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>'
-            );
-        });
-    });
-    $('.baggage-out').change(function () {
-        updateTotalPriceOutBound();
-        
-    }); 
-    $('.baggage-in').change(function () {
-        updateTotalPriceInBound();
-    });
-    $('#payment-order').click(function () {
-        const isAgree = $('#is-agree');
-        if (isAgree.is(":checked")) {
-            if (validateFormInputs('frmPostOrder') && validateRequiredInputs('.required')
+    }
+    
+    $('#create-order').click(function () {
+        if (validateFormInputs('frmPostOrder') && validateRequiredInputs('.required')
                 && validatePassengerBirthDates() && validateEmailInputs() && validatePhoneInputs()
                 && validateFullNameInputs() && validatePassengerBirth())
-            {
+         {
                 createOrderBooking($(this));
-            }
-        }
+         }
         else {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Cảnh báo',
-                text: 'Bạn chưa đồng ý với điều kiện khi đặt vé!',
-                confirmButtonText: 'Đã hiểu'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    isAgree.focus();
-                }
-            });
+            return;
         }
     });
-    function updateTotalPriceOutBound() {
-        const listBagOut = [];
-        let totalPriceBag = 0;
-        document.querySelectorAll('.baggage-out').forEach(bag => {
-            const selectedOption = bag.options[bag.selectedIndex];
-            const value = selectedOption.value;
-            const price = selectedOption.getAttribute('data-price');
-            const kg = selectedOption.getAttribute('data-kg');
-            var bagCheck = listBagOut.find(b => b.idBag == value);
-            if (value != 0) {
-                if (!bagCheck) {
-                    listBagOut.push({
-                        idBag: value,
-                        totalKg: kg,
-                        priceBag: price,
-                        countBag: 1
-                    })
-                }
-                else {
-                    bagCheck.countBag += 1;
-                }
-            }
-            totalPriceBag += parseInt(price);
-        });
-        let strBang = '';
-        if (listBagOut.length > 0) {
-            strBang = 'Mua hành lý:';
-            listBagOut.forEach(b => {
-                strBang += '(' + b.totalKg + 'Kg x ' + b.countBag + ') ';
-            });
-        }
-        const infoBagOut = document.querySelector('.info-detail .price-service-out p');
-        const priceBag = document.querySelector('.info-detail .price-service-out .price');
-        const infoTotalPriceOut = document.querySelector('.info-detail p.total-price-out');
-        let totalPriceOrder = 0;
-        let totalPriceOut = parseInt(infoTotalPriceOut.getAttribute('data-price'));
-        let totalPriceOutShow = totalPriceOut + totalPriceBag;
-        infoBagOut.innerHTML = 'Dịch vụ mua thêm';
-        const newBr = document.createElement('br');
-        infoBagOut.appendChild(newBr);
-        const newSpan = document.createElement('span');
-        newSpan.style.fontWeight = '500';
-        newSpan.innerHTML = strBang
-        infoBagOut.appendChild(newSpan);
-        priceBag.innerHTML = formatNumber(totalPriceBag) + ' VND';
-        infoTotalPriceOut.innerHTML = formatNumber(totalPriceOutShow) + ' VND';
-        totalPriceOrder += totalPriceOutShow;
-        infoTotalPriceOut.setAttribute('data-serviceprice', totalPriceBag);
-        const infoTotalPriceIn = document.querySelector('.info-detail p.total-price-in');
-        if (infoTotalPriceIn) {
-            const totalIn = parseInt(infoTotalPriceIn.getAttribute('data-price'));
-            const serviceIn = parseInt(infoTotalPriceIn.getAttribute('data-serviceprice'));
-            totalPriceOrder += (totalIn + serviceIn);
-        }
-        const priceTotal = document.querySelector('.price-total .price-order');
-        priceTotal.innerHTML = formatNumber(totalPriceOrder) + ' VND';
-    }
-    function updateTotalPriceInBound() {
-        const listBagIn = [];
-        let totalPriceBag = 0;
-        document.querySelectorAll('.baggage-in').forEach(bag => {
-            const selectedOption = bag.options[bag.selectedIndex];
-            const value = selectedOption.value;
-            const price = selectedOption.getAttribute('data-price');
-            const kg = selectedOption.getAttribute('data-kg');
-            var bagCheck = listBagIn.find(b => b.idBag == value);
-            if (value != 0) {
-                if (!bagCheck) {
-                    listBagIn.push({
-                        idBag: value,
-                        totalKg: kg,
-                        priceBag: price,
-                        countBag: 1
-                    })
-                }
-                else {
-                    bagCheck.countBag += 1;
-                }
-            }
-            totalPriceBag += parseInt(price);
-        });
-        let strBang = '';
-        if (listBagIn.length > 0) {
-            strBang = 'Mua hành lý:';
-            listBagIn.forEach(b => {
-                strBang += '(' + b.totalKg + 'Kg x ' + b.countBag + ') ';
-            });
-        }
-        const infoBagIn = document.querySelector('.info-detail .price-service-in p');
-        const priceBag = document.querySelector('.info-detail .price-service-in .price');
-        const infoTotalPriceIn = document.querySelector('.info-detail p.total-price-in');
-        let totalPriceOrder = 0;
-        let totalPriceIn = parseInt(infoTotalPriceIn.getAttribute('data-price'));
-        let totalPriceInShow = totalPriceIn + totalPriceBag;
-        infoBagIn.innerHTML = 'Dịch vụ mua thêm';
-        const newBr = document.createElement('br');
-        infoBagIn.appendChild(newBr);
-        const newSpan = document.createElement('span');
-        newSpan.style.fontWeight = '500';
-        newSpan.innerHTML = strBang
-        infoBagIn.appendChild(newSpan);
-        priceBag.innerHTML = formatNumber(totalPriceBag) + ' VND';
-        infoTotalPriceIn.innerHTML = formatNumber(totalPriceInShow) + ' VND';
-        totalPriceOrder += totalPriceInShow;
-        infoTotalPriceIn.setAttribute('data-serviceprice', totalPriceBag);
-        const infoTotalPriceOut = document.querySelector('.info-detail p.total-price-out');
-        if (infoTotalPriceOut) {
-            const totalOut = parseInt(infoTotalPriceOut.getAttribute('data-price'));
-            const serviceOut = parseInt(infoTotalPriceOut.getAttribute('data-serviceprice'));
-            totalPriceOrder += (totalOut + serviceOut);
-        }
-        const priceTotal = document.querySelector('.price-total .price-order');
-        priceTotal.innerHTML = formatNumber(totalPriceOrder) + ' VND';
-    }
+    
     function validateFormInputs(formId) {
         const form = document.getElementById(formId);
         if (!form) {
@@ -276,13 +158,33 @@ $(document).ready(function () {
     }
     function validateRequiredInputs(selector) {
         let isValid = true;
-        document.querySelectorAll(".error-message").forEach(e => e.remove());
         document.querySelectorAll(selector).forEach(el => {
             const value = el.value ? el.value.trim() : "";
             el.style.border = "";
             if (value === "") {
                 isValid = false;
-                displayWariError(el, "Trường này không được để trống", "error-message");
+                displayWariError(el, "Không được rỗng");
+            }
+            else {
+                if (el.classList.contains("selectd-type")) {
+                    const tagDiv = el.parentElement;
+                    const tagLabel = tagDiv.parentElement;
+                    const tagDivParent = tagLabel.parentElement;
+                    const error = tagDivParent.querySelector(".w-fit");
+                    if(error) error.remove();
+                    tagLabel.classList.remove("border-red");
+                    tagLabel.classList.add("border-[#B3B0D8]");
+                    tagDivParent.classList.remove("text-red-500");
+                }
+                else {
+                    const tagLabel = el.parentElement;
+                    const tagDiv = tagLabel.parentElement;
+                    const error = tagDiv.querySelector(".error-msg");
+                    if (error) error.remove();
+                    tagLabel.classList.remove("border-red");
+                    tagLabel.classList.add("border-[#B3B0D8]");
+                    tagDiv.classList.remove("text-red-500");
+                }
             }
         });
 
@@ -303,7 +205,7 @@ $(document).ready(function () {
 
             if (!dateRegex.test(value)) {
                 isValid = false;
-                displayWariError(el, "Định dạng ngày phải là dd/mm/yyyy", "error-message-date");
+                displayWariError(el, "Sai dd/mm/yyyy");
             }
         });
         return isValid;
@@ -318,7 +220,7 @@ $(document).ready(function () {
             if (value === "") return;
             if (!emailRegex.test(value)) {
                 isValid = false;
-                displayWariError(el, "Vui lòng nhập đúng định dạng email (ví dụ: hello@domain.vn)", "error-message-email");
+                displayWariError(el, "Không đúng định dạng email (ví dụ: hello@domain.vn)");
             }
         });
         return isValid;
@@ -334,7 +236,7 @@ $(document).ready(function () {
             if (value === "") return;
             if (!phoneRegex.test(value)) {
                 isValid = false;
-                displayWariError(el, "Số điện thoại phải gồm 10 chữ số (0–9)", "error-message-phone");
+                displayWariError(el, "Điện thoại phải gồm 10 chữ số (0–9)");
             }
         });
 
@@ -352,14 +254,13 @@ $(document).ready(function () {
             if (value === "") return;
             if (!nameRegex.test(value)) {
                 isValid = false;
-                displayWariError(el, "Họ và tên chỉ được chứa chữ cái và khoảng trắng", "error-message-name");
+                displayWariError(el, "Ký tự vi phạm");
                 return;
             }
             const words = value.split(/\s+/);
             if (words.length < 2) {
                 isValid = false;
-                el.style.border = "2px solid red";
-                displayWariError(el, "Vui lòng nhập đầy đủ họ và tên (ít nhất 2 từ)", "error-message-name");
+                displayWariError(el, "ít nhất 2 từ");
             }
         });
         return isValid;
@@ -383,16 +284,16 @@ $(document).ready(function () {
             let errorMsg = "";
 
             if (input.classList.contains("passenger-birth-adt") && age < 12) {
-                errorMsg = "Hành khách người lớn phải từ 12 tuổi trở lên.";
+                errorMsg = "Người lớn >= 12 tuổi";
             } else if (input.classList.contains("passenger-birth-chd") && (age < 2 || age >= 12)) {
-                errorMsg = "Hành khách trẻ em phải từ 2 đến dưới 12 tuổi.";
+                errorMsg = "2 <= Trẻ em < 12.";
             } else if (input.classList.contains("passenger-birth-inf") && age >= 2) {
-                errorMsg = "Hành khách em bé phải dưới 2 tuổi.";
+                errorMsg = "Em bé < 2 tuổi.";
             }
 
             if (errorMsg) {
                 isValid = false;
-                displayWariError(input, errorMsg, "error-message-birth");
+                displayWariError(input, errorMsg);
             } else {
                 input.style.border = "";
             }
@@ -417,21 +318,37 @@ $(document).ready(function () {
         }
         return age;
     }
-    function displayWariError(el, text, className) {
-        el.style.border = "";
-        el.style.border = "1px solid #e82d2d";
-        const error = document.createElement("div");
-        error.className = className;
-        error.style.color = "#e82d2d";
-        error.style.fontSize = "12px";
-        error.style.marginTop = "4px";
-        error.textContent = text;
-        const parentDiv = el.closest(".form-custom");
-        if (parentDiv) {
-            parentDiv.insertAdjacentElement("afterend", error);
-        } else {
-            el.insertAdjacentElement("afterend", error);
+    function displayWariError(el, text) {
+        if (el.classList.contains("selectd-type")) {
+            const tagDiv = el.parentElement;
+            const tagLabel = tagDiv.parentElement;
+            const tagDivParent = tagLabel.parentElement;
+            const tagspan = document.createElement("span");
+            const spancheck = tagDivParent.querySelector('span.w-fit');
+            if (!spancheck) {
+                tagspan.className = "w-fit ml-4";
+                tagspan.textContent = text;
+                tagDivParent.appendChild(tagspan);
+                tagLabel.classList.remove("border-[#B3B0D8]");
+                tagLabel.classList.add("border-red");
+                tagDivParent.classList.add("text-red-500");
+            }
         }
+        else {
+            const tagLabel = el.parentElement;
+            const tagDiv = tagLabel.parentElement;
+            const tagspan = document.createElement("span");
+            const spancheck = tagDiv.querySelector('span.error-msg');
+            if (!spancheck) {
+                tagspan.className = "w-fit ml-4 text-red-500 error-msg";
+                tagspan.textContent = text;
+                tagDiv.appendChild(tagspan);
+                tagLabel.classList.remove("border-[#B3B0D8]");
+                tagLabel.classList.add("border-red");
+                tagDiv.classList.add("text-red-500");
+            }
+        }
+        
     }
     function createOrderBooking(linkOrderElem) {
         let listFlight = [];
@@ -451,38 +368,29 @@ $(document).ready(function () {
             const names = document.querySelectorAll(`#passger-info .passenger-name-${type}`);
             const cardNums = document.querySelectorAll(`#passger-info .passenger-cardnum-${type}`);
             const births = document.querySelectorAll(`#passger-info .passenger-birth-${type}`);
+            const memberNum = document.querySelectorAll(`#passger-info .cardnum-member-${type}`);
             const count = names.length;
             for (let i = 0; i < count; i++) {
                 const genderEl = genders[i];
                 const nameEl = names[i];
                 const cardNumEl = cardNums[i];
                 const birthEl = births[i];
+                const memberNumEl = memberNum[i]
                 const genderValue = genderEl ? genderEl.value : "1";
                 const nameValue = nameEl ? nameEl.value.trim() : "";
                 const cardNumValue = cardNumEl ? cardNumEl.value.trim() : "";
                 const birthValue = birthEl ? birthEl.value.trim() : "";
-                const baggageSelectOut = document.querySelectorAll(`.baggage-out`)[paxId];
-                const baggageSelectIn = document.querySelectorAll(`.baggage-in`)[paxId];
+                const memberNumValue = memberNumEl ? memberNumEl.value.trim() : "";
                 let bagOutId = "0";
                 let totalOutKg = "0";
                 let bagInId = "0";
                 let totalInKg = "0";
-
-                if (baggageSelectOut) {
-                    const selectedOptionOut = baggageSelectOut.options[baggageSelectOut.selectedIndex];
-                    bagOutId = selectedOptionOut.value;
-                    totalOutKg = selectedOptionOut.getAttribute("data-kg") || "0";
-                }
-                if (baggageSelectIn) {
-                    const selectedOptionIn = baggageSelectIn.options[baggageSelectIn.selectedIndex];
-                    bagInId = selectedOptionIn.value;
-                    totalInKg = selectedOptionIn.getAttribute("data-kg") || "0";
-                }
                 listPassger.push({
                     genderPax: genderValue,
                     namePax: nameValue,
                     cardNum: cardNumValue,
                     birthPax: birthValue,
+                    memberNum: memberNumValue,
                     typePax: type,
                     bagIdOut: bagOutId,
                     totalKgOut: totalOutKg,
@@ -497,14 +405,12 @@ $(document).ready(function () {
             nameContactl: document.querySelector("#contaclt-info .name-contactl").value,
             phoneContactl: document.querySelector("#contaclt-info .phone-contactl").value,
             emailContactl: document.querySelector("#contaclt-info .email-contactl").value,
-            addContactl: document.querySelector("#contaclt-info .add-contactl").value,
-            otherRequirementsContactl: document.querySelector("#contaclt-info .other-requirements").value,
+            otherRequirementsContactl: document.querySelector("#other-requirements").value,
         }
         let invoice = {
             isInvoice: document.getElementById("is-invoice").checked,
             nameInvoice: document.getElementById("name-invoice").value,
             taxCodeInvoice: document.getElementById("tax-code-invoice").value,
-            emailInvoice: document.getElementById("email-invoice").value,
             addInvoice: document.getElementById("add-invoice").value,
         }
         var listBooking= {

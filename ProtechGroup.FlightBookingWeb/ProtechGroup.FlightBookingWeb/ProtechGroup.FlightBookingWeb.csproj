@@ -603,6 +603,7 @@
     <Content Include="Scripts\lip\modernizr-2.8.3.js" />
     <Content Include="Scripts\modules\confirmCustomer.js" />
     <Content Include="Scripts\modules\form_search.js" />
+    <Content Include="Scripts\modules\paymentOrder.js" />
     <Content Include="Scripts\modules\resultFlightDomestic.js" />
     <Content Include="Scripts\modules\searchflight.js" />
     <Content Include="Scripts\site.js" />
@@ -636,6 +637,7 @@
     <Content Include="Views\SearchFlight\ResultsFlightDomestic.cshtml" />
     <Content Include="Views\OrderBooking\ConfirmCusInformation.cshtml" />
     <Content Include="Views\Payment\PaymentMethodOrder.cshtml" />
+    <Content Include="Views\Shared\_Nav.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ProtechGroup.Application\ProtechGroup.Application.csproj">

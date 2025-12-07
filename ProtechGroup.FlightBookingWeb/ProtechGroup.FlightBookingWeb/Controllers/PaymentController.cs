@@ -143,7 +143,7 @@ namespace ProtechGroup.FlightBookingWeb.Controllers
                             InsertFlightSegment(orderFlight, groupFlights);
                             await InsertContactl(orderBooking.OrderId, request.contaclOrder, request.invoiceOrder);
                             UpdatePriceOrder(orderBooking.OrderId, groupFlights);
-                            await BookingOrderFlight(searchIput.SessionId, orderBooking.OrderId);
+                            //await BookingOrderFlight(searchIput.SessionId, orderBooking.OrderId);
                             var dataEncrypt = GetEncryptQuery("sessionId=" + searchIput.SessionId + "&orderId=" + orderBooking.OrderId);
                             return Json(new { status = true, dataResult = dataEncrypt }, JsonRequestBehavior.AllowGet);
                         }
@@ -447,7 +447,7 @@ namespace ProtechGroup.FlightBookingWeb.Controllers
                     PaxAddOnFee = 0,
                     PaxServiceFee =0,
                     PaxPrice = 0,
-                    PaxNote = string.Empty,
+                    PaxNote = pass.memberNum,
                     TaxAndFeeExcludeDiscount = 0,
                     ServiceFee = 0,
                     Discount = 0,

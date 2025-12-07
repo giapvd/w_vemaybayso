@@ -24,7 +24,11 @@ const quantityModal = document.getElementById("quantity-modal");
 
 let selectedInput = null;
 let typePlane = "one_way"; // one_way || round_trip
-const todayFix = new Date().toLocaleDateString("vi-VN");
+const todayFix = new Date().toLocaleDateString("vi-VN", {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+});
 departureDateValue.value = todayFix;
 returnDateValue.value = todayFix;
 departureDateInput.querySelector(".display").textContent = todayFix;
@@ -689,15 +693,4 @@ function addAirport(value) {
 }
 addAirport("vietnam");
 ///////// Custom select /////////
-document.querySelectorAll(".select-customer-wrapper").forEach((elem) => {
-    elem.addEventListener("click", () => {
-        elem.querySelector(".select-customer-dropdown").classList.toggle("hidden");
-    });
-    elem.querySelectorAll(".option").forEach((option) => {
-        option.addEventListener("click", (e) => {
-            const selectedText = e.target.closest(".option").textContent.trim();
-            elem.querySelector(".text-render").textContent = selectedText;
-            elem.querySelector('input[type="hidden"]').value = e.target.closest(".option").dataset.value;
-        });
-    });
-});
+

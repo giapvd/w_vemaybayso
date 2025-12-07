@@ -24,6 +24,12 @@ namespace ProtechGroup.FlightBookingWeb
                 defaults: new { controller = "Airport", action = "SearchByKey", data = UrlParameter.Optional }
             );
             routes.MapRoute(
+                name: "Thongtinchuyenbay",
+                url: "Thongtinchuyenbay/{data}",
+                defaults: new { controller = "SearchFlight", action = "GetFilghtInfor", data = UrlParameter.Optional }
+            );
+            
+            routes.MapRoute(
                name: "Trangchu",
                url: "Trangchu",
                defaults: new { controller = "Home", action = "Index" }
